@@ -27,8 +27,8 @@ We will use a 2 x 2 design (Spoken variety x Written standard) in which trials c
 
 ### Analyses 
 The results will be analysed for accuracy and reaction time (RT) per condition. Generalized Linear Mixed-Effects Models with random effects for participants and item, will be used to analyse the results. In our analysis, we will focus on the responses in the match condition (see also next point on exclusions). Two models will be fitted:
-	•	Glmer with response as the dependent variable (correct/incorrect) to examine main effects of Spoken variety and Written standard and their interactions.
-	•	Glmer with reaction time as the dependent variable (RTs will be transformed to correct for non-normal distributions) to examine main effects of Spoken variety and Written standard and their interactions.
+	+	Glmer with response as the dependent variable (correct/incorrect) to examine main effects of Spoken variety and Written standard and their interactions.
+	+	Glmer with reaction time as the dependent variable (RTs will be transformed to correct for non-normal distributions) to examine main effects of Spoken variety and Written standard and their interactions.
 
 ### Outliers and Exclusions 
 We will compute participants' individual mean reaction times per condition and exclude responses at 2.5 SD above the mean. The mismatch condition is used to sort out participants, i.e., we will exclude all data from participants that do not detect a mismatch in more than 50% of the mismatch items. 
