@@ -27,7 +27,8 @@ The MultiLit-project is funded by the Recearch Council of Norway (project number
 ### Analysis
 + R scripts to be added after publication of results
 
-#### Folders with experimental materials
+### Folders with experimental materials
++ Preregistrations
 + OpenSesame experimental files
 + jsPsych experiments
   
