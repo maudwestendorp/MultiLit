@@ -1,0 +1,3857 @@
+# OpenSesame Experiment
+
+---
+API: 2.1
+OpenSesame: 3.3.14
+Platform: posix
+---
+set width 1024
+set uniform_coordinates yes
+set title "Extended template"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend psycho
+set round_decimals 2
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 768
+set fullscreen no
+set form_clicks no
+set foreground black
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family sans
+set font_bold no
+set experiment_path "~/Documents/jatos_mac_java/study_assets_root/WP4_Narvik"
+set disable_garbage_collection yes
+set description "A template containing a practice and an experimental phase"
+set coordinates uniform
+set compensation 0
+set color_backend psycho
+set clock_backend psycho
+set canvas_backend psycho
+set bidi yes
+set background white
+
+define sketchpad Fixation_500
+	set start_response_interval no
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=black show_if=always style=default x=0 y=0 z_index=0
+
+
+define sketchpad Fixation_500_prac
+	set start_response_interval no
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=black show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad Flanker
+	set start_response_interval no
+	set duration 0
+	set description "Displays stimuli"
+	draw image center=1 file="[Flanker]" scale=2 show_if=always x=0 y=0 z_index=0
+
+define loop Flanker_loop
+	set source_file ""
+	set source table
+	set skip 0
+	set repeat 1
+	set order random
+	set offset no
+	set item trial_sequence
+	set description "A single block of trials"
+	set cycles 1
+	set continuous no
+	set column_order ""
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run Flanker_sequence
+
+define loop Flanker_loop_prac
+	set source_file ""
+	set source table
+	set skip 0
+	set repeat 1
+	set order random
+	set offset no
+	set item trial_sequence
+	set description "A single block of trials"
+	set cycles 1
+	set continuous no
+	set column_order ""
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run Flanker_sequence_fullprac
+
+define sketchpad Flanker_prac
+	set start_response_interval no
+	set duration 0
+	set description "Displays stimuli"
+	draw image center=1 file="[Flanker]" scale=2 show_if=always x=0 y=0 z_index=0
+
+define loop Flanker_practice_loop
+	set source_file ""
+	set source table
+	set skip 0
+	set repeat 1
+	set order random
+	set offset no
+	set item block_sequence
+	set description "A loop containing one or more practice blocks"
+	set cycles 8
+	set continuous no
+	set column_order practice
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 procedure Flanker_loop
+	setcycle 0 LD_nr ""
+	setcycle 0 condition Inc
+	setcycle 0 LD_stimulus ""
+	setcycle 0 Flanker "IncRight.png"
+	setcycle 0 LD_correct ""
+	setcycle 0 Flanker_correct right
+	setcycle 0 LD_condition ""
+	setcycle 0 correct_response right
+	setcycle 0 practice yes
+	setcycle 1 procedure Flanker_loop
+	setcycle 1 LD_nr ""
+	setcycle 1 condition Con
+	setcycle 1 LD_stimulus ""
+	setcycle 1 Flanker "ConRight.png"
+	setcycle 1 LD_correct ""
+	setcycle 1 Flanker_correct right
+	setcycle 1 LD_condition ""
+	setcycle 1 correct_response right
+	setcycle 1 practice yes
+	setcycle 2 procedure Flanker_loop
+	setcycle 2 LD_nr ""
+	setcycle 2 condition Inc
+	setcycle 2 LD_stimulus ""
+	setcycle 2 Flanker "IncLeft.png"
+	setcycle 2 LD_correct ""
+	setcycle 2 Flanker_correct left
+	setcycle 2 LD_condition ""
+	setcycle 2 correct_response left
+	setcycle 2 practice yes
+	setcycle 3 procedure Flanker_loop
+	setcycle 3 LD_nr ""
+	setcycle 3 condition Con
+	setcycle 3 LD_stimulus ""
+	setcycle 3 Flanker "ConLeft.png"
+	setcycle 3 LD_correct ""
+	setcycle 3 Flanker_correct left
+	setcycle 3 LD_condition ""
+	setcycle 3 correct_response left
+	setcycle 3 practice yes
+	setcycle 4 procedure Flanker_loop
+	setcycle 4 LD_nr ""
+	setcycle 4 condition Inc
+	setcycle 4 LD_stimulus ""
+	setcycle 4 Flanker "IncRight.png"
+	setcycle 4 LD_correct ""
+	setcycle 4 Flanker_correct right
+	setcycle 4 LD_condition ""
+	setcycle 4 correct_response right
+	setcycle 4 practice yes
+	setcycle 5 procedure Flanker_loop
+	setcycle 5 LD_nr ""
+	setcycle 5 condition Con
+	setcycle 5 LD_stimulus ""
+	setcycle 5 Flanker "ConRight.png"
+	setcycle 5 LD_correct ""
+	setcycle 5 Flanker_correct right
+	setcycle 5 LD_condition ""
+	setcycle 5 correct_response right
+	setcycle 5 practice yes
+	setcycle 6 procedure Flanker_loop
+	setcycle 6 LD_nr ""
+	setcycle 6 condition Inc
+	setcycle 6 LD_stimulus ""
+	setcycle 6 Flanker "IncLeft.png"
+	setcycle 6 LD_correct ""
+	setcycle 6 Flanker_correct left
+	setcycle 6 LD_condition ""
+	setcycle 6 correct_response left
+	setcycle 6 practice yes
+	setcycle 7 procedure Flanker_loop
+	setcycle 7 LD_nr ""
+	setcycle 7 condition Con
+	setcycle 7 LD_stimulus ""
+	setcycle 7 Flanker "ConLeft.png"
+	setcycle 7 LD_correct ""
+	setcycle 7 Flanker_correct left
+	setcycle 7 LD_condition ""
+	setcycle 7 correct_response left
+	setcycle 7 practice yes
+	run Flanker_sequence_prac
+
+define keyboard_response Flanker_response
+	set timeout 1000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set correct_response Flanker_correct
+	set allowed_responses "left;right"
+
+define keyboard_response Flanker_response_prac
+	set timeout 1500
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses "left;right"
+
+define sequence Flanker_sequence
+	set flush_keyboard yes
+	set description "A single trial"
+	run Fixation_500 always
+	run Flanker always
+	run Flanker_response always
+	run ITI always
+
+define sequence Flanker_sequence_fullprac
+	set flush_keyboard yes
+	set description "A single trial"
+	run Fixation_500 always
+	run Flanker always
+	run Flanker_response always
+	run prac_correct_feedback "[response_Flanker_response] = [Flanker_correct]"
+	run prac_incorrect_feedback "[response_Flanker_response] != [Flanker_correct]"
+	run ITI always
+
+define sequence Flanker_sequence_prac
+	set flush_keyboard yes
+	set description "A single trial"
+	run Fixation_500_prac always
+	run Flanker_prac always
+	run Flanker_response_prac always
+	run prac_correct_feedback "[response_Flanker_response_prac] = [correct_response]"
+	run prac_incorrect_feedback "[response_Flanker_response_prac] != [correct_response]"
+	run no_response_feedback "[response_Flanker_response_prac] = \"None\""
+	run inter_trail_interval_prac always
+	run logger always
+
+define loop Full_practice_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order sequential
+	set description "Repeatedly runs another item"
+	set cycles 10
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 procedure Target_loop
+	setcycle 0 LD_nr ""
+	setcycle 0 condition Con_Con
+	setcycle 0 LD_stimulus hugnad
+	setcycle 0 Flanker "ConLeft.png"
+	setcycle 0 LD_correct "[nn_response]"
+	setcycle 0 Flanker_correct left
+	setcycle 0 LD_condition noncog
+	setcycle 0 practice yes
+	setcycle 1 procedure LD_loop
+	setcycle 1 LD_nr ""
+	setcycle 1 condition ""
+	setcycle 1 LD_stimulus allereie
+	setcycle 1 Flanker ""
+	setcycle 1 LD_correct "[nn_response]"
+	setcycle 1 Flanker_correct ""
+	setcycle 1 LD_condition control_cog
+	setcycle 1 practice yes
+	setcycle 2 procedure Target_loop
+	setcycle 2 LD_nr ""
+	setcycle 2 condition Con_Con
+	setcycle 2 LD_stimulus meddelelse
+	setcycle 2 Flanker "ConRight.png"
+	setcycle 2 LD_correct "[bm_response]"
+	setcycle 2 Flanker_correct right
+	setcycle 2 LD_condition noncog
+	setcycle 2 practice yes
+	setcycle 3 procedure Target_loop
+	setcycle 3 LD_nr ""
+	setcycle 3 condition Inc_Inc
+	setcycle 3 LD_stimulus "øst"
+	setcycle 3 Flanker "IncRight.png"
+	setcycle 3 LD_correct "[bm_response]"
+	setcycle 3 Flanker_correct right
+	setcycle 3 LD_condition cog
+	setcycle 3 practice yes
+	setcycle 4 procedure Flanker_loop
+	setcycle 4 LD_nr ""
+	setcycle 4 condition Inc
+	setcycle 4 LD_stimulus ""
+	setcycle 4 Flanker "IncRight.png"
+	setcycle 4 LD_correct ""
+	setcycle 4 Flanker_correct right
+	setcycle 4 LD_condition ""
+	setcycle 4 practice yes
+	setcycle 5 procedure LD_loop
+	setcycle 5 LD_nr ""
+	setcycle 5 condition ""
+	setcycle 5 LD_stimulus auke
+	setcycle 5 Flanker ""
+	setcycle 5 LD_correct "[nn_response]"
+	setcycle 5 Flanker_correct ""
+	setcycle 5 LD_condition control_noncog
+	setcycle 5 practice yes
+	setcycle 6 procedure Flanker_loop
+	setcycle 6 LD_nr ""
+	setcycle 6 condition Con
+	setcycle 6 LD_stimulus ""
+	setcycle 6 Flanker "ConRight.png"
+	setcycle 6 LD_correct ""
+	setcycle 6 Flanker_correct right
+	setcycle 6 LD_condition ""
+	setcycle 6 practice yes
+	setcycle 7 procedure LD_loop
+	setcycle 7 LD_nr ""
+	setcycle 7 condition ""
+	setcycle 7 LD_stimulus hellig
+	setcycle 7 Flanker ""
+	setcycle 7 LD_correct "[bm_response]"
+	setcycle 7 Flanker_correct ""
+	setcycle 7 LD_condition control_cog
+	setcycle 7 practice yes
+	setcycle 8 procedure Target_loop
+	setcycle 8 LD_nr ""
+	setcycle 8 condition Inc_Inc
+	setcycle 8 LD_stimulus fingrar
+	setcycle 8 Flanker "IncLeft.png"
+	setcycle 8 LD_correct "[nn_response]"
+	setcycle 8 Flanker_correct left
+	setcycle 8 LD_condition cog
+	setcycle 8 practice yes
+	setcycle 9 procedure Flanker_loop
+	setcycle 9 LD_nr ""
+	setcycle 9 condition Con
+	setcycle 9 LD_stimulus ""
+	setcycle 9 Flanker "ConLeft.png"
+	setcycle 9 LD_correct ""
+	setcycle 9 Flanker_correct left
+	setcycle 9 LD_condition ""
+	setcycle 9 practice yes
+	run prac_sequence_run_if
+
+define sketchpad ITI
+	set duration 1000
+	set description "Displays stimuli"
+
+define sketchpad ITI_1
+	set duration 1000
+	set description "Displays stimuli"
+
+define sketchpad ITI_2
+	set duration 1000
+	set description "Displays stimuli"
+
+define sketchpad ITI_3
+	set duration 1000
+	set description "Displays stimuli"
+
+define sketchpad ITI_4
+	set duration 1000
+	set description "Displays stimuli"
+
+define sketchpad LD
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=24 html=yes show_if=always text="[LD_stimulus]" x=0 y=0 z_index=0
+
+define sequence LD_Flanker_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run Fixation_500 always
+	run LD always
+	run LD_response always
+	run ITI always
+	run Fixation_500 always
+	run Flanker always
+	run Flanker_response always
+	run ITI always
+
+define sequence LD_Flanker_sequence_prac
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run Fixation_500 always
+	run LD always
+	run LD_response always
+	run prac_correct_feedback "[response_LD_response] = [LD_correct]"
+	run prac_incorrect_feedback "[response_LD_response] != [LD_correct]"
+	run ITI always
+	run Fixation_500 always
+	run Flanker always
+	run Flanker_response always
+	run prac_correct_feedback "[response_Flanker_response] = [Flanker_correct]"
+	run prac_incorrect_feedback "[response_Flanker_response] != [Flanker_correct]"
+	run ITI always
+
+define loop LD_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run LD_sequence
+
+define loop LD_loop_prac
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run LD_sequence_prac
+
+define keyboard_response LD_response
+	set timeout 2000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set correct_response LD_correct
+	set allowed_responses "left;right"
+
+define keyboard_response LD_response_1
+	set timeout 2000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set correct_response LD_correct
+	set allowed_responses "left;right"
+
+define keyboard_response LD_response_2
+	set timeout 2000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set correct_response LD_correct
+	set allowed_responses "left;right"
+
+define sequence LD_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run Fixation_500 always
+	run LD always
+	run LD_response always
+	run ITI always
+
+define sequence LD_sequence_prac
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run Fixation_500 always
+	run LD always
+	run LD_response always
+	run prac_correct_feedback "[response_LD_response] = [LD_correct]"
+	run prac_incorrect_feedback "[response_LD_response] != [LD_correct]"
+	run ITI always
+
+define loop Target_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run LD_Flanker_sequence
+
+define loop Target_loop_prac
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run LD_Flanker_sequence_prac
+
+define loop block1
+	set source_file ""
+	set source table
+	set repeat 1
+	set order sequential
+	set description "Repeatedly runs another item"
+	set cycles 100
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 procedure Flanker_loop
+	setcycle 0 LD_nr ""
+	setcycle 0 condition Inc
+	setcycle 0 LD_stimulus ""
+	setcycle 0 Flanker "IncRight.png"
+	setcycle 0 LD_correct ""
+	setcycle 0 Flanker_correct right
+	setcycle 0 LD_condition ""
+	setcycle 0 Flanker_condition inc
+	setcycle 0 practice no
+	setcycle 1 procedure LD_loop
+	setcycle 1 LD_nr 409
+	setcycle 1 condition Inc
+	setcycle 1 LD_stimulus alternativ
+	setcycle 1 Flanker ""
+	setcycle 1 LD_correct ""
+	setcycle 1 Flanker_correct ""
+	setcycle 1 LD_condition fill_ident
+	setcycle 1 Flanker_condition ""
+	setcycle 1 practice no
+	setcycle 2 procedure LD_loop
+	setcycle 2 LD_nr 450
+	setcycle 2 condition Con
+	setcycle 2 LD_stimulus "anførselstegn"
+	setcycle 2 Flanker ""
+	setcycle 2 LD_correct "[bm_response]"
+	setcycle 2 Flanker_correct ""
+	setcycle 2 LD_condition fill_noncog
+	setcycle 2 Flanker_condition ""
+	setcycle 2 practice no
+	setcycle 3 procedure Target_loop
+	setcycle 3 LD_nr 103
+	setcycle 3 condition Con_Con
+	setcycle 3 LD_stimulus antall
+	setcycle 3 Flanker "ConRight.png"
+	setcycle 3 LD_correct "[bm_response]"
+	setcycle 3 Flanker_correct right
+	setcycle 3 LD_condition noncog
+	setcycle 3 Flanker_condition con
+	setcycle 3 practice no
+	setcycle 4 procedure Target_loop
+	setcycle 4 LD_nr 302
+	setcycle 4 condition Inc_Inc
+	setcycle 4 LD_stimulus ambassade
+	setcycle 4 Flanker "IncLeft.png"
+	setcycle 4 LD_correct ""
+	setcycle 4 Flanker_correct left
+	setcycle 4 LD_condition ident
+	setcycle 4 Flanker_condition inc
+	setcycle 4 practice no
+	setcycle 5 procedure Target_loop
+	setcycle 5 LD_nr 203
+	setcycle 5 condition Inc_Con
+	setcycle 5 LD_stimulus burger
+	setcycle 5 Flanker "ConRight.png"
+	setcycle 5 LD_correct "[bm_response]"
+	setcycle 5 Flanker_correct right
+	setcycle 5 LD_condition cog
+	setcycle 5 Flanker_condition con
+	setcycle 5 practice no
+	setcycle 6 procedure Flanker_loop
+	setcycle 6 LD_nr ""
+	setcycle 6 condition Con
+	setcycle 6 LD_stimulus ""
+	setcycle 6 Flanker "ConLeft.png"
+	setcycle 6 LD_correct ""
+	setcycle 6 Flanker_correct left
+	setcycle 6 LD_condition ""
+	setcycle 6 Flanker_condition con
+	setcycle 6 practice no
+	setcycle 7 procedure Target_loop
+	setcycle 7 LD_nr 360
+	setcycle 7 condition Inc_Con
+	setcycle 7 LD_stimulus adresse
+	setcycle 7 Flanker "ConLeft.png"
+	setcycle 7 LD_correct ""
+	setcycle 7 Flanker_correct left
+	setcycle 7 LD_condition ident
+	setcycle 7 Flanker_condition con
+	setcycle 7 practice no
+	setcycle 8 procedure Target_loop
+	setcycle 8 LD_nr 134
+	setcycle 8 condition Con_Inc
+	setcycle 8 LD_stimulus einsemd
+	setcycle 8 Flanker "IncLeft.png"
+	setcycle 8 LD_correct "[nn_response]"
+	setcycle 8 Flanker_correct left
+	setcycle 8 LD_condition noncog
+	setcycle 8 Flanker_condition inc
+	setcycle 8 practice no
+	setcycle 9 procedure Target_loop
+	setcycle 9 LD_nr 304
+	setcycle 9 condition Inc_Con
+	setcycle 9 LD_stimulus analyse
+	setcycle 9 Flanker "ConLeft.png"
+	setcycle 9 LD_correct ""
+	setcycle 9 Flanker_correct left
+	setcycle 9 LD_condition ident
+	setcycle 9 Flanker_condition con
+	setcycle 9 practice no
+	setcycle 10 procedure Target_loop
+	setcycle 10 LD_nr 133
+	setcycle 10 condition Con_Inc
+	setcycle 10 LD_stimulus busetnad
+	setcycle 10 Flanker "IncRight.png"
+	setcycle 10 LD_correct "[nn_response]"
+	setcycle 10 Flanker_correct right
+	setcycle 10 LD_condition noncog
+	setcycle 10 Flanker_condition inc
+	setcycle 10 practice no
+	setcycle 11 procedure Target_loop
+	setcycle 11 LD_nr 301
+	setcycle 11 condition Inc_Inc
+	setcycle 11 LD_stimulus aksjon
+	setcycle 11 Flanker "IncRight.png"
+	setcycle 11 LD_correct ""
+	setcycle 11 Flanker_correct right
+	setcycle 11 LD_condition ident
+	setcycle 11 Flanker_condition inc
+	setcycle 11 practice no
+	setcycle 12 procedure Target_loop
+	setcycle 12 LD_nr 232
+	setcycle 12 condition Inc_Con
+	setcycle 12 LD_stimulus draum
+	setcycle 12 Flanker "ConLeft.png"
+	setcycle 12 LD_correct "[nn_response]"
+	setcycle 12 Flanker_correct left
+	setcycle 12 LD_condition cog
+	setcycle 12 Flanker_condition con
+	setcycle 12 practice no
+	setcycle 13 procedure Target_loop
+	setcycle 13 LD_nr 137
+	setcycle 13 condition Con_Inc
+	setcycle 13 LD_stimulus grunngjeving
+	setcycle 13 Flanker "IncRight.png"
+	setcycle 13 LD_correct "[nn_response]"
+	setcycle 13 Flanker_correct right
+	setcycle 13 LD_condition noncog
+	setcycle 13 Flanker_condition inc
+	setcycle 13 practice no
+	setcycle 14 procedure Target_loop
+	setcycle 14 LD_nr 303
+	setcycle 14 condition Inc_Con
+	setcycle 14 LD_stimulus ambulanse
+	setcycle 14 Flanker "ConRight.png"
+	setcycle 14 LD_correct ""
+	setcycle 14 Flanker_correct right
+	setcycle 14 LD_condition ident
+	setcycle 14 Flanker_condition con
+	setcycle 14 practice no
+	setcycle 15 procedure LD_loop
+	setcycle 15 LD_nr 442
+	setcycle 15 condition Con
+	setcycle 15 LD_stimulus antagelse
+	setcycle 15 Flanker ""
+	setcycle 15 LD_correct "[bm_response]"
+	setcycle 15 Flanker_correct ""
+	setcycle 15 LD_condition fill_noncog
+	setcycle 15 Flanker_condition ""
+	setcycle 15 practice no
+	setcycle 16 procedure Flanker_loop
+	setcycle 16 LD_nr ""
+	setcycle 16 condition Inc
+	setcycle 16 LD_stimulus ""
+	setcycle 16 Flanker "IncRight.png"
+	setcycle 16 LD_correct ""
+	setcycle 16 Flanker_correct right
+	setcycle 16 LD_condition ""
+	setcycle 16 Flanker_condition inc
+	setcycle 16 practice no
+	setcycle 17 procedure Target_loop
+	setcycle 17 LD_nr 202
+	setcycle 17 condition Inc_Inc
+	setcycle 17 LD_stimulus "åpning"
+	setcycle 17 Flanker "IncLeft.png"
+	setcycle 17 LD_correct "[bm_response]"
+	setcycle 17 Flanker_correct left
+	setcycle 17 LD_condition cog
+	setcycle 17 Flanker_condition inc
+	setcycle 17 practice no
+	setcycle 18 procedure Target_loop
+	setcycle 18 LD_nr 204
+	setcycle 18 condition Inc_Con
+	setcycle 18 LD_stimulus "bredbånd"
+	setcycle 18 Flanker "ConLeft.png"
+	setcycle 18 LD_correct "[bm_response]"
+	setcycle 18 Flanker_correct left
+	setcycle 18 LD_condition cog
+	setcycle 18 Flanker_condition con
+	setcycle 18 practice no
+	setcycle 19 procedure LD_loop
+	setcycle 19 LD_nr 449
+	setcycle 19 condition Con
+	setcycle 19 LD_stimulus avhold
+	setcycle 19 Flanker ""
+	setcycle 19 LD_correct "[bm_response]"
+	setcycle 19 Flanker_correct ""
+	setcycle 19 LD_condition fill_noncog
+	setcycle 19 Flanker_condition ""
+	setcycle 19 practice no
+	setcycle 20 procedure LD_loop
+	setcycle 20 LD_nr 428
+	setcycle 20 condition Inc
+	setcycle 20 LD_stimulus bunn
+	setcycle 20 Flanker ""
+	setcycle 20 LD_correct "[bm_response]"
+	setcycle 20 Flanker_correct ""
+	setcycle 20 LD_condition fill_cog
+	setcycle 20 Flanker_condition ""
+	setcycle 20 practice no
+	setcycle 21 procedure Target_loop
+	setcycle 21 LD_nr 218
+	setcycle 21 condition Inc_Inc
+	setcycle 21 LD_stimulus hjemland
+	setcycle 21 Flanker "IncLeft.png"
+	setcycle 21 LD_correct "[bm_response]"
+	setcycle 21 Flanker_correct left
+	setcycle 21 LD_condition cog
+	setcycle 21 Flanker_condition inc
+	setcycle 21 practice no
+	setcycle 22 procedure Target_loop
+	setcycle 22 LD_nr 231
+	setcycle 22 condition Inc_Con
+	setcycle 22 LD_stimulus dotter
+	setcycle 22 Flanker "ConRight.png"
+	setcycle 22 LD_correct "[nn_response]"
+	setcycle 22 Flanker_correct right
+	setcycle 22 LD_condition cog
+	setcycle 22 Flanker_condition con
+	setcycle 22 practice no
+	setcycle 23 procedure LD_loop
+	setcycle 23 LD_nr 445
+	setcycle 23 condition Con
+	setcycle 23 LD_stimulus betingelse
+	setcycle 23 Flanker ""
+	setcycle 23 LD_correct "[bm_response]"
+	setcycle 23 Flanker_correct ""
+	setcycle 23 LD_condition fill_noncog
+	setcycle 23 Flanker_condition ""
+	setcycle 23 practice no
+	setcycle 24 procedure Target_loop
+	setcycle 24 LD_nr 328
+	setcycle 24 condition Inc_Con
+	setcycle 24 LD_stimulus arkitekt
+	setcycle 24 Flanker "ConLeft.png"
+	setcycle 24 LD_correct ""
+	setcycle 24 Flanker_correct left
+	setcycle 24 LD_condition ident
+	setcycle 24 Flanker_condition con
+	setcycle 24 practice no
+	setcycle 25 procedure Target_loop
+	setcycle 25 LD_nr 107
+	setcycle 25 condition Con_Con
+	setcycle 25 LD_stimulus beslutning
+	setcycle 25 Flanker "ConRight.png"
+	setcycle 25 LD_correct "[bm_response]"
+	setcycle 25 Flanker_correct right
+	setcycle 25 LD_condition noncog
+	setcycle 25 Flanker_condition con
+	setcycle 25 practice no
+	setcycle 26 procedure Target_loop
+	setcycle 26 LD_nr 305
+	setcycle 26 condition Inc_Inc
+	setcycle 26 LD_stimulus asfalt
+	setcycle 26 Flanker "IncRight.png"
+	setcycle 26 LD_correct ""
+	setcycle 26 Flanker_correct right
+	setcycle 26 LD_condition ident
+	setcycle 26 Flanker_condition inc
+	setcycle 26 practice no
+	setcycle 27 procedure Flanker_loop
+	setcycle 27 LD_nr ""
+	setcycle 27 condition Inc
+	setcycle 27 LD_stimulus ""
+	setcycle 27 Flanker "IncLeft.png"
+	setcycle 27 LD_correct ""
+	setcycle 27 Flanker_correct left
+	setcycle 27 LD_condition ""
+	setcycle 27 Flanker_condition inc
+	setcycle 27 practice no
+	setcycle 28 procedure LD_loop
+	setcycle 28 LD_nr 416
+	setcycle 28 condition Inc
+	setcycle 28 LD_stimulus "båt"
+	setcycle 28 Flanker ""
+	setcycle 28 LD_correct ""
+	setcycle 28 Flanker_correct ""
+	setcycle 28 LD_condition fill_ident
+	setcycle 28 Flanker_condition ""
+	setcycle 28 practice no
+	setcycle 29 procedure Flanker_loop
+	setcycle 29 LD_nr ""
+	setcycle 29 condition Con
+	setcycle 29 LD_stimulus ""
+	setcycle 29 Flanker "ConLeft.png"
+	setcycle 29 LD_correct ""
+	setcycle 29 Flanker_correct left
+	setcycle 29 LD_condition ""
+	setcycle 29 Flanker_condition con
+	setcycle 29 practice no
+	setcycle 30 procedure Target_loop
+	setcycle 30 LD_nr 307
+	setcycle 30 condition Inc_Con
+	setcycle 30 LD_stimulus batteri
+	setcycle 30 Flanker "ConRight.png"
+	setcycle 30 LD_correct ""
+	setcycle 30 Flanker_correct right
+	setcycle 30 LD_condition ident
+	setcycle 30 Flanker_condition con
+	setcycle 30 practice no
+	setcycle 31 procedure Target_loop
+	setcycle 31 LD_nr 138
+	setcycle 31 condition Con_Inc
+	setcycle 31 LD_stimulus heilskap
+	setcycle 31 Flanker "IncLeft.png"
+	setcycle 31 LD_correct "[nn_response]"
+	setcycle 31 Flanker_correct left
+	setcycle 31 LD_condition noncog
+	setcycle 31 Flanker_condition inc
+	setcycle 31 practice no
+	setcycle 32 procedure Target_loop
+	setcycle 32 LD_nr 306
+	setcycle 32 condition Inc_Inc
+	setcycle 32 LD_stimulus balanse
+	setcycle 32 Flanker "IncLeft.png"
+	setcycle 32 LD_correct ""
+	setcycle 32 Flanker_correct left
+	setcycle 32 LD_condition ident
+	setcycle 32 Flanker_condition inc
+	setcycle 32 practice no
+	setcycle 33 procedure Flanker_loop
+	setcycle 33 LD_nr ""
+	setcycle 33 condition Con
+	setcycle 33 LD_stimulus ""
+	setcycle 33 Flanker "ConRight.png"
+	setcycle 33 LD_correct ""
+	setcycle 33 Flanker_correct right
+	setcycle 33 LD_condition ""
+	setcycle 33 Flanker_condition con
+	setcycle 33 practice no
+	setcycle 34 procedure Target_loop
+	setcycle 34 LD_nr 235
+	setcycle 34 condition Inc_Con
+	setcycle 34 LD_stimulus fiskar
+	setcycle 34 Flanker "ConRight.png"
+	setcycle 34 LD_correct "[nn_response]"
+	setcycle 34 Flanker_correct right
+	setcycle 34 LD_condition cog
+	setcycle 34 Flanker_condition con
+	setcycle 34 practice no
+	setcycle 35 procedure Flanker_loop
+	setcycle 35 LD_nr ""
+	setcycle 35 condition Con
+	setcycle 35 LD_stimulus ""
+	setcycle 35 Flanker "ConLeft.png"
+	setcycle 35 LD_correct ""
+	setcycle 35 Flanker_correct left
+	setcycle 35 LD_condition ""
+	setcycle 35 Flanker_condition con
+	setcycle 35 practice no
+	setcycle 36 procedure Target_loop
+	setcycle 36 LD_nr 309
+	setcycle 36 condition Inc_Inc
+	setcycle 36 LD_stimulus demokrati
+	setcycle 36 Flanker "IncRight.png"
+	setcycle 36 LD_correct ""
+	setcycle 36 Flanker_correct right
+	setcycle 36 LD_condition ident
+	setcycle 36 Flanker_condition inc
+	setcycle 36 practice no
+	setcycle 37 procedure Flanker_loop
+	setcycle 37 LD_nr ""
+	setcycle 37 condition Inc
+	setcycle 37 LD_stimulus ""
+	setcycle 37 Flanker "IncRight.png"
+	setcycle 37 LD_correct ""
+	setcycle 37 Flanker_correct right
+	setcycle 37 LD_condition ""
+	setcycle 37 Flanker_condition inc
+	setcycle 37 practice no
+	setcycle 38 procedure Target_loop
+	setcycle 38 LD_nr 310
+	setcycle 38 condition Inc_Inc
+	setcycle 38 LD_stimulus detalj
+	setcycle 38 Flanker "IncLeft.png"
+	setcycle 38 LD_correct ""
+	setcycle 38 Flanker_correct left
+	setcycle 38 LD_condition ident
+	setcycle 38 Flanker_condition inc
+	setcycle 38 practice no
+	setcycle 39 procedure Target_loop
+	setcycle 39 LD_nr 236
+	setcycle 39 condition Inc_Con
+	setcycle 39 LD_stimulus flaum
+	setcycle 39 Flanker "ConLeft.png"
+	setcycle 39 LD_correct "[nn_response]"
+	setcycle 39 Flanker_correct left
+	setcycle 39 LD_condition cog
+	setcycle 39 Flanker_condition con
+	setcycle 39 practice no
+	setcycle 40 procedure Target_loop
+	setcycle 40 LD_nr 111
+	setcycle 40 condition Con_Con
+	setcycle 40 LD_stimulus "følsomhet"
+	setcycle 40 Flanker "ConRight.png"
+	setcycle 40 LD_correct "[bm_response]"
+	setcycle 40 Flanker_correct right
+	setcycle 40 LD_condition noncog
+	setcycle 40 Flanker_condition con
+	setcycle 40 practice no
+	setcycle 41 procedure Target_loop
+	setcycle 41 LD_nr 234
+	setcycle 41 condition Inc_Inc
+	setcycle 41 LD_stimulus eigarskap
+	setcycle 41 Flanker "IncLeft.png"
+	setcycle 41 LD_correct "[nn_response]"
+	setcycle 41 Flanker_correct left
+	setcycle 41 LD_condition cog
+	setcycle 41 Flanker_condition inc
+	setcycle 41 practice no
+	setcycle 42 procedure Target_loop
+	setcycle 42 LD_nr 311
+	setcycle 42 condition Inc_Con
+	setcycle 42 LD_stimulus diskusjon
+	setcycle 42 Flanker "ConRight.png"
+	setcycle 42 LD_correct ""
+	setcycle 42 Flanker_correct right
+	setcycle 42 LD_condition ident
+	setcycle 42 Flanker_condition con
+	setcycle 42 practice no
+	setcycle 43 procedure Flanker_loop
+	setcycle 43 LD_nr ""
+	setcycle 43 condition Con
+	setcycle 43 LD_stimulus ""
+	setcycle 43 Flanker "ConRight.png"
+	setcycle 43 LD_correct ""
+	setcycle 43 Flanker_correct right
+	setcycle 43 LD_condition ""
+	setcycle 43 Flanker_condition con
+	setcycle 43 practice no
+	setcycle 44 procedure LD_loop
+	setcycle 44 LD_nr 431
+	setcycle 44 condition Inc
+	setcycle 44 LD_stimulus auge
+	setcycle 44 Flanker ""
+	setcycle 44 LD_correct "[nn_response]"
+	setcycle 44 Flanker_correct ""
+	setcycle 44 LD_condition fill_cog
+	setcycle 44 Flanker_condition ""
+	setcycle 44 practice no
+	setcycle 45 procedure Target_loop
+	setcycle 45 LD_nr 238
+	setcycle 45 condition Inc_Inc
+	setcycle 45 LD_stimulus hjarte
+	setcycle 45 Flanker "IncLeft.png"
+	setcycle 45 LD_correct "[nn_response]"
+	setcycle 45 Flanker_correct left
+	setcycle 45 LD_condition cog
+	setcycle 45 Flanker_condition inc
+	setcycle 45 practice no
+	setcycle 46 procedure Target_loop
+	setcycle 46 LD_nr 315
+	setcycle 46 condition Inc_Con
+	setcycle 46 LD_stimulus fyrverkeri
+	setcycle 46 Flanker "ConRight.png"
+	setcycle 46 LD_correct ""
+	setcycle 46 Flanker_correct right
+	setcycle 46 LD_condition ident
+	setcycle 46 Flanker_condition con
+	setcycle 46 practice no
+	setcycle 47 procedure Flanker_loop
+	setcycle 47 LD_nr ""
+	setcycle 47 condition Con
+	setcycle 47 LD_stimulus ""
+	setcycle 47 Flanker "ConRight.png"
+	setcycle 47 LD_correct ""
+	setcycle 47 Flanker_correct right
+	setcycle 47 LD_condition ""
+	setcycle 47 Flanker_condition con
+	setcycle 47 practice no
+	setcycle 48 procedure Target_loop
+	setcycle 48 LD_nr 314
+	setcycle 48 condition Inc_Inc
+	setcycle 48 LD_stimulus dialekt
+	setcycle 48 Flanker "IncLeft.png"
+	setcycle 48 LD_correct ""
+	setcycle 48 Flanker_correct left
+	setcycle 48 LD_condition ident
+	setcycle 48 Flanker_condition inc
+	setcycle 48 practice no
+	setcycle 49 procedure Target_loop
+	setcycle 49 LD_nr 308
+	setcycle 49 condition Inc_Con
+	setcycle 49 LD_stimulus budsjett
+	setcycle 49 Flanker "ConLeft.png"
+	setcycle 49 LD_correct ""
+	setcycle 49 Flanker_correct left
+	setcycle 49 LD_condition ident
+	setcycle 49 Flanker_condition con
+	setcycle 49 practice no
+	setcycle 50 procedure LD_loop
+	setcycle 50 LD_nr 454
+	setcycle 50 condition Con
+	setcycle 50 LD_stimulus brukarrettleiing
+	setcycle 50 Flanker ""
+	setcycle 50 LD_correct "[nn_response]"
+	setcycle 50 Flanker_correct ""
+	setcycle 50 LD_condition fill_noncog
+	setcycle 50 Flanker_condition ""
+	setcycle 50 practice no
+	setcycle 51 procedure Target_loop
+	setcycle 51 LD_nr 317
+	setcycle 51 condition Inc_Inc
+	setcycle 51 LD_stimulus industri
+	setcycle 51 Flanker "IncRight.png"
+	setcycle 51 LD_correct ""
+	setcycle 51 Flanker_correct right
+	setcycle 51 LD_condition ident
+	setcycle 51 Flanker_condition inc
+	setcycle 51 practice no
+	setcycle 52 procedure LD_loop
+	setcycle 52 LD_nr 407
+	setcycle 52 condition Inc
+	setcycle 52 LD_stimulus buss
+	setcycle 52 Flanker ""
+	setcycle 52 LD_correct ""
+	setcycle 52 Flanker_correct ""
+	setcycle 52 LD_condition fill_ident
+	setcycle 52 Flanker_condition ""
+	setcycle 52 practice no
+	setcycle 53 procedure Flanker_loop
+	setcycle 53 LD_nr ""
+	setcycle 53 condition Inc
+	setcycle 53 LD_stimulus ""
+	setcycle 53 Flanker "IncLeft.png"
+	setcycle 53 LD_correct ""
+	setcycle 53 Flanker_correct left
+	setcycle 53 LD_condition ""
+	setcycle 53 Flanker_condition inc
+	setcycle 53 practice no
+	setcycle 54 procedure Flanker_loop
+	setcycle 54 LD_nr ""
+	setcycle 54 condition Con
+	setcycle 54 LD_stimulus ""
+	setcycle 54 Flanker "ConRight.png"
+	setcycle 54 LD_correct ""
+	setcycle 54 Flanker_correct right
+	setcycle 54 LD_condition ""
+	setcycle 54 Flanker_condition con
+	setcycle 54 practice no
+	setcycle 55 procedure LD_loop
+	setcycle 55 LD_nr 408
+	setcycle 55 condition Inc
+	setcycle 55 LD_stimulus energi
+	setcycle 55 Flanker ""
+	setcycle 55 LD_correct ""
+	setcycle 55 Flanker_correct ""
+	setcycle 55 LD_condition fill_ident
+	setcycle 55 Flanker_condition ""
+	setcycle 55 practice no
+	setcycle 56 procedure Flanker_loop
+	setcycle 56 LD_nr ""
+	setcycle 56 condition Inc
+	setcycle 56 LD_stimulus ""
+	setcycle 56 Flanker "IncLeft.png"
+	setcycle 56 LD_correct ""
+	setcycle 56 Flanker_correct left
+	setcycle 56 LD_condition ""
+	setcycle 56 Flanker_condition inc
+	setcycle 56 practice no
+	setcycle 57 procedure Target_loop
+	setcycle 57 LD_nr 102
+	setcycle 57 condition Con_Inc
+	setcycle 57 LD_stimulus anbefaling
+	setcycle 57 Flanker "IncLeft.png"
+	setcycle 57 LD_correct "[bm_response]"
+	setcycle 57 Flanker_correct left
+	setcycle 57 LD_condition noncog
+	setcycle 57 Flanker_condition inc
+	setcycle 57 practice no
+	setcycle 58 procedure Target_loop
+	setcycle 58 LD_nr 341
+	setcycle 58 condition Inc_Inc
+	setcycle 58 LD_stimulus "ingeniør"
+	setcycle 58 Flanker "IncRight.png"
+	setcycle 58 LD_correct ""
+	setcycle 58 Flanker_correct right
+	setcycle 58 LD_condition ident
+	setcycle 58 Flanker_condition inc
+	setcycle 58 practice no
+	setcycle 59 procedure LD_loop
+	setcycle 59 LD_nr 418
+	setcycle 59 condition Inc
+	setcycle 59 LD_stimulus eple
+	setcycle 59 Flanker ""
+	setcycle 59 LD_correct ""
+	setcycle 59 Flanker_correct ""
+	setcycle 59 LD_condition fill_ident
+	setcycle 59 Flanker_condition ""
+	setcycle 59 practice no
+	setcycle 60 procedure Flanker_loop
+	setcycle 60 LD_nr ""
+	setcycle 60 condition Con
+	setcycle 60 LD_stimulus ""
+	setcycle 60 Flanker "ConLeft.png"
+	setcycle 60 LD_correct ""
+	setcycle 60 Flanker_correct left
+	setcycle 60 LD_condition ""
+	setcycle 60 Flanker_condition con
+	setcycle 60 practice no
+	setcycle 61 procedure Target_loop
+	setcycle 61 LD_nr 312
+	setcycle 61 condition Inc_Con
+	setcycle 61 LD_stimulus eksport
+	setcycle 61 Flanker "ConLeft.png"
+	setcycle 61 LD_correct ""
+	setcycle 61 Flanker_correct left
+	setcycle 61 LD_condition ident
+	setcycle 61 Flanker_condition con
+	setcycle 61 practice no
+	setcycle 62 procedure Target_loop
+	setcycle 62 LD_nr 132
+	setcycle 62 condition Con_Con
+	setcycle 62 LD_stimulus "åtvaring"
+	setcycle 62 Flanker "ConLeft.png"
+	setcycle 62 LD_correct "[nn_response]"
+	setcycle 62 Flanker_correct left
+	setcycle 62 LD_condition noncog
+	setcycle 62 Flanker_condition con
+	setcycle 62 practice no
+	setcycle 63 procedure Flanker_loop
+	setcycle 63 LD_nr ""
+	setcycle 63 condition Inc
+	setcycle 63 LD_stimulus ""
+	setcycle 63 Flanker "IncLeft.png"
+	setcycle 63 LD_correct ""
+	setcycle 63 Flanker_correct left
+	setcycle 63 LD_condition ""
+	setcycle 63 Flanker_condition inc
+	setcycle 63 practice no
+	setcycle 64 procedure Flanker_loop
+	setcycle 64 LD_nr ""
+	setcycle 64 condition Con
+	setcycle 64 LD_stimulus ""
+	setcycle 64 Flanker "ConLeft.png"
+	setcycle 64 LD_correct ""
+	setcycle 64 Flanker_correct left
+	setcycle 64 LD_condition ""
+	setcycle 64 Flanker_condition con
+	setcycle 64 practice no
+	setcycle 65 procedure Target_loop
+	setcycle 65 LD_nr 319
+	setcycle 65 condition Inc_Con
+	setcycle 65 LD_stimulus kamera
+	setcycle 65 Flanker "ConRight.png"
+	setcycle 65 LD_correct ""
+	setcycle 65 Flanker_correct right
+	setcycle 65 LD_condition ident
+	setcycle 65 Flanker_condition con
+	setcycle 65 practice no
+	setcycle 66 procedure Target_loop
+	setcycle 66 LD_nr 136
+	setcycle 66 condition Con_Con
+	setcycle 66 LD_stimulus "føresetnad"
+	setcycle 66 Flanker "ConLeft.png"
+	setcycle 66 LD_correct "[nn_response]"
+	setcycle 66 Flanker_correct left
+	setcycle 66 LD_condition noncog
+	setcycle 66 Flanker_condition con
+	setcycle 66 practice no
+	setcycle 67 procedure Flanker_loop
+	setcycle 67 LD_nr ""
+	setcycle 67 condition Inc
+	setcycle 67 LD_stimulus ""
+	setcycle 67 Flanker "IncLeft.png"
+	setcycle 67 LD_correct ""
+	setcycle 67 Flanker_correct left
+	setcycle 67 LD_condition ""
+	setcycle 67 Flanker_condition inc
+	setcycle 67 practice no
+	setcycle 68 procedure LD_loop
+	setcycle 68 LD_nr 455
+	setcycle 68 condition Con
+	setcycle 68 LD_stimulus "fråhald"
+	setcycle 68 Flanker ""
+	setcycle 68 LD_correct "[nn_response]"
+	setcycle 68 Flanker_correct ""
+	setcycle 68 LD_condition fill_noncog
+	setcycle 68 Flanker_condition ""
+	setcycle 68 practice no
+	setcycle 69 procedure Target_loop
+	setcycle 69 LD_nr 239
+	setcycle 69 condition Inc_Con
+	setcycle 69 LD_stimulus "høgde"
+	setcycle 69 Flanker "ConRight.png"
+	setcycle 69 LD_correct "[nn_response]"
+	setcycle 69 Flanker_correct right
+	setcycle 69 LD_condition cog
+	setcycle 69 Flanker_condition con
+	setcycle 69 practice no
+	setcycle 70 procedure Target_loop
+	setcycle 70 LD_nr 122
+	setcycle 70 condition Con_Inc
+	setcycle 70 LD_stimulus anelse
+	setcycle 70 Flanker "IncLeft.png"
+	setcycle 70 LD_correct "[bm_response]"
+	setcycle 70 Flanker_correct left
+	setcycle 70 LD_condition noncog
+	setcycle 70 Flanker_condition inc
+	setcycle 70 practice no
+	setcycle 71 procedure Target_loop
+	setcycle 71 LD_nr 318
+	setcycle 71 condition Inc_Inc
+	setcycle 71 LD_stimulus intervju
+	setcycle 71 Flanker "IncLeft.png"
+	setcycle 71 LD_correct ""
+	setcycle 71 Flanker_correct left
+	setcycle 71 LD_condition ident
+	setcycle 71 Flanker_condition inc
+	setcycle 71 practice no
+	setcycle 72 procedure LD_loop
+	setcycle 72 LD_nr 434
+	setcycle 72 condition Inc
+	setcycle 72 LD_stimulus boge
+	setcycle 72 Flanker ""
+	setcycle 72 LD_correct "[nn_response]"
+	setcycle 72 Flanker_correct ""
+	setcycle 72 LD_condition fill_cog
+	setcycle 72 Flanker_condition ""
+	setcycle 72 practice no
+	setcycle 73 procedure LD_loop
+	setcycle 73 LD_nr 424
+	setcycle 73 condition Inc
+	setcycle 73 LD_stimulus hode
+	setcycle 73 Flanker ""
+	setcycle 73 LD_correct "[bm_response]"
+	setcycle 73 Flanker_correct ""
+	setcycle 73 LD_condition fill_cog
+	setcycle 73 Flanker_condition ""
+	setcycle 73 practice no
+	setcycle 74 procedure Flanker_loop
+	setcycle 74 LD_nr ""
+	setcycle 74 condition Con
+	setcycle 74 LD_stimulus ""
+	setcycle 74 Flanker "ConLeft.png"
+	setcycle 74 LD_correct ""
+	setcycle 74 Flanker_correct left
+	setcycle 74 LD_condition ""
+	setcycle 74 Flanker_condition con
+	setcycle 74 practice no
+	setcycle 75 procedure LD_loop
+	setcycle 75 LD_nr 430
+	setcycle 75 condition Inc
+	setcycle 75 LD_stimulus "høsting"
+	setcycle 75 Flanker ""
+	setcycle 75 LD_correct "[bm_response]"
+	setcycle 75 Flanker_correct ""
+	setcycle 75 LD_condition fill_cog
+	setcycle 75 Flanker_condition ""
+	setcycle 75 practice no
+	setcycle 76 procedure LD_loop
+	setcycle 76 LD_nr 426
+	setcycle 76 condition Inc
+	setcycle 76 LD_stimulus mandag
+	setcycle 76 Flanker ""
+	setcycle 76 LD_correct "[bm_response]"
+	setcycle 76 Flanker_correct ""
+	setcycle 76 LD_condition fill_cog
+	setcycle 76 Flanker_condition ""
+	setcycle 76 practice no
+	setcycle 77 procedure Target_loop
+	setcycle 77 LD_nr 140
+	setcycle 77 condition Con_Con
+	setcycle 77 LD_stimulus kyrkjelyd
+	setcycle 77 Flanker "ConLeft.png"
+	setcycle 77 LD_correct "[nn_response]"
+	setcycle 77 Flanker_correct left
+	setcycle 77 LD_condition noncog
+	setcycle 77 Flanker_condition con
+	setcycle 77 practice no
+	setcycle 78 procedure Flanker_loop
+	setcycle 78 LD_nr ""
+	setcycle 78 condition Inc
+	setcycle 78 LD_stimulus ""
+	setcycle 78 Flanker "IncRight.png"
+	setcycle 78 LD_correct ""
+	setcycle 78 Flanker_correct right
+	setcycle 78 LD_condition ""
+	setcycle 78 Flanker_condition inc
+	setcycle 78 practice no
+	setcycle 79 procedure Target_loop
+	setcycle 79 LD_nr 115
+	setcycle 79 condition Con_Con
+	setcycle 79 LD_stimulus gjenvalg
+	setcycle 79 Flanker "ConRight.png"
+	setcycle 79 LD_correct "[bm_response]"
+	setcycle 79 Flanker_correct right
+	setcycle 79 LD_condition noncog
+	setcycle 79 Flanker_condition con
+	setcycle 79 practice no
+	setcycle 80 procedure Flanker_loop
+	setcycle 80 LD_nr ""
+	setcycle 80 condition Inc
+	setcycle 80 LD_stimulus ""
+	setcycle 80 Flanker "IncLeft.png"
+	setcycle 80 LD_correct ""
+	setcycle 80 Flanker_correct left
+	setcycle 80 LD_condition ""
+	setcycle 80 Flanker_condition inc
+	setcycle 80 practice no
+	setcycle 81 procedure Target_loop
+	setcycle 81 LD_nr 106
+	setcycle 81 condition Con_Inc
+	setcycle 81 LD_stimulus beskrivelse
+	setcycle 81 Flanker "IncLeft.png"
+	setcycle 81 LD_correct "[bm_response]"
+	setcycle 81 Flanker_correct left
+	setcycle 81 LD_condition noncog
+	setcycle 81 Flanker_condition inc
+	setcycle 81 practice no
+	setcycle 82 procedure Target_loop
+	setcycle 82 LD_nr 240
+	setcycle 82 condition Inc_Con
+	setcycle 82 LD_stimulus kaffikopp
+	setcycle 82 Flanker "ConLeft.png"
+	setcycle 82 LD_correct "[nn_response]"
+	setcycle 82 Flanker_correct left
+	setcycle 82 LD_condition cog
+	setcycle 82 Flanker_condition con
+	setcycle 82 practice no
+	setcycle 83 procedure LD_loop
+	setcycle 83 LD_nr 447
+	setcycle 83 condition Con
+	setcycle 83 LD_stimulus bevegelse
+	setcycle 83 Flanker ""
+	setcycle 83 LD_correct "[bm_response]"
+	setcycle 83 Flanker_correct ""
+	setcycle 83 LD_condition fill_noncog
+	setcycle 83 Flanker_condition ""
+	setcycle 83 practice no
+	setcycle 84 procedure Target_loop
+	setcycle 84 LD_nr 244
+	setcycle 84 condition Inc_Con
+	setcycle 84 LD_stimulus meister
+	setcycle 84 Flanker "ConLeft.png"
+	setcycle 84 LD_correct "[nn_response]"
+	setcycle 84 Flanker_correct left
+	setcycle 84 LD_condition cog
+	setcycle 84 Flanker_condition con
+	setcycle 84 practice no
+	setcycle 85 procedure Target_loop
+	setcycle 85 LD_nr 131
+	setcycle 85 condition Con_Con
+	setcycle 85 LD_stimulus atterhald
+	setcycle 85 Flanker "ConRight.png"
+	setcycle 85 LD_correct "[nn_response]"
+	setcycle 85 Flanker_correct right
+	setcycle 85 LD_condition noncog
+	setcycle 85 Flanker_condition con
+	setcycle 85 practice no
+	setcycle 86 procedure Target_loop
+	setcycle 86 LD_nr 201
+	setcycle 86 condition Inc_Inc
+	setcycle 86 LD_stimulus analytiker
+	setcycle 86 Flanker "IncRight.png"
+	setcycle 86 LD_correct "[bm_response]"
+	setcycle 86 Flanker_correct right
+	setcycle 86 LD_condition cog
+	setcycle 86 Flanker_condition inc
+	setcycle 86 practice no
+	setcycle 87 procedure Target_loop
+	setcycle 87 LD_nr 104
+	setcycle 87 condition Con_Con
+	setcycle 87 LD_stimulus begivenhet
+	setcycle 87 Flanker "ConLeft.png"
+	setcycle 87 LD_correct "[bm_response]"
+	setcycle 87 Flanker_correct left
+	setcycle 87 LD_condition noncog
+	setcycle 87 Flanker_condition con
+	setcycle 87 practice no
+	setcycle 88 procedure Target_loop
+	setcycle 88 LD_nr 226
+	setcycle 88 condition Inc_Inc
+	setcycle 88 LD_stimulus "høyskole"
+	setcycle 88 Flanker "IncLeft.png"
+	setcycle 88 LD_correct "[bm_response]"
+	setcycle 88 Flanker_correct left
+	setcycle 88 LD_condition cog
+	setcycle 88 Flanker_condition inc
+	setcycle 88 practice no
+	setcycle 89 procedure Target_loop
+	setcycle 89 LD_nr 205
+	setcycle 89 condition Inc_Inc
+	setcycle 89 LD_stimulus ferge
+	setcycle 89 Flanker "IncRight.png"
+	setcycle 89 LD_correct "[bm_response]"
+	setcycle 89 Flanker_correct right
+	setcycle 89 LD_condition cog
+	setcycle 89 Flanker_condition inc
+	setcycle 89 practice no
+	setcycle 90 procedure LD_loop
+	setcycle 90 LD_nr 433
+	setcycle 90 condition Inc
+	setcycle 90 LD_stimulus kval
+	setcycle 90 Flanker ""
+	setcycle 90 LD_correct "[nn_response]"
+	setcycle 90 Flanker_correct ""
+	setcycle 90 LD_condition fill_cog
+	setcycle 90 Flanker_condition ""
+	setcycle 90 practice no
+	setcycle 91 procedure Target_loop
+	setcycle 91 LD_nr 217
+	setcycle 91 condition Inc_Inc
+	setcycle 91 LD_stimulus "håndball"
+	setcycle 91 Flanker "IncRight.png"
+	setcycle 91 LD_correct "[bm_response]"
+	setcycle 91 Flanker_correct right
+	setcycle 91 LD_condition cog
+	setcycle 91 Flanker_condition inc
+	setcycle 91 practice no
+	setcycle 92 procedure Target_loop
+	setcycle 92 LD_nr 110
+	setcycle 92 condition Con_Inc
+	setcycle 92 LD_stimulus enhet
+	setcycle 92 Flanker "IncLeft.png"
+	setcycle 92 LD_correct "[bm_response]"
+	setcycle 92 Flanker_correct left
+	setcycle 92 LD_condition noncog
+	setcycle 92 Flanker_condition inc
+	setcycle 92 practice no
+	setcycle 93 procedure Target_loop
+	setcycle 93 LD_nr 233
+	setcycle 93 condition Inc_Inc
+	setcycle 93 LD_stimulus drope
+	setcycle 93 Flanker "IncRight.png"
+	setcycle 93 LD_correct "[nn_response]"
+	setcycle 93 Flanker_correct right
+	setcycle 93 LD_condition cog
+	setcycle 93 Flanker_condition inc
+	setcycle 93 practice no
+	setcycle 94 procedure Target_loop
+	setcycle 94 LD_nr 142
+	setcycle 94 condition Con_Inc
+	setcycle 94 LD_stimulus merksemd
+	setcycle 94 Flanker "IncLeft.png"
+	setcycle 94 LD_correct "[nn_response]"
+	setcycle 94 Flanker_correct left
+	setcycle 94 LD_condition noncog
+	setcycle 94 Flanker_condition inc
+	setcycle 94 practice no
+	setcycle 95 procedure Target_loop
+	setcycle 95 LD_nr 237
+	setcycle 95 condition Inc_Inc
+	setcycle 95 LD_stimulus gartnar
+	setcycle 95 Flanker "IncRight.png"
+	setcycle 95 LD_correct "[nn_response]"
+	setcycle 95 Flanker_correct right
+	setcycle 95 LD_condition cog
+	setcycle 95 Flanker_condition inc
+	setcycle 95 practice no
+	setcycle 96 procedure Target_loop
+	setcycle 96 LD_nr 248
+	setcycle 96 condition Inc_Con
+	setcycle 96 LD_stimulus opningstid
+	setcycle 96 Flanker "ConLeft.png"
+	setcycle 96 LD_correct "[nn_response]"
+	setcycle 96 Flanker_correct left
+	setcycle 96 LD_condition cog
+	setcycle 96 Flanker_condition con
+	setcycle 96 practice no
+	setcycle 97 procedure Target_loop
+	setcycle 97 LD_nr 101
+	setcycle 97 condition Con_Inc
+	setcycle 97 LD_stimulus aften
+	setcycle 97 Flanker "IncRight.png"
+	setcycle 97 LD_correct "[bm_response]"
+	setcycle 97 Flanker_correct right
+	setcycle 97 LD_condition noncog
+	setcycle 97 Flanker_condition inc
+	setcycle 97 practice no
+	setcycle 98 procedure LD_loop
+	setcycle 98 LD_nr 403
+	setcycle 98 condition Inc
+	setcycle 98 LD_stimulus familie
+	setcycle 98 Flanker ""
+	setcycle 98 LD_correct ""
+	setcycle 98 Flanker_correct ""
+	setcycle 98 LD_condition fill_ident
+	setcycle 98 Flanker_condition ""
+	setcycle 98 practice no
+	setcycle 99 procedure Target_loop
+	setcycle 99 LD_nr 144
+	setcycle 99 condition Con_Con
+	setcycle 99 LD_stimulus nemning
+	setcycle 99 Flanker "ConLeft.png"
+	setcycle 99 LD_correct "[nn_response]"
+	setcycle 99 Flanker_correct left
+	setcycle 99 LD_condition noncog
+	setcycle 99 Flanker_condition con
+	setcycle 99 practice no
+	run exp_sequence_run_if
+
+define loop block2
+	set source_file ""
+	set source table
+	set repeat 1
+	set order sequential
+	set description "Repeatedly runs another item"
+	set cycles 100
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 procedure Flanker_loop
+	setcycle 0 LD_nr ""
+	setcycle 0 condition Inc
+	setcycle 0 LD_stimulus ""
+	setcycle 0 Flanker "IncRight.png"
+	setcycle 0 LD_correct ""
+	setcycle 0 Flanker_correct right
+	setcycle 0 LD_condition ""
+	setcycle 0 Flanker_condition inc
+	setcycle 0 practice no
+	setcycle 1 procedure LD_loop
+	setcycle 1 LD_nr 456
+	setcycle 1 condition Con
+	setcycle 1 LD_stimulus framhald
+	setcycle 1 Flanker ""
+	setcycle 1 LD_correct "[nn_response]"
+	setcycle 1 Flanker_correct ""
+	setcycle 1 LD_condition fill_noncog
+	setcycle 1 Flanker_condition ""
+	setcycle 1 practice no
+	setcycle 2 procedure LD_loop
+	setcycle 2 LD_nr 436
+	setcycle 2 condition Inc
+	setcycle 2 LD_stimulus "lêr"
+	setcycle 2 Flanker ""
+	setcycle 2 LD_correct "[nn_response]"
+	setcycle 2 Flanker_correct ""
+	setcycle 2 LD_condition fill_cog
+	setcycle 2 Flanker_condition ""
+	setcycle 2 practice no
+	setcycle 3 procedure Target_loop
+	setcycle 3 LD_nr 135
+	setcycle 3 condition Con_Con
+	setcycle 3 LD_stimulus "førebuing"
+	setcycle 3 Flanker "ConRight.png"
+	setcycle 3 LD_correct "[nn_response]"
+	setcycle 3 Flanker_correct right
+	setcycle 3 LD_condition noncog
+	setcycle 3 Flanker_condition con
+	setcycle 3 practice no
+	setcycle 4 procedure Target_loop
+	setcycle 4 LD_nr 146
+	setcycle 4 condition Con_Inc
+	setcycle 4 LD_stimulus "røyndom"
+	setcycle 4 Flanker "IncLeft.png"
+	setcycle 4 LD_correct "[nn_response]"
+	setcycle 4 Flanker_correct left
+	setcycle 4 LD_condition noncog
+	setcycle 4 Flanker_condition inc
+	setcycle 4 practice no
+	setcycle 5 procedure Target_loop
+	setcycle 5 LD_nr 252
+	setcycle 5 condition Inc_Con
+	setcycle 5 LD_stimulus seljar
+	setcycle 5 Flanker "ConLeft.png"
+	setcycle 5 LD_correct "[nn_response]"
+	setcycle 5 Flanker_correct left
+	setcycle 5 LD_condition cog
+	setcycle 5 Flanker_condition con
+	setcycle 5 practice no
+	setcycle 6 procedure Target_loop
+	setcycle 6 LD_nr 141
+	setcycle 6 condition Con_Inc
+	setcycle 6 LD_stimulus medvit
+	setcycle 6 Flanker "IncRight.png"
+	setcycle 6 LD_correct "[nn_response]"
+	setcycle 6 Flanker_correct right
+	setcycle 6 LD_condition noncog
+	setcycle 6 Flanker_condition inc
+	setcycle 6 practice no
+	setcycle 7 procedure Target_loop
+	setcycle 7 LD_nr 255
+	setcycle 7 condition Inc_Con
+	setcycle 7 LD_stimulus leiarskap
+	setcycle 7 Flanker "ConRight.png"
+	setcycle 7 LD_correct "[nn_response]"
+	setcycle 7 Flanker_correct right
+	setcycle 7 LD_condition cog
+	setcycle 7 Flanker_condition con
+	setcycle 7 practice no
+	setcycle 8 procedure Target_loop
+	setcycle 8 LD_nr 145
+	setcycle 8 condition Con_Inc
+	setcycle 8 LD_stimulus rettleiar
+	setcycle 8 Flanker "IncRight.png"
+	setcycle 8 LD_correct "[nn_response]"
+	setcycle 8 Flanker_correct right
+	setcycle 8 LD_condition noncog
+	setcycle 8 Flanker_condition inc
+	setcycle 8 practice no
+	setcycle 9 procedure Target_loop
+	setcycle 9 LD_nr 256
+	setcycle 9 condition Inc_Con
+	setcycle 9 LD_stimulus "søkjar"
+	setcycle 9 Flanker "ConLeft.png"
+	setcycle 9 LD_correct "[nn_response]"
+	setcycle 9 Flanker_correct left
+	setcycle 9 LD_condition cog
+	setcycle 9 Flanker_condition con
+	setcycle 9 practice no
+	setcycle 10 procedure Target_loop
+	setcycle 10 LD_nr 149
+	setcycle 10 condition Con_Inc
+	setcycle 10 LD_stimulus "sjølvstende"
+	setcycle 10 Flanker "IncRight.png"
+	setcycle 10 LD_correct "[nn_response]"
+	setcycle 10 Flanker_correct right
+	setcycle 10 LD_condition noncog
+	setcycle 10 Flanker_condition inc
+	setcycle 10 practice no
+	setcycle 11 procedure LD_loop
+	setcycle 11 LD_nr 435
+	setcycle 11 condition Inc
+	setcycle 11 LD_stimulus namn
+	setcycle 11 Flanker ""
+	setcycle 11 LD_correct "[nn_response]"
+	setcycle 11 Flanker_correct ""
+	setcycle 11 LD_condition fill_cog
+	setcycle 11 Flanker_condition ""
+	setcycle 11 practice no
+	setcycle 12 procedure LD_loop
+	setcycle 12 LD_nr 459
+	setcycle 12 condition Con
+	setcycle 12 LD_stimulus hermeteikn
+	setcycle 12 Flanker ""
+	setcycle 12 LD_correct "[nn_response]"
+	setcycle 12 Flanker_correct ""
+	setcycle 12 LD_condition fill_noncog
+	setcycle 12 Flanker_condition ""
+	setcycle 12 practice no
+	setcycle 13 procedure Target_loop
+	setcycle 13 LD_nr 243
+	setcycle 13 condition Inc_Con
+	setcycle 13 LD_stimulus marknadspris
+	setcycle 13 Flanker "ConRight.png"
+	setcycle 13 LD_correct "[nn_response]"
+	setcycle 13 Flanker_correct right
+	setcycle 13 LD_condition cog
+	setcycle 13 Flanker_condition con
+	setcycle 13 practice no
+	setcycle 14 procedure Flanker_loop
+	setcycle 14 LD_nr ""
+	setcycle 14 condition Con
+	setcycle 14 LD_stimulus ""
+	setcycle 14 Flanker "ConLeft.png"
+	setcycle 14 LD_correct ""
+	setcycle 14 Flanker_correct left
+	setcycle 14 LD_condition ""
+	setcycle 14 Flanker_condition con
+	setcycle 14 practice no
+	setcycle 15 procedure Target_loop
+	setcycle 15 LD_nr 247
+	setcycle 15 condition Inc_Con
+	setcycle 15 LD_stimulus nyheit
+	setcycle 15 Flanker "ConRight.png"
+	setcycle 15 LD_correct "[nn_response]"
+	setcycle 15 Flanker_correct right
+	setcycle 15 LD_condition cog
+	setcycle 15 Flanker_condition con
+	setcycle 15 practice no
+	setcycle 16 procedure LD_loop
+	setcycle 16 LD_nr 458
+	setcycle 16 condition Con
+	setcycle 16 LD_stimulus kunngjering
+	setcycle 16 Flanker ""
+	setcycle 16 LD_correct "[nn_response]"
+	setcycle 16 Flanker_correct ""
+	setcycle 16 LD_condition fill_noncog
+	setcycle 16 Flanker_condition ""
+	setcycle 16 practice no
+	setcycle 17 procedure LD_loop
+	setcycle 17 LD_nr 417
+	setcycle 17 condition Inc
+	setcycle 17 LD_stimulus fotograf
+	setcycle 17 Flanker ""
+	setcycle 17 LD_correct ""
+	setcycle 17 Flanker_correct ""
+	setcycle 17 LD_condition fill_ident
+	setcycle 17 Flanker_condition ""
+	setcycle 17 practice no
+	setcycle 18 procedure Target_loop
+	setcycle 18 LD_nr 139
+	setcycle 18 condition Con_Con
+	setcycle 18 LD_stimulus innverknad
+	setcycle 18 Flanker "ConRight.png"
+	setcycle 18 LD_correct "[nn_response]"
+	setcycle 18 Flanker_correct right
+	setcycle 18 LD_condition noncog
+	setcycle 18 Flanker_condition con
+	setcycle 18 practice no
+	setcycle 19 procedure Target_loop
+	setcycle 19 LD_nr 241
+	setcycle 19 condition Inc_Inc
+	setcycle 19 LD_stimulus klede
+	setcycle 19 Flanker "IncRight.png"
+	setcycle 19 LD_correct "[nn_response]"
+	setcycle 19 Flanker_correct right
+	setcycle 19 LD_condition cog
+	setcycle 19 Flanker_condition inc
+	setcycle 19 practice no
+	setcycle 20 procedure Target_loop
+	setcycle 20 LD_nr 251
+	setcycle 20 condition Inc_Con
+	setcycle 20 LD_stimulus raudvin
+	setcycle 20 Flanker "ConRight.png"
+	setcycle 20 LD_correct "[nn_response]"
+	setcycle 20 Flanker_correct right
+	setcycle 20 LD_condition cog
+	setcycle 20 Flanker_condition con
+	setcycle 20 practice no
+	setcycle 21 procedure Flanker_loop
+	setcycle 21 LD_nr ""
+	setcycle 21 condition Con
+	setcycle 21 LD_stimulus ""
+	setcycle 21 Flanker "ConRight.png"
+	setcycle 21 LD_correct ""
+	setcycle 21 Flanker_correct right
+	setcycle 21 LD_condition ""
+	setcycle 21 Flanker_condition con
+	setcycle 21 practice no
+	setcycle 22 procedure LD_loop
+	setcycle 22 LD_nr 412
+	setcycle 22 condition Inc
+	setcycle 22 LD_stimulus kaos
+	setcycle 22 Flanker ""
+	setcycle 22 LD_correct ""
+	setcycle 22 Flanker_correct ""
+	setcycle 22 LD_condition fill_ident
+	setcycle 22 Flanker_condition ""
+	setcycle 22 practice no
+	setcycle 23 procedure Flanker_loop
+	setcycle 23 LD_nr ""
+	setcycle 23 condition Con
+	setcycle 23 LD_stimulus ""
+	setcycle 23 Flanker "ConRight.png"
+	setcycle 23 LD_correct ""
+	setcycle 23 Flanker_correct right
+	setcycle 23 LD_condition ""
+	setcycle 23 Flanker_condition con
+	setcycle 23 practice no
+	setcycle 24 procedure Target_loop
+	setcycle 24 LD_nr 323
+	setcycle 24 condition Inc_Con
+	setcycle 24 LD_stimulus "komité"
+	setcycle 24 Flanker "ConRight.png"
+	setcycle 24 LD_correct ""
+	setcycle 24 Flanker_correct right
+	setcycle 24 LD_condition ident
+	setcycle 24 Flanker_condition con
+	setcycle 24 practice no
+	setcycle 25 procedure Target_loop
+	setcycle 25 LD_nr 147
+	setcycle 25 condition Con_Con
+	setcycle 25 LD_stimulus "røyst"
+	setcycle 25 Flanker "ConRight.png"
+	setcycle 25 LD_correct "[nn_response]"
+	setcycle 25 Flanker_correct right
+	setcycle 25 LD_condition noncog
+	setcycle 25 Flanker_condition con
+	setcycle 25 practice no
+	setcycle 26 procedure LD_loop
+	setcycle 26 LD_nr 405
+	setcycle 26 condition Inc
+	setcycle 26 LD_stimulus katt
+	setcycle 26 Flanker ""
+	setcycle 26 LD_correct ""
+	setcycle 26 Flanker_correct ""
+	setcycle 26 LD_condition fill_ident
+	setcycle 26 Flanker_condition ""
+	setcycle 26 practice no
+	setcycle 27 procedure Flanker_loop
+	setcycle 27 LD_nr ""
+	setcycle 27 condition Con
+	setcycle 27 LD_stimulus ""
+	setcycle 27 Flanker "ConRight.png"
+	setcycle 27 LD_correct ""
+	setcycle 27 Flanker_correct right
+	setcycle 27 LD_condition ""
+	setcycle 27 Flanker_condition con
+	setcycle 27 practice no
+	setcycle 28 procedure LD_loop
+	setcycle 28 LD_nr 438
+	setcycle 28 condition Inc
+	setcycle 28 LD_stimulus oske
+	setcycle 28 Flanker ""
+	setcycle 28 LD_correct "[nn_response]"
+	setcycle 28 Flanker_correct ""
+	setcycle 28 LD_condition fill_cog
+	setcycle 28 Flanker_condition ""
+	setcycle 28 practice no
+	setcycle 29 procedure Target_loop
+	setcycle 29 LD_nr 242
+	setcycle 29 condition Inc_Inc
+	setcycle 29 LD_stimulus "månad"
+	setcycle 29 Flanker "IncLeft.png"
+	setcycle 29 LD_correct "[nn_response]"
+	setcycle 29 Flanker_correct left
+	setcycle 29 LD_condition cog
+	setcycle 29 Flanker_condition inc
+	setcycle 29 practice no
+	setcycle 30 procedure Target_loop
+	setcycle 30 LD_nr 327
+	setcycle 30 condition Inc_Con
+	setcycle 30 LD_stimulus konklusjon
+	setcycle 30 Flanker "ConRight.png"
+	setcycle 30 LD_correct ""
+	setcycle 30 Flanker_correct right
+	setcycle 30 LD_condition ident
+	setcycle 30 Flanker_condition con
+	setcycle 30 practice no
+	setcycle 31 procedure Flanker_loop
+	setcycle 31 LD_nr ""
+	setcycle 31 condition Con
+	setcycle 31 LD_stimulus ""
+	setcycle 31 Flanker "ConLeft.png"
+	setcycle 31 LD_correct ""
+	setcycle 31 Flanker_correct left
+	setcycle 31 LD_condition ""
+	setcycle 31 Flanker_condition con
+	setcycle 31 practice no
+	setcycle 32 procedure Target_loop
+	setcycle 32 LD_nr 331
+	setcycle 32 condition Inc_Con
+	setcycle 32 LD_stimulus litteratur
+	setcycle 32 Flanker "ConRight.png"
+	setcycle 32 LD_correct ""
+	setcycle 32 Flanker_correct right
+	setcycle 32 LD_condition ident
+	setcycle 32 Flanker_condition con
+	setcycle 32 practice no
+	setcycle 33 procedure LD_loop
+	setcycle 33 LD_nr 453
+	setcycle 33 condition Con
+	setcycle 33 LD_stimulus "løyving"
+	setcycle 33 Flanker ""
+	setcycle 33 LD_correct "[nn_response]"
+	setcycle 33 Flanker_correct ""
+	setcycle 33 LD_condition fill_noncog
+	setcycle 33 Flanker_condition ""
+	setcycle 33 practice no
+	setcycle 34 procedure Target_loop
+	setcycle 34 LD_nr 335
+	setcycle 34 condition Inc_Con
+	setcycle 34 LD_stimulus organisasjon
+	setcycle 34 Flanker "ConRight.png"
+	setcycle 34 LD_correct ""
+	setcycle 34 Flanker_correct right
+	setcycle 34 LD_condition ident
+	setcycle 34 Flanker_condition con
+	setcycle 34 practice no
+	setcycle 35 procedure Flanker_loop
+	setcycle 35 LD_nr ""
+	setcycle 35 condition Con
+	setcycle 35 LD_stimulus ""
+	setcycle 35 Flanker "ConLeft.png"
+	setcycle 35 LD_correct ""
+	setcycle 35 Flanker_correct left
+	setcycle 35 LD_condition ""
+	setcycle 35 Flanker_condition con
+	setcycle 35 practice no
+	setcycle 36 procedure Target_loop
+	setcycle 36 LD_nr 246
+	setcycle 36 condition Inc_Inc
+	setcycle 36 LD_stimulus musikar
+	setcycle 36 Flanker "IncLeft.png"
+	setcycle 36 LD_correct "[nn_response]"
+	setcycle 36 Flanker_correct left
+	setcycle 36 LD_condition cog
+	setcycle 36 Flanker_condition inc
+	setcycle 36 practice no
+	setcycle 37 procedure Target_loop
+	setcycle 37 LD_nr 322
+	setcycle 37 condition Inc_Inc
+	setcycle 37 LD_stimulus komedie
+	setcycle 37 Flanker "IncLeft.png"
+	setcycle 37 LD_correct ""
+	setcycle 37 Flanker_correct left
+	setcycle 37 LD_condition ident
+	setcycle 37 Flanker_condition inc
+	setcycle 37 practice no
+	setcycle 38 procedure Target_loop
+	setcycle 38 LD_nr 148
+	setcycle 38 condition Con_Con
+	setcycle 38 LD_stimulus semje
+	setcycle 38 Flanker "ConLeft.png"
+	setcycle 38 LD_correct "[nn_response]"
+	setcycle 38 Flanker_correct left
+	setcycle 38 LD_condition noncog
+	setcycle 38 Flanker_condition con
+	setcycle 38 practice no
+	setcycle 39 procedure Flanker_loop
+	setcycle 39 LD_nr ""
+	setcycle 39 condition Con
+	setcycle 39 LD_stimulus ""
+	setcycle 39 Flanker "ConRight.png"
+	setcycle 39 LD_correct ""
+	setcycle 39 Flanker_correct right
+	setcycle 39 LD_condition ""
+	setcycle 39 Flanker_condition con
+	setcycle 39 practice no
+	setcycle 40 procedure Target_loop
+	setcycle 40 LD_nr 316
+	setcycle 40 condition Inc_Con
+	setcycle 40 LD_stimulus generasjon
+	setcycle 40 Flanker "ConLeft.png"
+	setcycle 40 LD_correct ""
+	setcycle 40 Flanker_correct left
+	setcycle 40 LD_condition ident
+	setcycle 40 Flanker_condition con
+	setcycle 40 practice no
+	setcycle 41 procedure Target_loop
+	setcycle 41 LD_nr 152
+	setcycle 41 condition Con_Con
+	setcycle 41 LD_stimulus storleik
+	setcycle 41 Flanker "ConLeft.png"
+	setcycle 41 LD_correct "[nn_response]"
+	setcycle 41 Flanker_correct left
+	setcycle 41 LD_condition noncog
+	setcycle 41 Flanker_condition con
+	setcycle 41 practice no
+	setcycle 42 procedure Target_loop
+	setcycle 42 LD_nr 245
+	setcycle 42 condition Inc_Inc
+	setcycle 42 LD_stimulus morgon
+	setcycle 42 Flanker "IncRight.png"
+	setcycle 42 LD_correct "[nn_response]"
+	setcycle 42 Flanker_correct right
+	setcycle 42 LD_condition cog
+	setcycle 42 Flanker_condition inc
+	setcycle 42 practice no
+	setcycle 43 procedure Flanker_loop
+	setcycle 43 LD_nr ""
+	setcycle 43 condition Inc
+	setcycle 43 LD_stimulus ""
+	setcycle 43 Flanker "IncRight.png"
+	setcycle 43 LD_correct ""
+	setcycle 43 Flanker_correct right
+	setcycle 43 LD_condition ""
+	setcycle 43 Flanker_condition inc
+	setcycle 43 practice no
+	setcycle 44 procedure Target_loop
+	setcycle 44 LD_nr 326
+	setcycle 44 condition Inc_Inc
+	setcycle 44 LD_stimulus konge
+	setcycle 44 Flanker "IncLeft.png"
+	setcycle 44 LD_correct ""
+	setcycle 44 Flanker_correct left
+	setcycle 44 LD_condition ident
+	setcycle 44 Flanker_condition inc
+	setcycle 44 practice no
+	setcycle 45 procedure LD_loop
+	setcycle 45 LD_nr 415
+	setcycle 45 condition Inc
+	setcycle 45 LD_stimulus konsert
+	setcycle 45 Flanker ""
+	setcycle 45 LD_correct ""
+	setcycle 45 Flanker_correct ""
+	setcycle 45 LD_condition fill_ident
+	setcycle 45 Flanker_condition ""
+	setcycle 45 practice no
+	setcycle 46 procedure Target_loop
+	setcycle 46 LD_nr 209
+	setcycle 46 condition Inc_Inc
+	setcycle 46 LD_stimulus "høring"
+	setcycle 46 Flanker "IncRight.png"
+	setcycle 46 LD_correct "[bm_response]"
+	setcycle 46 Flanker_correct right
+	setcycle 46 LD_condition cog
+	setcycle 46 Flanker_condition inc
+	setcycle 46 practice no
+	setcycle 47 procedure Flanker_loop
+	setcycle 47 LD_nr ""
+	setcycle 47 condition Inc
+	setcycle 47 LD_stimulus ""
+	setcycle 47 Flanker "IncRight.png"
+	setcycle 47 LD_correct ""
+	setcycle 47 Flanker_correct right
+	setcycle 47 LD_condition ""
+	setcycle 47 Flanker_condition inc
+	setcycle 47 practice no
+	setcycle 48 procedure Target_loop
+	setcycle 48 LD_nr 213
+	setcycle 48 condition Inc_Inc
+	setcycle 48 LD_stimulus kirke
+	setcycle 48 Flanker "IncRight.png"
+	setcycle 48 LD_correct "[bm_response]"
+	setcycle 48 Flanker_correct right
+	setcycle 48 LD_condition cog
+	setcycle 48 Flanker_condition inc
+	setcycle 48 practice no
+	setcycle 49 procedure Flanker_loop
+	setcycle 49 LD_nr ""
+	setcycle 49 condition Inc
+	setcycle 49 LD_stimulus ""
+	setcycle 49 Flanker "IncLeft.png"
+	setcycle 49 LD_correct ""
+	setcycle 49 Flanker_correct left
+	setcycle 49 LD_condition ""
+	setcycle 49 Flanker_condition inc
+	setcycle 49 practice no
+	setcycle 50 procedure Target_loop
+	setcycle 50 LD_nr 321
+	setcycle 50 condition Inc_Inc
+	setcycle 50 LD_stimulus klima
+	setcycle 50 Flanker "IncRight.png"
+	setcycle 50 LD_correct ""
+	setcycle 50 Flanker_correct right
+	setcycle 50 LD_condition ident
+	setcycle 50 Flanker_condition inc
+	setcycle 50 practice no
+	setcycle 51 procedure Target_loop
+	setcycle 51 LD_nr 320
+	setcycle 51 condition Inc_Con
+	setcycle 51 LD_stimulus kapasitet
+	setcycle 51 Flanker "ConLeft.png"
+	setcycle 51 LD_correct ""
+	setcycle 51 Flanker_correct left
+	setcycle 51 LD_condition ident
+	setcycle 51 Flanker_condition con
+	setcycle 51 practice no
+	setcycle 52 procedure LD_loop
+	setcycle 52 LD_nr 443
+	setcycle 52 condition Con
+	setcycle 52 LD_stimulus bevilgning
+	setcycle 52 Flanker ""
+	setcycle 52 LD_correct "[bm_response]"
+	setcycle 52 Flanker_correct ""
+	setcycle 52 LD_condition fill_noncog
+	setcycle 52 Flanker_condition ""
+	setcycle 52 practice no
+	setcycle 53 procedure Target_loop
+	setcycle 53 LD_nr 330
+	setcycle 53 condition Inc_Inc
+	setcycle 53 LD_stimulus kontrakt
+	setcycle 53 Flanker "IncLeft.png"
+	setcycle 53 LD_correct ""
+	setcycle 53 Flanker_correct left
+	setcycle 53 LD_condition ident
+	setcycle 53 Flanker_condition inc
+	setcycle 53 practice no
+	setcycle 54 procedure Flanker_loop
+	setcycle 54 LD_nr ""
+	setcycle 54 condition Inc
+	setcycle 54 LD_stimulus ""
+	setcycle 54 Flanker "IncLeft.png"
+	setcycle 54 LD_correct ""
+	setcycle 54 Flanker_correct left
+	setcycle 54 LD_condition ""
+	setcycle 54 Flanker_condition inc
+	setcycle 54 practice no
+	setcycle 55 procedure Flanker_loop
+	setcycle 55 LD_nr ""
+	setcycle 55 condition Inc
+	setcycle 55 LD_stimulus ""
+	setcycle 55 Flanker "IncRight.png"
+	setcycle 55 LD_correct ""
+	setcycle 55 Flanker_correct right
+	setcycle 55 LD_condition ""
+	setcycle 55 Flanker_condition inc
+	setcycle 55 practice no
+	setcycle 56 procedure Flanker_loop
+	setcycle 56 LD_nr ""
+	setcycle 56 condition Con
+	setcycle 56 LD_stimulus ""
+	setcycle 56 Flanker "ConLeft.png"
+	setcycle 56 LD_correct ""
+	setcycle 56 Flanker_correct left
+	setcycle 56 LD_condition ""
+	setcycle 56 Flanker_condition con
+	setcycle 56 practice no
+	setcycle 57 procedure Flanker_loop
+	setcycle 57 LD_nr ""
+	setcycle 57 condition Inc
+	setcycle 57 LD_stimulus ""
+	setcycle 57 Flanker "IncLeft.png"
+	setcycle 57 LD_correct ""
+	setcycle 57 Flanker_correct left
+	setcycle 57 LD_condition ""
+	setcycle 57 Flanker_condition inc
+	setcycle 57 practice no
+	setcycle 58 procedure LD_loop
+	setcycle 58 LD_nr 401
+	setcycle 58 condition Inc
+	setcycle 58 LD_stimulus ku
+	setcycle 58 Flanker ""
+	setcycle 58 LD_correct ""
+	setcycle 58 Flanker_correct ""
+	setcycle 58 LD_condition fill_ident
+	setcycle 58 Flanker_condition ""
+	setcycle 58 practice no
+	setcycle 59 procedure Target_loop
+	setcycle 59 LD_nr 119
+	setcycle 59 condition Con_Con
+	setcycle 59 LD_stimulus hukommelse
+	setcycle 59 Flanker "ConRight.png"
+	setcycle 59 LD_correct "[bm_response]"
+	setcycle 59 Flanker_correct right
+	setcycle 59 LD_condition noncog
+	setcycle 59 Flanker_condition con
+	setcycle 59 practice no
+	setcycle 60 procedure Target_loop
+	setcycle 60 LD_nr 334
+	setcycle 60 condition Inc_Inc
+	setcycle 60 LD_stimulus optimisme
+	setcycle 60 Flanker "IncLeft.png"
+	setcycle 60 LD_correct ""
+	setcycle 60 Flanker_correct left
+	setcycle 60 LD_condition ident
+	setcycle 60 Flanker_condition inc
+	setcycle 60 practice no
+	setcycle 61 procedure Target_loop
+	setcycle 61 LD_nr 225
+	setcycle 61 condition Inc_Inc
+	setcycle 61 LD_stimulus prosjektleder
+	setcycle 61 Flanker "IncRight.png"
+	setcycle 61 LD_correct "[bm_response]"
+	setcycle 61 Flanker_correct right
+	setcycle 61 LD_condition cog
+	setcycle 61 Flanker_condition inc
+	setcycle 61 practice no
+	setcycle 62 procedure Target_loop
+	setcycle 62 LD_nr 208
+	setcycle 62 condition Inc_Con
+	setcycle 62 LD_stimulus gress
+	setcycle 62 Flanker "ConLeft.png"
+	setcycle 62 LD_correct "[bm_response]"
+	setcycle 62 Flanker_correct left
+	setcycle 62 LD_condition cog
+	setcycle 62 Flanker_condition con
+	setcycle 62 practice no
+	setcycle 63 procedure Flanker_loop
+	setcycle 63 LD_nr ""
+	setcycle 63 condition Con
+	setcycle 63 LD_stimulus ""
+	setcycle 63 Flanker "ConRight.png"
+	setcycle 63 LD_correct ""
+	setcycle 63 Flanker_correct right
+	setcycle 63 LD_condition ""
+	setcycle 63 Flanker_condition con
+	setcycle 63 practice no
+	setcycle 64 procedure Target_loop
+	setcycle 64 LD_nr 325
+	setcycle 64 condition Inc_Inc
+	setcycle 64 LD_stimulus konflikt
+	setcycle 64 Flanker "IncRight.png"
+	setcycle 64 LD_correct ""
+	setcycle 64 Flanker_correct right
+	setcycle 64 LD_condition ident
+	setcycle 64 Flanker_condition inc
+	setcycle 64 practice no
+	setcycle 65 procedure Target_loop
+	setcycle 65 LD_nr 324
+	setcycle 65 condition Inc_Con
+	setcycle 65 LD_stimulus kommentar
+	setcycle 65 Flanker "ConLeft.png"
+	setcycle 65 LD_correct ""
+	setcycle 65 Flanker_correct left
+	setcycle 65 LD_condition ident
+	setcycle 65 Flanker_condition con
+	setcycle 65 practice no
+	setcycle 66 procedure Target_loop
+	setcycle 66 LD_nr 156
+	setcycle 66 condition Con_Con
+	setcycle 66 LD_stimulus "veikskap "
+	setcycle 66 Flanker "ConLeft.png"
+	setcycle 66 LD_correct "[nn_response]"
+	setcycle 66 Flanker_correct left
+	setcycle 66 LD_condition noncog
+	setcycle 66 Flanker_condition con
+	setcycle 66 practice no
+	setcycle 67 procedure Target_loop
+	setcycle 67 LD_nr 329
+	setcycle 67 condition Inc_Inc
+	setcycle 67 LD_stimulus kontekst
+	setcycle 67 Flanker "IncRight.png"
+	setcycle 67 LD_correct ""
+	setcycle 67 Flanker_correct right
+	setcycle 67 LD_condition ident
+	setcycle 67 Flanker_condition inc
+	setcycle 67 practice no
+	setcycle 68 procedure LD_loop
+	setcycle 68 LD_nr 402
+	setcycle 68 condition Inc
+	setcycle 68 LD_stimulus kultur
+	setcycle 68 Flanker ""
+	setcycle 68 LD_correct ""
+	setcycle 68 Flanker_correct ""
+	setcycle 68 LD_condition fill_ident
+	setcycle 68 Flanker_condition ""
+	setcycle 68 practice no
+	setcycle 69 procedure Target_loop
+	setcycle 69 LD_nr 221
+	setcycle 69 condition Inc_Inc
+	setcycle 69 LD_stimulus solskinn
+	setcycle 69 Flanker "IncRight.png"
+	setcycle 69 LD_correct "[bm_response]"
+	setcycle 69 Flanker_correct right
+	setcycle 69 LD_condition cog
+	setcycle 69 Flanker_condition inc
+	setcycle 69 practice no
+	setcycle 70 procedure LD_loop
+	setcycle 70 LD_nr 413
+	setcycle 70 condition Inc
+	setcycle 70 LD_stimulus olje
+	setcycle 70 Flanker ""
+	setcycle 70 LD_correct ""
+	setcycle 70 Flanker_correct ""
+	setcycle 70 LD_condition fill_ident
+	setcycle 70 Flanker_condition ""
+	setcycle 70 practice no
+	setcycle 71 procedure LD_loop
+	setcycle 71 LD_nr 448
+	setcycle 71 condition Con
+	setcycle 71 LD_stimulus bruksanvisning
+	setcycle 71 Flanker ""
+	setcycle 71 LD_correct "[bm_response]"
+	setcycle 71 Flanker_correct ""
+	setcycle 71 LD_condition fill_noncog
+	setcycle 71 Flanker_condition ""
+	setcycle 71 practice no
+	setcycle 72 procedure Target_loop
+	setcycle 72 LD_nr 338
+	setcycle 72 condition Inc_Inc
+	setcycle 72 LD_stimulus posisjon
+	setcycle 72 Flanker "IncLeft.png"
+	setcycle 72 LD_correct ""
+	setcycle 72 Flanker_correct left
+	setcycle 72 LD_condition ident
+	setcycle 72 Flanker_condition inc
+	setcycle 72 practice no
+	setcycle 73 procedure Flanker_loop
+	setcycle 73 LD_nr ""
+	setcycle 73 condition Inc
+	setcycle 73 LD_stimulus ""
+	setcycle 73 Flanker "IncLeft.png"
+	setcycle 73 LD_correct ""
+	setcycle 73 Flanker_correct left
+	setcycle 73 LD_condition ""
+	setcycle 73 Flanker_condition inc
+	setcycle 73 practice no
+	setcycle 74 procedure Target_loop
+	setcycle 74 LD_nr 333
+	setcycle 74 condition Inc_Inc
+	setcycle 74 LD_stimulus natur
+	setcycle 74 Flanker "IncRight.png"
+	setcycle 74 LD_correct ""
+	setcycle 74 Flanker_correct right
+	setcycle 74 LD_condition ident
+	setcycle 74 Flanker_condition inc
+	setcycle 74 practice no
+	setcycle 75 procedure LD_loop
+	setcycle 75 LD_nr 422
+	setcycle 75 condition Inc
+	setcycle 75 LD_stimulus melk
+	setcycle 75 Flanker ""
+	setcycle 75 LD_correct "[bm_response]"
+	setcycle 75 Flanker_correct ""
+	setcycle 75 LD_condition fill_cog
+	setcycle 75 Flanker_condition ""
+	setcycle 75 practice no
+	setcycle 76 procedure Target_loop
+	setcycle 76 LD_nr 210
+	setcycle 76 condition Inc_Inc
+	setcycle 76 LD_stimulus husholdning
+	setcycle 76 Flanker "IncLeft.png"
+	setcycle 76 LD_correct "[bm_response]"
+	setcycle 76 Flanker_correct left
+	setcycle 76 LD_condition cog
+	setcycle 76 Flanker_condition inc
+	setcycle 76 practice no
+	setcycle 77 procedure Flanker_loop
+	setcycle 77 LD_nr ""
+	setcycle 77 condition Inc
+	setcycle 77 LD_stimulus ""
+	setcycle 77 Flanker "IncRight.png"
+	setcycle 77 LD_correct ""
+	setcycle 77 Flanker_correct right
+	setcycle 77 LD_condition ""
+	setcycle 77 Flanker_condition inc
+	setcycle 77 practice no
+	setcycle 78 procedure LD_loop
+	setcycle 78 LD_nr 425
+	setcycle 78 condition Inc
+	setcycle 78 LD_stimulus morgen
+	setcycle 78 Flanker ""
+	setcycle 78 LD_correct "[bm_response]"
+	setcycle 78 Flanker_correct ""
+	setcycle 78 LD_condition fill_cog
+	setcycle 78 Flanker_condition ""
+	setcycle 78 practice no
+	setcycle 79 procedure Target_loop
+	setcycle 79 LD_nr 114
+	setcycle 79 condition Con_Inc
+	setcycle 79 LD_stimulus gjensyn
+	setcycle 79 Flanker "IncLeft.png"
+	setcycle 79 LD_correct "[bm_response]"
+	setcycle 79 Flanker_correct left
+	setcycle 79 LD_condition noncog
+	setcycle 79 Flanker_condition inc
+	setcycle 79 practice no
+	setcycle 80 procedure Target_loop
+	setcycle 80 LD_nr 356
+	setcycle 80 condition Inc_Con
+	setcycle 80 LD_stimulus maskin
+	setcycle 80 Flanker "ConLeft.png"
+	setcycle 80 LD_correct ""
+	setcycle 80 Flanker_correct left
+	setcycle 80 LD_condition ident
+	setcycle 80 Flanker_condition con
+	setcycle 80 practice no
+	setcycle 81 procedure Target_loop
+	setcycle 81 LD_nr 105
+	setcycle 81 condition Con_Inc
+	setcycle 81 LD_stimulus begravelse
+	setcycle 81 Flanker "IncRight.png"
+	setcycle 81 LD_correct "[bm_response]"
+	setcycle 81 Flanker_correct right
+	setcycle 81 LD_condition noncog
+	setcycle 81 Flanker_condition inc
+	setcycle 81 practice no
+	setcycle 82 procedure Target_loop
+	setcycle 82 LD_nr 206
+	setcycle 82 condition Inc_Inc
+	setcycle 82 LD_stimulus hvitvin
+	setcycle 82 Flanker "IncLeft.png"
+	setcycle 82 LD_correct "[bm_response]"
+	setcycle 82 Flanker_correct left
+	setcycle 82 LD_condition cog
+	setcycle 82 Flanker_condition inc
+	setcycle 82 practice no
+	setcycle 83 procedure Target_loop
+	setcycle 83 LD_nr 332
+	setcycle 83 condition Inc_Con
+	setcycle 83 LD_stimulus meny
+	setcycle 83 Flanker "ConLeft.png"
+	setcycle 83 LD_correct ""
+	setcycle 83 Flanker_correct left
+	setcycle 83 LD_condition ident
+	setcycle 83 Flanker_condition con
+	setcycle 83 practice no
+	setcycle 84 procedure Target_loop
+	setcycle 84 LD_nr 109
+	setcycle 84 condition Con_Inc
+	setcycle 84 LD_stimulus bolig
+	setcycle 84 Flanker "IncRight.png"
+	setcycle 84 LD_correct "[bm_response]"
+	setcycle 84 Flanker_correct right
+	setcycle 84 LD_condition noncog
+	setcycle 84 Flanker_condition inc
+	setcycle 84 practice no
+	setcycle 85 procedure Target_loop
+	setcycle 85 LD_nr 344
+	setcycle 85 condition Inc_Con
+	setcycle 85 LD_stimulus mysterium
+	setcycle 85 Flanker "ConLeft.png"
+	setcycle 85 LD_correct ""
+	setcycle 85 Flanker_correct left
+	setcycle 85 LD_condition ident
+	setcycle 85 Flanker_condition con
+	setcycle 85 practice no
+	setcycle 86 procedure Target_loop
+	setcycle 86 LD_nr 123
+	setcycle 86 condition Con_Con
+	setcycle 86 LD_stimulus opptreden
+	setcycle 86 Flanker "ConRight.png"
+	setcycle 86 LD_correct "[bm_response]"
+	setcycle 86 Flanker_correct right
+	setcycle 86 LD_condition noncog
+	setcycle 86 Flanker_condition con
+	setcycle 86 practice no
+	setcycle 87 procedure Flanker_loop
+	setcycle 87 LD_nr ""
+	setcycle 87 condition Inc
+	setcycle 87 LD_stimulus ""
+	setcycle 87 Flanker "IncRight.png"
+	setcycle 87 LD_correct ""
+	setcycle 87 Flanker_correct right
+	setcycle 87 LD_condition ""
+	setcycle 87 Flanker_condition inc
+	setcycle 87 practice no
+	setcycle 88 procedure Target_loop
+	setcycle 88 LD_nr 108
+	setcycle 88 condition Con_Con
+	setcycle 88 LD_stimulus bilag
+	setcycle 88 Flanker "ConLeft.png"
+	setcycle 88 LD_correct "[bm_response]"
+	setcycle 88 Flanker_correct left
+	setcycle 88 LD_condition noncog
+	setcycle 88 Flanker_condition con
+	setcycle 88 practice no
+	setcycle 89 procedure LD_loop
+	setcycle 89 LD_nr 444
+	setcycle 89 condition Con
+	setcycle 89 LD_stimulus fortsettelse
+	setcycle 89 Flanker ""
+	setcycle 89 LD_correct "[bm_response]"
+	setcycle 89 Flanker_correct ""
+	setcycle 89 LD_condition fill_noncog
+	setcycle 89 Flanker_condition ""
+	setcycle 89 practice no
+	setcycle 90 procedure Target_loop
+	setcycle 90 LD_nr 212
+	setcycle 90 condition Inc_Con
+	setcycle 90 LD_stimulus kaffe
+	setcycle 90 Flanker "ConLeft.png"
+	setcycle 90 LD_correct "[bm_response]"
+	setcycle 90 Flanker_correct left
+	setcycle 90 LD_condition cog
+	setcycle 90 Flanker_condition con
+	setcycle 90 practice no
+	setcycle 91 procedure Target_loop
+	setcycle 91 LD_nr 112
+	setcycle 91 condition Con_Con
+	setcycle 91 LD_stimulus forbrytelse
+	setcycle 91 Flanker "ConLeft.png"
+	setcycle 91 LD_correct "[bm_response]"
+	setcycle 91 Flanker_correct left
+	setcycle 91 LD_condition noncog
+	setcycle 91 Flanker_condition con
+	setcycle 91 practice no
+	setcycle 92 procedure Target_loop
+	setcycle 92 LD_nr 118
+	setcycle 92 condition Con_Inc
+	setcycle 92 LD_stimulus herkomst
+	setcycle 92 Flanker "IncLeft.png"
+	setcycle 92 LD_correct "[bm_response]"
+	setcycle 92 Flanker_correct left
+	setcycle 92 LD_condition noncog
+	setcycle 92 Flanker_condition inc
+	setcycle 92 practice no
+	setcycle 93 procedure Target_loop
+	setcycle 93 LD_nr 211
+	setcycle 93 condition Inc_Con
+	setcycle 93 LD_stimulus drikkevann
+	setcycle 93 Flanker "ConRight.png"
+	setcycle 93 LD_correct "[bm_response]"
+	setcycle 93 Flanker_correct right
+	setcycle 93 LD_condition cog
+	setcycle 93 Flanker_condition con
+	setcycle 93 practice no
+	setcycle 94 procedure Target_loop
+	setcycle 94 LD_nr 113
+	setcycle 94 condition Con_Inc
+	setcycle 94 LD_stimulus "fornøyelse"
+	setcycle 94 Flanker "IncRight.png"
+	setcycle 94 LD_correct "[bm_response]"
+	setcycle 94 Flanker_correct right
+	setcycle 94 LD_condition noncog
+	setcycle 94 Flanker_condition inc
+	setcycle 94 practice no
+	setcycle 95 procedure LD_loop
+	setcycle 95 LD_nr 421
+	setcycle 95 condition Inc
+	setcycle 95 LD_stimulus nese
+	setcycle 95 Flanker ""
+	setcycle 95 LD_correct "[bm_response]"
+	setcycle 95 Flanker_correct ""
+	setcycle 95 LD_condition fill_cog
+	setcycle 95 Flanker_condition ""
+	setcycle 95 practice no
+	setcycle 96 procedure Target_loop
+	setcycle 96 LD_nr 126
+	setcycle 96 condition Con_Inc
+	setcycle 96 LD_stimulus oversettelse
+	setcycle 96 Flanker "IncLeft.png"
+	setcycle 96 LD_correct "[bm_response]"
+	setcycle 96 Flanker_correct left
+	setcycle 96 LD_condition noncog
+	setcycle 96 Flanker_condition inc
+	setcycle 96 practice no
+	setcycle 97 procedure Target_loop
+	setcycle 97 LD_nr 223
+	setcycle 97 condition Inc_Con
+	setcycle 97 LD_stimulus hvete
+	setcycle 97 Flanker "ConRight.png"
+	setcycle 97 LD_correct "[bm_response]"
+	setcycle 97 Flanker_correct right
+	setcycle 97 LD_condition cog
+	setcycle 97 Flanker_condition con
+	setcycle 97 practice no
+	setcycle 98 procedure Flanker_loop
+	setcycle 98 LD_nr ""
+	setcycle 98 condition Con
+	setcycle 98 LD_stimulus ""
+	setcycle 98 Flanker "ConRight.png"
+	setcycle 98 LD_correct ""
+	setcycle 98 Flanker_correct right
+	setcycle 98 LD_condition ""
+	setcycle 98 Flanker_condition con
+	setcycle 98 practice no
+	setcycle 99 procedure Target_loop
+	setcycle 99 LD_nr 337
+	setcycle 99 condition Inc_Inc
+	setcycle 99 LD_stimulus panikk
+	setcycle 99 Flanker "IncRight.png"
+	setcycle 99 LD_correct ""
+	setcycle 99 Flanker_correct right
+	setcycle 99 LD_condition ident
+	setcycle 99 Flanker_condition inc
+	setcycle 99 practice no
+	run exp_sequence_run_if
+
+define loop block3
+	set source_file ""
+	set source table
+	set repeat 1
+	set order sequential
+	set description "Repeatedly runs another item"
+	set cycles 100
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 procedure Flanker_loop
+	setcycle 0 LD_nr ""
+	setcycle 0 condition Con
+	setcycle 0 LD_stimulus ""
+	setcycle 0 Flanker "ConRight.png"
+	setcycle 0 LD_correct ""
+	setcycle 0 Flanker_correct right
+	setcycle 0 LD_condition ""
+	setcycle 0 Flanker_condition con
+	setcycle 0 practice no
+	setcycle 1 procedure LD_loop
+	setcycle 1 LD_nr 410
+	setcycle 1 condition Inc
+	setcycle 1 LD_stimulus papir
+	setcycle 1 Flanker ""
+	setcycle 1 LD_correct ""
+	setcycle 1 Flanker_correct ""
+	setcycle 1 LD_condition fill_ident
+	setcycle 1 Flanker_condition ""
+	setcycle 1 practice no
+	setcycle 2 procedure LD_loop
+	setcycle 2 LD_nr 440
+	setcycle 2 condition Inc
+	setcycle 2 LD_stimulus sal
+	setcycle 2 Flanker ""
+	setcycle 2 LD_correct "[nn_response]"
+	setcycle 2 Flanker_correct ""
+	setcycle 2 LD_condition fill_cog
+	setcycle 2 Flanker_condition ""
+	setcycle 2 practice no
+	setcycle 3 procedure Target_loop
+	setcycle 3 LD_nr 117
+	setcycle 3 condition Con_Inc
+	setcycle 3 LD_stimulus hensyn
+	setcycle 3 Flanker "IncRight.png"
+	setcycle 3 LD_correct "[bm_response]"
+	setcycle 3 Flanker_correct right
+	setcycle 3 LD_condition noncog
+	setcycle 3 Flanker_condition inc
+	setcycle 3 practice no
+	setcycle 4 procedure Target_loop
+	setcycle 4 LD_nr 260
+	setcycle 4 condition Inc_Con
+	setcycle 4 LD_stimulus vindauge
+	setcycle 4 Flanker "ConLeft.png"
+	setcycle 4 LD_correct "[nn_response]"
+	setcycle 4 Flanker_correct left
+	setcycle 4 LD_condition cog
+	setcycle 4 Flanker_condition con
+	setcycle 4 practice no
+	setcycle 5 procedure Target_loop
+	setcycle 5 LD_nr 150
+	setcycle 5 condition Con_Inc
+	setcycle 5 LD_stimulus skilnad
+	setcycle 5 Flanker "IncLeft.png"
+	setcycle 5 LD_correct "[nn_response]"
+	setcycle 5 Flanker_correct left
+	setcycle 5 LD_condition noncog
+	setcycle 5 Flanker_condition inc
+	setcycle 5 practice no
+	setcycle 6 procedure Target_loop
+	setcycle 6 LD_nr 259
+	setcycle 6 condition Inc_Con
+	setcycle 6 LD_stimulus syster
+	setcycle 6 Flanker "ConRight.png"
+	setcycle 6 LD_correct "[nn_response]"
+	setcycle 6 Flanker_correct right
+	setcycle 6 LD_condition cog
+	setcycle 6 Flanker_condition con
+	setcycle 6 practice no
+	setcycle 7 procedure Target_loop
+	setcycle 7 LD_nr 154
+	setcycle 7 condition Con_Inc
+	setcycle 7 LD_stimulus tilsett
+	setcycle 7 Flanker "IncLeft.png"
+	setcycle 7 LD_correct "[nn_response]"
+	setcycle 7 Flanker_correct left
+	setcycle 7 LD_condition noncog
+	setcycle 7 Flanker_condition inc
+	setcycle 7 practice no
+	setcycle 8 procedure Target_loop
+	setcycle 8 LD_nr 216
+	setcycle 8 condition Inc_Con
+	setcycle 8 LD_stimulus mening
+	setcycle 8 Flanker "ConLeft.png"
+	setcycle 8 LD_correct "[bm_response]"
+	setcycle 8 Flanker_correct left
+	setcycle 8 LD_condition cog
+	setcycle 8 Flanker_condition con
+	setcycle 8 practice no
+	setcycle 9 procedure Target_loop
+	setcycle 9 LD_nr 158
+	setcycle 9 condition Con_Inc
+	setcycle 9 LD_stimulus verksemd
+	setcycle 9 Flanker "IncLeft.png"
+	setcycle 9 LD_correct "[nn_response]"
+	setcycle 9 Flanker_correct left
+	setcycle 9 LD_condition noncog
+	setcycle 9 Flanker_condition inc
+	setcycle 9 practice no
+	setcycle 10 procedure Target_loop
+	setcycle 10 LD_nr 219
+	setcycle 10 condition Inc_Con
+	setcycle 10 LD_stimulus hvitvasking
+	setcycle 10 Flanker "ConRight.png"
+	setcycle 10 LD_correct "[bm_response]"
+	setcycle 10 Flanker_correct right
+	setcycle 10 LD_condition cog
+	setcycle 10 Flanker_condition con
+	setcycle 10 practice no
+	setcycle 11 procedure Target_loop
+	setcycle 11 LD_nr 121
+	setcycle 11 condition Con_Inc
+	setcycle 11 LD_stimulus likhet
+	setcycle 11 Flanker "IncRight.png"
+	setcycle 11 LD_correct "[bm_response]"
+	setcycle 11 Flanker_correct right
+	setcycle 11 LD_condition noncog
+	setcycle 11 Flanker_condition inc
+	setcycle 11 practice no
+	setcycle 12 procedure LD_loop
+	setcycle 12 LD_nr 423
+	setcycle 12 condition Inc
+	setcycle 12 LD_stimulus ovn
+	setcycle 12 Flanker ""
+	setcycle 12 LD_correct "[bm_response]"
+	setcycle 12 Flanker_correct ""
+	setcycle 12 LD_condition fill_cog
+	setcycle 12 Flanker_condition ""
+	setcycle 12 practice no
+	setcycle 13 procedure Target_loop
+	setcycle 13 LD_nr 153
+	setcycle 13 condition Con_Inc
+	setcycle 13 LD_stimulus tilkomst
+	setcycle 13 Flanker "IncRight.png"
+	setcycle 13 LD_correct "[nn_response]"
+	setcycle 13 Flanker_correct right
+	setcycle 13 LD_condition noncog
+	setcycle 13 Flanker_condition inc
+	setcycle 13 practice no
+	setcycle 14 procedure Target_loop
+	setcycle 14 LD_nr 220
+	setcycle 14 condition Inc_Con
+	setcycle 14 LD_stimulus selvironi
+	setcycle 14 Flanker "ConLeft.png"
+	setcycle 14 LD_correct "[bm_response]"
+	setcycle 14 Flanker_correct left
+	setcycle 14 LD_condition cog
+	setcycle 14 Flanker_condition con
+	setcycle 14 practice no
+	setcycle 15 procedure Target_loop
+	setcycle 15 LD_nr 157
+	setcycle 15 condition Con_Inc
+	setcycle 15 LD_stimulus venleik
+	setcycle 15 Flanker "IncRight.png"
+	setcycle 15 LD_correct "[nn_response]"
+	setcycle 15 Flanker_correct right
+	setcycle 15 LD_condition noncog
+	setcycle 15 Flanker_condition inc
+	setcycle 15 practice no
+	setcycle 16 procedure LD_loop
+	setcycle 16 LD_nr 427
+	setcycle 16 condition Inc
+	setcycle 16 LD_stimulus tirsdag
+	setcycle 16 Flanker ""
+	setcycle 16 LD_correct "[bm_response]"
+	setcycle 16 Flanker_correct ""
+	setcycle 16 LD_condition fill_cog
+	setcycle 16 Flanker_condition ""
+	setcycle 16 practice no
+	setcycle 17 procedure Target_loop
+	setcycle 17 LD_nr 222
+	setcycle 17 condition Inc_Inc
+	setcycle 17 LD_stimulus "seilbåt"
+	setcycle 17 Flanker "IncLeft.png"
+	setcycle 17 LD_correct "[bm_response]"
+	setcycle 17 Flanker_correct left
+	setcycle 17 LD_condition cog
+	setcycle 17 Flanker_condition inc
+	setcycle 17 practice no
+	setcycle 18 procedure LD_loop
+	setcycle 18 LD_nr 452
+	setcycle 18 condition Con
+	setcycle 18 LD_stimulus "rørsle"
+	setcycle 18 Flanker ""
+	setcycle 18 LD_correct "[nn_response]"
+	setcycle 18 Flanker_correct ""
+	setcycle 18 LD_condition fill_noncog
+	setcycle 18 Flanker_condition ""
+	setcycle 18 practice no
+	setcycle 19 procedure Target_loop
+	setcycle 19 LD_nr 224
+	setcycle 19 condition Inc_Con
+	setcycle 19 LD_stimulus skudd
+	setcycle 19 Flanker "ConLeft.png"
+	setcycle 19 LD_correct "[bm_response]"
+	setcycle 19 Flanker_correct left
+	setcycle 19 LD_condition cog
+	setcycle 19 Flanker_condition con
+	setcycle 19 practice no
+	setcycle 20 procedure Target_loop
+	setcycle 20 LD_nr 116
+	setcycle 20 condition Con_Con
+	setcycle 20 LD_stimulus hemmelighet
+	setcycle 20 Flanker "ConLeft.png"
+	setcycle 20 LD_correct "[bm_response]"
+	setcycle 20 Flanker_correct left
+	setcycle 20 LD_condition noncog
+	setcycle 20 Flanker_condition con
+	setcycle 20 practice no
+	setcycle 21 procedure LD_loop
+	setcycle 21 LD_nr 457
+	setcycle 21 condition Con
+	setcycle 21 LD_stimulus tregleik
+	setcycle 21 Flanker ""
+	setcycle 21 LD_correct "[nn_response]"
+	setcycle 21 Flanker_correct ""
+	setcycle 21 LD_condition fill_noncog
+	setcycle 21 Flanker_condition ""
+	setcycle 21 practice no
+	setcycle 22 procedure Target_loop
+	setcycle 22 LD_nr 207
+	setcycle 22 condition Inc_Con
+	setcycle 22 LD_stimulus skoletid
+	setcycle 22 Flanker "ConRight.png"
+	setcycle 22 LD_correct "[bm_response]"
+	setcycle 22 Flanker_correct right
+	setcycle 22 LD_condition cog
+	setcycle 22 Flanker_condition con
+	setcycle 22 practice no
+	setcycle 23 procedure LD_loop
+	setcycle 23 LD_nr 451
+	setcycle 23 condition Con
+	setcycle 23 LD_stimulus velgjerd
+	setcycle 23 Flanker ""
+	setcycle 23 LD_correct "[nn_response]"
+	setcycle 23 Flanker_correct ""
+	setcycle 23 LD_condition fill_noncog
+	setcycle 23 Flanker_condition ""
+	setcycle 23 practice no
+	setcycle 24 procedure Target_loop
+	setcycle 24 LD_nr 228
+	setcycle 24 condition Inc_Con
+	setcycle 24 LD_stimulus torden
+	setcycle 24 Flanker "ConLeft.png"
+	setcycle 24 LD_correct "[bm_response]"
+	setcycle 24 Flanker_correct left
+	setcycle 24 LD_condition cog
+	setcycle 24 Flanker_condition con
+	setcycle 24 practice no
+	setcycle 25 procedure Target_loop
+	setcycle 25 LD_nr 129
+	setcycle 25 condition Con_Inc
+	setcycle 25 LD_stimulus "nærhet"
+	setcycle 25 Flanker "IncRight.png"
+	setcycle 25 LD_correct "[bm_response]"
+	setcycle 25 Flanker_correct right
+	setcycle 25 LD_condition noncog
+	setcycle 25 Flanker_condition inc
+	setcycle 25 practice no
+	setcycle 26 procedure Target_loop
+	setcycle 26 LD_nr 249
+	setcycle 26 condition Inc_Inc
+	setcycle 26 LD_stimulus "øyra"
+	setcycle 26 Flanker "IncRight.png"
+	setcycle 26 LD_correct "[nn_response]"
+	setcycle 26 Flanker_correct right
+	setcycle 26 LD_condition cog
+	setcycle 26 Flanker_condition inc
+	setcycle 26 practice no
+	setcycle 27 procedure Target_loop
+	setcycle 27 LD_nr 120
+	setcycle 27 condition Con_Con
+	setcycle 27 LD_stimulus klarhet
+	setcycle 27 Flanker "ConLeft.png"
+	setcycle 27 LD_correct "[bm_response]"
+	setcycle 27 Flanker_correct left
+	setcycle 27 LD_condition noncog
+	setcycle 27 Flanker_condition con
+	setcycle 27 practice no
+	setcycle 28 procedure Target_loop
+	setcycle 28 LD_nr 253
+	setcycle 28 condition Inc_Inc
+	setcycle 28 LD_stimulus "sjølvkritikk"
+	setcycle 28 Flanker "IncRight.png"
+	setcycle 28 LD_correct "[nn_response]"
+	setcycle 28 Flanker_correct right
+	setcycle 28 LD_condition cog
+	setcycle 28 Flanker_condition inc
+	setcycle 28 practice no
+	setcycle 29 procedure Flanker_loop
+	setcycle 29 LD_nr ""
+	setcycle 29 condition Con
+	setcycle 29 LD_stimulus ""
+	setcycle 29 Flanker "ConRight.png"
+	setcycle 29 LD_correct ""
+	setcycle 29 Flanker_correct right
+	setcycle 29 LD_condition ""
+	setcycle 29 Flanker_condition con
+	setcycle 29 practice no
+	setcycle 30 procedure Target_loop
+	setcycle 30 LD_nr 250
+	setcycle 30 condition Inc_Inc
+	setcycle 30 LD_stimulus prisvinnar
+	setcycle 30 Flanker "IncLeft.png"
+	setcycle 30 LD_correct "[nn_response]"
+	setcycle 30 Flanker_correct left
+	setcycle 30 LD_condition cog
+	setcycle 30 Flanker_condition inc
+	setcycle 30 practice no
+	setcycle 31 procedure LD_loop
+	setcycle 31 LD_nr 406
+	setcycle 31 condition Inc
+	setcycle 31 LD_stimulus refleksjon
+	setcycle 31 Flanker ""
+	setcycle 31 LD_correct ""
+	setcycle 31 Flanker_correct ""
+	setcycle 31 LD_condition fill_ident
+	setcycle 31 Flanker_condition ""
+	setcycle 31 practice no
+	setcycle 32 procedure Target_loop
+	setcycle 32 LD_nr 229
+	setcycle 32 condition Inc_Inc
+	setcycle 32 LD_stimulus tyveri
+	setcycle 32 Flanker "IncRight.png"
+	setcycle 32 LD_correct "[bm_response]"
+	setcycle 32 Flanker_correct right
+	setcycle 32 LD_condition cog
+	setcycle 32 Flanker_condition inc
+	setcycle 32 practice no
+	setcycle 33 procedure LD_loop
+	setcycle 33 LD_nr 414
+	setcycle 33 condition Inc
+	setcycle 33 LD_stimulus ris
+	setcycle 33 Flanker ""
+	setcycle 33 LD_correct ""
+	setcycle 33 Flanker_correct ""
+	setcycle 33 LD_condition fill_ident
+	setcycle 33 Flanker_condition ""
+	setcycle 33 practice no
+	setcycle 34 procedure LD_loop
+	setcycle 34 LD_nr 404
+	setcycle 34 condition Inc
+	setcycle 34 LD_stimulus sektor
+	setcycle 34 Flanker ""
+	setcycle 34 LD_correct ""
+	setcycle 34 Flanker_correct ""
+	setcycle 34 LD_condition fill_ident
+	setcycle 34 Flanker_condition ""
+	setcycle 34 practice no
+	setcycle 35 procedure Target_loop
+	setcycle 35 LD_nr 124
+	setcycle 35 condition Con_Con
+	setcycle 35 LD_stimulus "ørret"
+	setcycle 35 Flanker "ConLeft.png"
+	setcycle 35 LD_correct "[bm_response]"
+	setcycle 35 Flanker_correct left
+	setcycle 35 LD_condition noncog
+	setcycle 35 Flanker_condition con
+	setcycle 35 practice no
+	setcycle 36 procedure LD_loop
+	setcycle 36 LD_nr 429
+	setcycle 36 condition Inc
+	setcycle 36 LD_stimulus uke
+	setcycle 36 Flanker ""
+	setcycle 36 LD_correct "[bm_response]"
+	setcycle 36 Flanker_correct ""
+	setcycle 36 LD_condition fill_cog
+	setcycle 36 Flanker_condition ""
+	setcycle 36 practice no
+	setcycle 37 procedure Flanker_loop
+	setcycle 37 LD_nr ""
+	setcycle 37 condition Con
+	setcycle 37 LD_stimulus ""
+	setcycle 37 Flanker "ConRight.png"
+	setcycle 37 LD_correct ""
+	setcycle 37 Flanker_correct right
+	setcycle 37 LD_condition ""
+	setcycle 37 Flanker_condition con
+	setcycle 37 practice no
+	setcycle 38 procedure Target_loop
+	setcycle 38 LD_nr 214
+	setcycle 38 condition Inc_Inc
+	setcycle 38 LD_stimulus utbrudd
+	setcycle 38 Flanker "IncLeft.png"
+	setcycle 38 LD_correct "[bm_response]"
+	setcycle 38 Flanker_correct left
+	setcycle 38 LD_condition cog
+	setcycle 38 Flanker_condition inc
+	setcycle 38 practice no
+	setcycle 39 procedure Target_loop
+	setcycle 39 LD_nr 127
+	setcycle 39 condition Con_Con
+	setcycle 39 LD_stimulus pike
+	setcycle 39 Flanker "ConRight.png"
+	setcycle 39 LD_correct "[bm_response]"
+	setcycle 39 Flanker_correct right
+	setcycle 39 LD_condition noncog
+	setcycle 39 Flanker_condition con
+	setcycle 39 practice no
+	setcycle 40 procedure Flanker_loop
+	setcycle 40 LD_nr ""
+	setcycle 40 condition Con
+	setcycle 40 LD_stimulus ""
+	setcycle 40 Flanker "ConRight.png"
+	setcycle 40 LD_correct ""
+	setcycle 40 Flanker_correct right
+	setcycle 40 LD_condition ""
+	setcycle 40 Flanker_condition con
+	setcycle 40 practice no
+	setcycle 41 procedure Target_loop
+	setcycle 41 LD_nr 254
+	setcycle 41 condition Inc_Inc
+	setcycle 41 LD_stimulus "skuleår"
+	setcycle 41 Flanker "IncLeft.png"
+	setcycle 41 LD_correct "[nn_response]"
+	setcycle 41 Flanker_correct left
+	setcycle 41 LD_condition cog
+	setcycle 41 Flanker_condition inc
+	setcycle 41 practice no
+	setcycle 42 procedure Flanker_loop
+	setcycle 42 LD_nr ""
+	setcycle 42 condition Inc
+	setcycle 42 LD_stimulus ""
+	setcycle 42 Flanker "IncLeft.png"
+	setcycle 42 LD_correct ""
+	setcycle 42 Flanker_correct left
+	setcycle 42 LD_condition ""
+	setcycle 42 Flanker_condition inc
+	setcycle 42 practice no
+	setcycle 43 procedure Target_loop
+	setcycle 43 LD_nr 151
+	setcycle 43 condition Con_Con
+	setcycle 43 LD_stimulus stadfesting
+	setcycle 43 Flanker "ConRight.png"
+	setcycle 43 LD_correct "[nn_response]"
+	setcycle 43 Flanker_correct right
+	setcycle 43 LD_condition noncog
+	setcycle 43 Flanker_condition con
+	setcycle 43 practice no
+	setcycle 44 procedure LD_loop
+	setcycle 44 LD_nr 411
+	setcycle 44 condition Inc
+	setcycle 44 LD_stimulus skip
+	setcycle 44 Flanker ""
+	setcycle 44 LD_correct ""
+	setcycle 44 Flanker_correct ""
+	setcycle 44 LD_condition fill_ident
+	setcycle 44 Flanker_condition ""
+	setcycle 44 practice no
+	setcycle 45 procedure Target_loop
+	setcycle 45 LD_nr 160
+	setcycle 45 condition Con_Con
+	setcycle 45 LD_stimulus vonbrot
+	setcycle 45 Flanker "ConLeft.png"
+	setcycle 45 LD_correct "[nn_response]"
+	setcycle 45 Flanker_correct left
+	setcycle 45 LD_condition noncog
+	setcycle 45 Flanker_condition con
+	setcycle 45 practice no
+	setcycle 46 procedure Target_loop
+	setcycle 46 LD_nr 342
+	setcycle 46 condition Inc_Inc
+	setcycle 46 LD_stimulus reaksjon
+	setcycle 46 Flanker "IncLeft.png"
+	setcycle 46 LD_correct ""
+	setcycle 46 Flanker_correct left
+	setcycle 46 LD_condition ident
+	setcycle 46 Flanker_condition inc
+	setcycle 46 practice no
+	setcycle 47 procedure Target_loop
+	setcycle 47 LD_nr 339
+	setcycle 47 condition Inc_Con
+	setcycle 47 LD_stimulus potensial
+	setcycle 47 Flanker "ConRight.png"
+	setcycle 47 LD_correct ""
+	setcycle 47 Flanker_correct right
+	setcycle 47 LD_condition ident
+	setcycle 47 Flanker_condition con
+	setcycle 47 practice no
+	setcycle 48 procedure LD_loop
+	setcycle 48 LD_nr 446
+	setcycle 48 condition Con
+	setcycle 48 LD_stimulus meddelelse
+	setcycle 48 Flanker ""
+	setcycle 48 LD_correct "[bm_response]"
+	setcycle 48 Flanker_correct ""
+	setcycle 48 LD_condition fill_noncog
+	setcycle 48 Flanker_condition ""
+	setcycle 48 practice no
+	setcycle 49 procedure Target_loop
+	setcycle 49 LD_nr 336
+	setcycle 49 condition Inc_Con
+	setcycle 49 LD_stimulus overtid
+	setcycle 49 Flanker "ConLeft.png"
+	setcycle 49 LD_correct ""
+	setcycle 49 Flanker_correct left
+	setcycle 49 LD_condition ident
+	setcycle 49 Flanker_condition con
+	setcycle 49 practice no
+	setcycle 50 procedure Flanker_loop
+	setcycle 50 LD_nr ""
+	setcycle 50 condition Con
+	setcycle 50 LD_stimulus ""
+	setcycle 50 Flanker "ConLeft.png"
+	setcycle 50 LD_correct ""
+	setcycle 50 Flanker_correct left
+	setcycle 50 LD_condition ""
+	setcycle 50 Flanker_condition con
+	setcycle 50 practice no
+	setcycle 51 procedure LD_loop
+	setcycle 51 LD_nr 439
+	setcycle 51 condition Inc
+	setcycle 51 LD_stimulus song
+	setcycle 51 Flanker ""
+	setcycle 51 LD_correct "[nn_response]"
+	setcycle 51 Flanker_correct ""
+	setcycle 51 LD_condition fill_cog
+	setcycle 51 Flanker_condition ""
+	setcycle 51 practice no
+	setcycle 52 procedure Target_loop
+	setcycle 52 LD_nr 345
+	setcycle 52 condition Inc_Inc
+	setcycle 52 LD_stimulus sekund
+	setcycle 52 Flanker "IncRight.png"
+	setcycle 52 LD_correct ""
+	setcycle 52 Flanker_correct right
+	setcycle 52 LD_condition ident
+	setcycle 52 Flanker_condition inc
+	setcycle 52 practice no
+	setcycle 53 procedure Target_loop
+	setcycle 53 LD_nr 340
+	setcycle 53 condition Inc_Con
+	setcycle 53 LD_stimulus prinsipp
+	setcycle 53 Flanker "ConLeft.png"
+	setcycle 53 LD_correct ""
+	setcycle 53 Flanker_correct left
+	setcycle 53 LD_condition ident
+	setcycle 53 Flanker_condition con
+	setcycle 53 practice no
+	setcycle 54 procedure Flanker_loop
+	setcycle 54 LD_nr ""
+	setcycle 54 condition Con
+	setcycle 54 LD_stimulus ""
+	setcycle 54 Flanker "ConRight.png"
+	setcycle 54 LD_correct ""
+	setcycle 54 Flanker_correct right
+	setcycle 54 LD_condition ""
+	setcycle 54 Flanker_condition con
+	setcycle 54 practice no
+	setcycle 55 procedure Flanker_loop
+	setcycle 55 LD_nr ""
+	setcycle 55 condition Inc
+	setcycle 55 LD_stimulus ""
+	setcycle 55 Flanker "IncRight.png"
+	setcycle 55 LD_correct ""
+	setcycle 55 Flanker_correct right
+	setcycle 55 LD_condition ""
+	setcycle 55 Flanker_condition inc
+	setcycle 55 practice no
+	setcycle 56 procedure Flanker_loop
+	setcycle 56 LD_nr ""
+	setcycle 56 condition Con
+	setcycle 56 LD_stimulus ""
+	setcycle 56 Flanker "ConLeft.png"
+	setcycle 56 LD_correct ""
+	setcycle 56 Flanker_correct left
+	setcycle 56 LD_condition ""
+	setcycle 56 Flanker_condition con
+	setcycle 56 practice no
+	setcycle 57 procedure Target_loop
+	setcycle 57 LD_nr 215
+	setcycle 57 condition Inc_Con
+	setcycle 57 LD_stimulus sommer
+	setcycle 57 Flanker "ConRight.png"
+	setcycle 57 LD_correct "[bm_response]"
+	setcycle 57 Flanker_correct right
+	setcycle 57 LD_condition cog
+	setcycle 57 Flanker_condition con
+	setcycle 57 practice no
+	setcycle 58 procedure Target_loop
+	setcycle 58 LD_nr 155
+	setcycle 58 condition Con_Con
+	setcycle 58 LD_stimulus tryggleik
+	setcycle 58 Flanker "ConRight.png"
+	setcycle 58 LD_correct "[nn_response]"
+	setcycle 58 Flanker_correct right
+	setcycle 58 LD_condition noncog
+	setcycle 58 Flanker_condition con
+	setcycle 58 practice no
+	setcycle 59 procedure Flanker_loop
+	setcycle 59 LD_nr ""
+	setcycle 59 condition Inc
+	setcycle 59 LD_stimulus ""
+	setcycle 59 Flanker "IncLeft.png"
+	setcycle 59 LD_correct ""
+	setcycle 59 Flanker_correct left
+	setcycle 59 LD_condition ""
+	setcycle 59 Flanker_condition inc
+	setcycle 59 practice no
+	setcycle 60 procedure Flanker_loop
+	setcycle 60 LD_nr ""
+	setcycle 60 condition Con
+	setcycle 60 LD_stimulus ""
+	setcycle 60 Flanker "ConLeft.png"
+	setcycle 60 LD_correct ""
+	setcycle 60 Flanker_correct left
+	setcycle 60 LD_condition ""
+	setcycle 60 Flanker_condition con
+	setcycle 60 practice no
+	setcycle 61 procedure Flanker_loop
+	setcycle 61 LD_nr ""
+	setcycle 61 condition Inc
+	setcycle 61 LD_stimulus ""
+	setcycle 61 Flanker "IncLeft.png"
+	setcycle 61 LD_correct ""
+	setcycle 61 Flanker_correct left
+	setcycle 61 LD_condition ""
+	setcycle 61 Flanker_condition inc
+	setcycle 61 practice no
+	setcycle 62 procedure LD_loop
+	setcycle 62 LD_nr 432
+	setcycle 62 condition Inc
+	setcycle 62 LD_stimulus straum
+	setcycle 62 Flanker ""
+	setcycle 62 LD_correct "[nn_response]"
+	setcycle 62 Flanker_correct ""
+	setcycle 62 LD_condition fill_cog
+	setcycle 62 Flanker_condition ""
+	setcycle 62 practice no
+	setcycle 63 procedure Target_loop
+	setcycle 63 LD_nr 143
+	setcycle 63 condition Con_Con
+	setcycle 63 LD_stimulus verknad
+	setcycle 63 Flanker "ConRight.png"
+	setcycle 63 LD_correct "[nn_response]"
+	setcycle 63 Flanker_correct right
+	setcycle 63 LD_condition noncog
+	setcycle 63 Flanker_condition con
+	setcycle 63 practice no
+	setcycle 64 procedure Target_loop
+	setcycle 64 LD_nr 346
+	setcycle 64 condition Inc_Inc
+	setcycle 64 LD_stimulus sjokk
+	setcycle 64 Flanker "IncLeft.png"
+	setcycle 64 LD_correct ""
+	setcycle 64 Flanker_correct left
+	setcycle 64 LD_condition ident
+	setcycle 64 Flanker_condition inc
+	setcycle 64 practice no
+	setcycle 65 procedure Flanker_loop
+	setcycle 65 LD_nr ""
+	setcycle 65 condition Inc
+	setcycle 65 LD_stimulus ""
+	setcycle 65 Flanker "IncLeft.png"
+	setcycle 65 LD_correct ""
+	setcycle 65 Flanker_correct left
+	setcycle 65 LD_condition ""
+	setcycle 65 Flanker_condition inc
+	setcycle 65 practice no
+	setcycle 66 procedure Target_loop
+	setcycle 66 LD_nr 350
+	setcycle 66 condition Inc_Inc
+	setcycle 66 LD_stimulus stadion
+	setcycle 66 Flanker "IncLeft.png"
+	setcycle 66 LD_correct ""
+	setcycle 66 Flanker_correct left
+	setcycle 66 LD_condition ident
+	setcycle 66 Flanker_condition inc
+	setcycle 66 practice no
+	setcycle 67 procedure Target_loop
+	setcycle 67 LD_nr 348
+	setcycle 67 condition Inc_Con
+	setcycle 67 LD_stimulus "skjørt"
+	setcycle 67 Flanker "ConLeft.png"
+	setcycle 67 LD_correct ""
+	setcycle 67 Flanker_correct left
+	setcycle 67 LD_condition ident
+	setcycle 67 Flanker_condition con
+	setcycle 67 practice no
+	setcycle 68 procedure Flanker_loop
+	setcycle 68 LD_nr ""
+	setcycle 68 condition Con
+	setcycle 68 LD_stimulus ""
+	setcycle 68 Flanker "ConLeft.png"
+	setcycle 68 LD_correct ""
+	setcycle 68 Flanker_correct left
+	setcycle 68 LD_condition ""
+	setcycle 68 Flanker_condition con
+	setcycle 68 practice no
+	setcycle 69 procedure Target_loop
+	setcycle 69 LD_nr 343
+	setcycle 69 condition Inc_Con
+	setcycle 69 LD_stimulus ressurs
+	setcycle 69 Flanker "ConRight.png"
+	setcycle 69 LD_correct ""
+	setcycle 69 Flanker_correct right
+	setcycle 69 LD_condition ident
+	setcycle 69 Flanker_condition con
+	setcycle 69 practice no
+	setcycle 70 procedure Flanker_loop
+	setcycle 70 LD_nr ""
+	setcycle 70 condition Con
+	setcycle 70 LD_stimulus ""
+	setcycle 70 Flanker "ConLeft.png"
+	setcycle 70 LD_correct ""
+	setcycle 70 Flanker_correct left
+	setcycle 70 LD_condition ""
+	setcycle 70 Flanker_condition con
+	setcycle 70 practice no
+	setcycle 71 procedure Flanker_loop
+	setcycle 71 LD_nr ""
+	setcycle 71 condition Inc
+	setcycle 71 LD_stimulus ""
+	setcycle 71 Flanker "IncRight.png"
+	setcycle 71 LD_correct ""
+	setcycle 71 Flanker_correct right
+	setcycle 71 LD_condition ""
+	setcycle 71 Flanker_condition inc
+	setcycle 71 practice no
+	setcycle 72 procedure Target_loop
+	setcycle 72 LD_nr 313
+	setcycle 72 condition Inc_Inc
+	setcycle 72 LD_stimulus seremoni
+	setcycle 72 Flanker "IncRight.png"
+	setcycle 72 LD_correct ""
+	setcycle 72 Flanker_correct right
+	setcycle 72 LD_condition ident
+	setcycle 72 Flanker_condition inc
+	setcycle 72 practice no
+	setcycle 73 procedure Target_loop
+	setcycle 73 LD_nr 347
+	setcycle 73 condition Inc_Con
+	setcycle 73 LD_stimulus sjokolade
+	setcycle 73 Flanker "ConRight.png"
+	setcycle 73 LD_correct ""
+	setcycle 73 Flanker_correct right
+	setcycle 73 LD_condition ident
+	setcycle 73 Flanker_condition con
+	setcycle 73 practice no
+	setcycle 74 procedure Target_loop
+	setcycle 74 LD_nr 130
+	setcycle 74 condition Con_Inc
+	setcycle 74 LD_stimulus viten
+	setcycle 74 Flanker "IncLeft.png"
+	setcycle 74 LD_correct "[bm_response]"
+	setcycle 74 Flanker_correct left
+	setcycle 74 LD_condition noncog
+	setcycle 74 Flanker_condition inc
+	setcycle 74 practice no
+	setcycle 75 procedure Target_loop
+	setcycle 75 LD_nr 230
+	setcycle 75 condition Inc_Inc
+	setcycle 75 LD_stimulus verdensrekord
+	setcycle 75 Flanker "IncLeft.png"
+	setcycle 75 LD_correct "[bm_response]"
+	setcycle 75 Flanker_correct left
+	setcycle 75 LD_condition cog
+	setcycle 75 Flanker_condition inc
+	setcycle 75 practice no
+	setcycle 76 procedure Target_loop
+	setcycle 76 LD_nr 227
+	setcycle 76 condition Inc_Con
+	setcycle 76 LD_stimulus sykdom
+	setcycle 76 Flanker "ConRight.png"
+	setcycle 76 LD_correct "[bm_response]"
+	setcycle 76 Flanker_correct right
+	setcycle 76 LD_condition cog
+	setcycle 76 Flanker_condition con
+	setcycle 76 practice no
+	setcycle 77 procedure Target_loop
+	setcycle 77 LD_nr 159
+	setcycle 77 condition Con_Con
+	setcycle 77 LD_stimulus vitjing
+	setcycle 77 Flanker "ConRight.png"
+	setcycle 77 LD_correct "[nn_response]"
+	setcycle 77 Flanker_correct right
+	setcycle 77 LD_condition noncog
+	setcycle 77 Flanker_condition con
+	setcycle 77 practice no
+	setcycle 78 procedure Target_loop
+	setcycle 78 LD_nr 349
+	setcycle 78 condition Inc_Inc
+	setcycle 78 LD_stimulus stabilitet
+	setcycle 78 Flanker "IncRight.png"
+	setcycle 78 LD_correct ""
+	setcycle 78 Flanker_correct right
+	setcycle 78 LD_condition ident
+	setcycle 78 Flanker_condition inc
+	setcycle 78 practice no
+	setcycle 79 procedure Target_loop
+	setcycle 79 LD_nr 351
+	setcycle 79 condition Inc_Con
+	setcycle 79 LD_stimulus symbol
+	setcycle 79 Flanker "ConRight.png"
+	setcycle 79 LD_correct ""
+	setcycle 79 Flanker_correct right
+	setcycle 79 LD_condition ident
+	setcycle 79 Flanker_condition con
+	setcycle 79 practice no
+	setcycle 80 procedure Target_loop
+	setcycle 80 LD_nr 128
+	setcycle 80 condition Con_Con
+	setcycle 80 LD_stimulus utholdenhet
+	setcycle 80 Flanker "ConLeft.png"
+	setcycle 80 LD_correct "[bm_response]"
+	setcycle 80 Flanker_correct left
+	setcycle 80 LD_condition noncog
+	setcycle 80 Flanker_condition con
+	setcycle 80 practice no
+	setcycle 81 procedure Target_loop
+	setcycle 81 LD_nr 353
+	setcycle 81 condition Inc_Inc
+	setcycle 81 LD_stimulus telefon
+	setcycle 81 Flanker "IncRight.png"
+	setcycle 81 LD_correct ""
+	setcycle 81 Flanker_correct right
+	setcycle 81 LD_condition ident
+	setcycle 81 Flanker_condition inc
+	setcycle 81 practice no
+	setcycle 82 procedure Target_loop
+	setcycle 82 LD_nr 355
+	setcycle 82 condition Inc_Con
+	setcycle 82 LD_stimulus tradisjon
+	setcycle 82 Flanker "ConRight.png"
+	setcycle 82 LD_correct ""
+	setcycle 82 Flanker_correct right
+	setcycle 82 LD_condition ident
+	setcycle 82 Flanker_condition con
+	setcycle 82 practice no
+	setcycle 83 procedure Target_loop
+	setcycle 83 LD_nr 125
+	setcycle 83 condition Con_Inc
+	setcycle 83 LD_stimulus "øvelse"
+	setcycle 83 Flanker "IncRight.png"
+	setcycle 83 LD_correct "[bm_response]"
+	setcycle 83 Flanker_correct right
+	setcycle 83 LD_condition noncog
+	setcycle 83 Flanker_condition inc
+	setcycle 83 practice no
+	setcycle 84 procedure Flanker_loop
+	setcycle 84 LD_nr ""
+	setcycle 84 condition Inc
+	setcycle 84 LD_stimulus ""
+	setcycle 84 Flanker "IncRight.png"
+	setcycle 84 LD_correct ""
+	setcycle 84 Flanker_correct right
+	setcycle 84 LD_condition ""
+	setcycle 84 Flanker_condition inc
+	setcycle 84 practice no
+	setcycle 85 procedure Target_loop
+	setcycle 85 LD_nr 357
+	setcycle 85 condition Inc_Inc
+	setcycle 85 LD_stimulus "trøbbel"
+	setcycle 85 Flanker "IncRight.png"
+	setcycle 85 LD_correct ""
+	setcycle 85 Flanker_correct right
+	setcycle 85 LD_condition ident
+	setcycle 85 Flanker_condition inc
+	setcycle 85 practice no
+	setcycle 86 procedure Flanker_loop
+	setcycle 86 LD_nr ""
+	setcycle 86 condition Inc
+	setcycle 86 LD_stimulus ""
+	setcycle 86 Flanker "IncRight.png"
+	setcycle 86 LD_correct ""
+	setcycle 86 Flanker_correct right
+	setcycle 86 LD_condition ""
+	setcycle 86 Flanker_condition inc
+	setcycle 86 practice no
+	setcycle 87 procedure Target_loop
+	setcycle 87 LD_nr 257
+	setcycle 87 condition Inc_Inc
+	setcycle 87 LD_stimulus sommardag
+	setcycle 87 Flanker "IncRight.png"
+	setcycle 87 LD_correct "[nn_response]"
+	setcycle 87 Flanker_correct right
+	setcycle 87 LD_condition cog
+	setcycle 87 Flanker_condition inc
+	setcycle 87 practice no
+	setcycle 88 procedure LD_loop
+	setcycle 88 LD_nr 420
+	setcycle 88 condition Inc
+	setcycle 88 LD_stimulus trafikk
+	setcycle 88 Flanker ""
+	setcycle 88 LD_correct ""
+	setcycle 88 Flanker_correct ""
+	setcycle 88 LD_condition fill_ident
+	setcycle 88 Flanker_condition ""
+	setcycle 88 practice no
+	setcycle 89 procedure Target_loop
+	setcycle 89 LD_nr 354
+	setcycle 89 condition Inc_Inc
+	setcycle 89 LD_stimulus toalett
+	setcycle 89 Flanker "IncLeft.png"
+	setcycle 89 LD_correct ""
+	setcycle 89 Flanker_correct left
+	setcycle 89 LD_condition ident
+	setcycle 89 Flanker_condition inc
+	setcycle 89 practice no
+	setcycle 90 procedure Flanker_loop
+	setcycle 90 LD_nr ""
+	setcycle 90 condition Inc
+	setcycle 90 LD_stimulus ""
+	setcycle 90 Flanker "IncRight.png"
+	setcycle 90 LD_correct ""
+	setcycle 90 Flanker_correct right
+	setcycle 90 LD_condition ""
+	setcycle 90 Flanker_condition inc
+	setcycle 90 practice no
+	setcycle 91 procedure Target_loop
+	setcycle 91 LD_nr 258
+	setcycle 91 condition Inc_Inc
+	setcycle 91 LD_stimulus spreiing
+	setcycle 91 Flanker "IncLeft.png"
+	setcycle 91 LD_correct "[nn_response]"
+	setcycle 91 Flanker_correct left
+	setcycle 91 LD_condition cog
+	setcycle 91 Flanker_condition inc
+	setcycle 91 practice no
+	setcycle 92 procedure Target_loop
+	setcycle 92 LD_nr 352
+	setcycle 92 condition Inc_Con
+	setcycle 92 LD_stimulus teknologi
+	setcycle 92 Flanker "ConLeft.png"
+	setcycle 92 LD_correct ""
+	setcycle 92 Flanker_correct left
+	setcycle 92 LD_condition ident
+	setcycle 92 Flanker_condition con
+	setcycle 92 practice no
+	setcycle 93 procedure LD_loop
+	setcycle 93 LD_nr 460
+	setcycle 93 condition Con
+	setcycle 93 LD_stimulus "vilkår"
+	setcycle 93 Flanker ""
+	setcycle 93 LD_correct "[nn_response]"
+	setcycle 93 Flanker_correct ""
+	setcycle 93 LD_condition fill_noncog
+	setcycle 93 Flanker_condition ""
+	setcycle 93 practice no
+	setcycle 94 procedure LD_loop
+	setcycle 94 LD_nr 437
+	setcycle 94 condition Inc
+	setcycle 94 LD_stimulus "vêr"
+	setcycle 94 Flanker ""
+	setcycle 94 LD_correct "[nn_response]"
+	setcycle 94 Flanker_correct ""
+	setcycle 94 LD_condition fill_cog
+	setcycle 94 Flanker_condition ""
+	setcycle 94 practice no
+	setcycle 95 procedure Target_loop
+	setcycle 95 LD_nr 358
+	setcycle 95 condition Inc_Inc
+	setcycle 95 LD_stimulus turist
+	setcycle 95 Flanker "IncLeft.png"
+	setcycle 95 LD_correct ""
+	setcycle 95 Flanker_correct left
+	setcycle 95 LD_condition ident
+	setcycle 95 Flanker_condition inc
+	setcycle 95 practice no
+	setcycle 96 procedure Target_loop
+	setcycle 96 LD_nr 359
+	setcycle 96 condition Inc_Con
+	setcycle 96 LD_stimulus vaksine
+	setcycle 96 Flanker "ConRight.png"
+	setcycle 96 LD_correct ""
+	setcycle 96 Flanker_correct right
+	setcycle 96 LD_condition ident
+	setcycle 96 Flanker_condition con
+	setcycle 96 practice no
+	setcycle 97 procedure LD_loop
+	setcycle 97 LD_nr 441
+	setcycle 97 condition Con
+	setcycle 97 LD_stimulus veldedighet
+	setcycle 97 Flanker ""
+	setcycle 97 LD_correct "[bm_response]"
+	setcycle 97 Flanker_correct ""
+	setcycle 97 LD_condition fill_noncog
+	setcycle 97 Flanker_condition ""
+	setcycle 97 practice no
+	setcycle 98 procedure LD_loop
+	setcycle 98 LD_nr 419
+	setcycle 98 condition Inc
+	setcycle 98 LD_stimulus ulv
+	setcycle 98 Flanker ""
+	setcycle 98 LD_correct ""
+	setcycle 98 Flanker_correct ""
+	setcycle 98 LD_condition fill_ident
+	setcycle 98 Flanker_condition ""
+	setcycle 98 practice no
+	setcycle 99 procedure Flanker_loop
+	setcycle 99 LD_nr ""
+	setcycle 99 condition Inc
+	setcycle 99 LD_stimulus ""
+	setcycle 99 Flanker "IncLeft.png"
+	setcycle 99 LD_correct ""
+	setcycle 99 Flanker_correct left
+	setcycle 99 LD_condition ""
+	setcycle 99 Flanker_condition inc
+	setcycle 99 practice no
+	run exp_sequence_run_if
+
+define sequence block_sequence_run_if
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run block1 "[block] = 'block1'"
+	run block2 "[block] = 'block2'"
+	run block3 "[block] = 'block3'"
+
+define sketchpad break
+	set duration 60000
+	set description "Displays stimuli"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Pause! Du har nå gjort [loopcount] av 300 ord i undersøkelsen.<br /> Etter ett minutt kan du fortsette med neste blokk.<br /><br />Pause! Du har no gjort [loopcount] av 300 ord i undersøkinga.<br /> Etter eit minutt kan du fortsetja med neste blokk." x=0 y=0 z_index=0
+
+define loop code_loop
+	set source table
+	set repeat 200
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if "[response] = return or [response] = enter"
+	setcycle 0 empty_column ""
+	run get_code_sequence
+
+define keyboard_response code_number_input
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses "1;2;3;4;5;6;7;8;9;0;backspace;return"
+
+define inline_javascript constants
+	set description "Executes JavaScript code"
+	___run__
+	
+	vars.loopcount = 0
+	vars.code_number = ''
+	vars.response = ''
+	__end__
+	set _prepare ""
+
+define sketchpad continue_break_even
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Det har gått ett minutt. Du kan nå fortsette undersøkelsen. <br /><br />Husk: &larr; for å svare NYNORSK. &rarr; for å svare BOKMÅL.<br /><br /> Trykk ENTER for å fortsette." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=14 y2=14 z_index=0
+
+define sketchpad continue_break_odd
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Det har gått ett minutt. Du kan nå fortsette undersøkelsen. <br /><br />Husk: &larr; for å svare BOKMÅL. &rarr; for å svare NYNORSK.<br /><br /> Trykk ENTER for å fortsette." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=14 y2=14 z_index=0
+
+define inline_javascript counterbalance
+	set description "Executes JavaScript code"
+	___run__
+	
+	if (vars.subject_nr % 2 == 1) {
+	    vars.bm_response = 'left'
+	    vars.nn_response = 'right'
+	    vars.sub_parity = 'odd'
+	 } else {
+	    vars.bm_response = 'right'
+	    vars.nn_response = 'left'
+	    vars.sub_parity = 'even'
+	}
+	__end__
+	set _prepare ""
+
+define sketchpad end_of_experiment
+	set start_response_interval no
+	set duration keypress
+	set description "A sketchpad notifying the participant that the experiment is finished"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Du er ferdig med første del av undersøkelsen. <br />Trykk ENTER for å gå videre til neste del." x=0 y=0 z_index=0
+
+define sequence end_of_practice
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run instructions3_odd "[sub_parity] = 'odd'"
+	run instructions3_even "[sub_parity] = 'even'"
+
+define sequence exp_sequence_run_if
+	set flush_keyboard yes
+	set description "A sequence containing a single block of trials followed by feedback to the participant"
+	run increment_loopcount "[practice] != \"yes\""
+	run LD_loop "[procedure] = \"LD_loop\""
+	run Target_loop "[procedure] = \"Target_loop\""
+	run Flanker_loop "[procedure] = \"Flanker_loop\""
+	run break "[loopcount] = 101 or [loopcount] = 201"
+	run continue_break_odd "[sub_parity] = 'odd' and [loopcount] = 101"
+	run continue_break_odd_2 "[sub_parity] = 'odd' and [loopcount] = 201"
+	run continue_break_even "[sub_parity] = 'even' and [loopcount] = 101"
+	run continue_break_even_2 "[sub_parity] = 'even' and [loopcount] = 201"
+	run logger always
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "The main sequence of the experiment"
+	run counterbalance always
+	run constants always
+	run code_loop always
+	run verify_code_number always
+	run instructions1 always
+	run Flanker_practice_loop always
+	run instructions2 always
+	run Full_practice_loop always
+	run end_of_practice always
+	run experimental_loop always
+	run end_of_experiment always
+
+define loop experimental_loop
+	set source_file ""
+	set source table
+	set skip 0
+	set repeat 1
+	set order random
+	set offset no
+	set item block_sequence
+	set description "A loop containing one or more experimental blocks"
+	set cycles 3
+	set continuous no
+	set column_order practice
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 block block1
+	setcycle 0 list 2
+	setcycle 1 block block2
+	setcycle 1 list 2
+	setcycle 2 block block3
+	setcycle 2 list 2
+	run block_sequence_run_if
+
+define sequence get_code_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run show_code_number always
+	run code_number_input always
+	run process_code_number_input always
+
+define inline_javascript increment_loopcount
+	set description "Executes JavaScript code"
+	set _run "vars.loopcount++"
+	set _prepare ""
+
+define sequence instructions1
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run instructions_1a always
+	run instructions_1b always
+	run instructions_1c always
+
+define sequence instructions2
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run instructions_2a always
+	run instructions_2b always
+	run instructions_2c_odd "[sub_parity] = 'odd'"
+	run instructions_2c_even "[sub_parity] = 'even'"
+	run instructions_2d always
+
+define sketchpad instructions3_even
+	set start_response_interval no
+	set duration keypress
+	set description "A sketchpad notifying the participant that the practice phase is finished"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Dette er slutten på øvingsblokken. Husk: <br /><br />&larr; for å indikere VENSTRE. &rarr; for å indikere HØYRE. <br /><br />&larr; for å svare NYNORSK. &rarr; for å svare BOKMÅL. <br /><br />Du vil nå starte med eksperimentet. Trykk SPACE for å begynne.<br /><br /><br /><br /> Dette er slutten på øvingsblokken. Hugs: <br /><br />&larr; for å indikere VENSTRE. &rarr; for å indikere HØGRE. <br /><br />&larr; for å svara NYNORSK. &rarr; for å svara BOKMÅL. <br /><br />Du vil no starte med eksperimentet. Trykk SPACE for å byrja." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=-70 y2=-70 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=160 y2=160 z_index=0
+
+define sketchpad instructions3_odd
+	set start_response_interval no
+	set duration keypress
+	set description "A sketchpad notifying the participant that the practice phase is finished"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Dette er slutten på øvingsblokken. Husk: <br /><br />&larr; for å indikere VENSTRE. &rarr; for å indikere HØYRE. <br /><br />&larr; for å svare BOKMÅL. &rarr; for å svare NYNORSK. <br /><br />Du vil nå starte med eksperimentet. Trykk SPACE for å begynne.<br /><br /><br /><br /> Dette er slutten på øvingsblokken. Hugs: <br /><br />&larr; for å indikere VENSTRE. &rarr; for å indikere HØGRE. <br /><br />&larr; for å svara BOKMÅL. &rarr; for å svara NYNORSK. <br /><br />Du vil no starte med eksperimentet. Trykk SPACE for å byrja." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=-70 y2=-70 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=160 y2=160 z_index=0
+
+define sketchpad instructions_1a
+	set start_response_interval no
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Velkommen! I denne undersøkelsen skal du fullføre to ulike oppgaver: <br /><br />en oppgave med piler og en oppgave der du får se ulike ord. <br /><br />Du skal bruke piltastene for å svare.<br /><br /> Trykk ENTER for å fortsette.<br /><br /><br /><br />Velkommen! I denne undersøking skal du fullføra to ulike oppgåver:<br /><br /> ei oppgåve med piler og ei oppgåve der du får sjå ulike ord.<br /><br /> Du skal bruka piltastane for å svara.<br /><br />Trykk ENTER for å fortsetje.<br />" x=0 y=0 z_index=0
+
+define sketchpad instructions_1b
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="I piloppgaven ser du fem piler midt på skjermen. <br /><br />Du skal angi om den MIDTERSTE pilen peker mot venstre eller høyre. <br /><br />Trykk ENTER for å fortsette.<br /><br /><br /><br />I pilloppgåva ser du fem piler midt på skjermen. <br /><br />Du skal angje om den MIDTRE pila peikar mot venstre eller høgre. <br /><br /> Trykk ENTER for å fortsetje.<br />" x=0 y=0 z_index=0
+
+define sketchpad instructions_1c
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Vi starter med en øvingsblokk for piloppgaven. <br /><br /> Bruk piltastene for å svare.<br /><br />Trykk &larr; for VENSTRE. Trykk &rarr; for HØYRE. <br /><br />Spør forskeren hvis du har spørsmål. Trykk ENTER for å begynne.<br /><br /><br /><br />Vi byrja med ein øvingsblokk for piloppgåva. <br /><br />Bruk piltastane for å svara.<br /><br />Trykk &larr; for VENSTRE. Trykk &rarr; for HØGRE. <br /><br />Spør forskaren viss du har spørsmål. Trykk ENTER for å byrja.<br />" x=0 y=0 z_index=0
+
+define sketchpad instructions_2a
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Dette er slutten på første øvingsblokk. Hvis du har spørsmål, <br /><br /> vennligst still dem nå. Trykk ENTER for å fortsette.<br /><br /> <br /><br /> Dette er slutten på første øvingsblokk. Viss du har spørsmål, <br /><br /> ver vennleg å still dei no. Trykk ENTER for å fortsetje." x=0 y=0 z_index=0
+
+define sketchpad instructions_2b
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Den andre oppgaven er ordoppgaven. Her får du se ett ord på skjermen. Noen ord er bokmål, <br /><br /> og noen ord er nynorsk. Trykk ENTER for å fortsette.<br /><br /> <br /><br /> Den andre oppgåva er ordoppgåva. Her får du sjå eitt ord på skjermen. Nokre ord er bokmål, <br /><br /> nokre ord er nynorsk. Trykk ENTER for å fortsetje." x=0 y=0 z_index=0
+
+define sketchpad instructions_2c_even
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Du skal avgjøre om ordet er bokmål eller om ordet er nynorsk. <br /><br />Bruk piltastene for å svare.<br /><br />Trykk &larr; for å svare NYNORSK. Trykk &rarr; for å svare BOKMÅL. <br /><br />Om ordet er tillatt i begge målformer, velger du det du først tenker på.<br /><br />Trykk SPACE for å fortsette.<br /><br /><br /><br /> Du skal avgjere om ordet er bokmål eller om ordet er nynorsk.<br /><br />Bruk piltastane for å svara.<br /><br /> Trykk &larr; for å svara NYNORSK. Trykk &rarr; for å svara BOKMÅL.<br /><br /> Om ordet er tillaten i begge målforma, vel du det du først tenkjer på.<br /><br />Trykk SPACE for å fortsetje." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=-115 y2=-115 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=160 y2=160 z_index=0
+
+define sketchpad instructions_2c_odd
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Du skal avgjøre om ordet er bokmål eller om ordet er nynorsk. <br /><br />Bruk piltastene for å svare.<br /><br />Trykk &larr; for å svare BOKMÅL. Trykk &rarr; for å svare NYNORSK. <br /><br />Om ordet er tillatt i begge målformer, velger du det du først tenker på.<br /><br />Trykk SPACE for å fortsette.<br /><br /><br /><br /> Du skal avgjere om ordet er bokmål eller om ordet er nynorsk.<br /><br />Bruk piltastane for å svara.<br /><br /> Trykk &larr; for å svara BOKMÅL. Trykk &rarr; for å svara NYNORSK.<br /><br /> Om ordet er tillaten i begge målforma, vel du det du først tenkjer på.<br /><br />Trykk SPACE for å fortsetje." x=0 y=0 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=-115 y2=-115 z_index=0
+	draw line color=orange penwidth=4 show_if=always x1=-256 x2=256 y1=160 y2=160 z_index=0
+
+define sketchpad instructions_2d
+	set duration keypress
+	set description "A sketchpad containing the instructions for the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="I undersøkelsen får du både pil- og ordoppgaver i samme økt. <br /><br />Før vi starter, øver vi kort med begge oppgaver. Trykk ENTER for å begynne øvelsesrunden.<br /><br /><br /><br />I undersøkinga får du både pil- og leseoppgåver i same økt. <br /><br />Før vi startar, øver vi kort med begge oppgåver. Trykk ENTER for å byrja øvingsrunden." x=0 y=0 z_index=0
+
+define sketchpad inter_trail_interval
+	set duration 0
+	set description "Displays stimuli"
+
+define sketchpad inter_trail_interval_prac
+	set duration 1000
+	set description "Displays stimuli"
+
+define keyboard_response late_Flanker_response
+	set timeout 1000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses "left;right"
+
+define keyboard_response late_LD_response
+	set timeout 1000
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses "left;right"
+
+define logger logger
+	set description "Logs experimental data"
+	set auto_log no
+	log bm_response
+	log code_number
+	log condition
+	log datetime
+	log experiment_file
+	log Flanker
+	log Flanker_correct
+	log LD_condition
+	log Flanker_condition
+	log LD_nr
+	log LD_stimulus
+	log loopcount
+	log practice
+	log procedure
+	log subject_nr
+	log subject_parity
+	log response_time_Flanker_response
+	log response_time_LD_response
+	log response_Flanker_response
+	log response_LD_response
+	log LD_correct
+	log response_Flanker_response_prac
+	log response_time_Flanker_response_prac
+	log block
+	log list
+
+define feedback no_response_feedback
+	set reset_variables yes
+	set duration 2500
+	set description "Provides feedback to the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Prøv å svare så raskt som mulig!" x=0 y=0 z_index=0
+
+define feedback prac_correct_feedback
+	set reset_variables yes
+	set duration 750
+	set description "Provides feedback to the participant"
+	draw image center=1 file="thumbs_up.png" scale=0.20000000000000015 show_if=always x=0 y=0 z_index=0
+
+define feedback prac_incorrect_feedback
+	set reset_variables yes
+	set duration 750
+	set description "Provides feedback to the participant"
+	draw image center=1 file="thumbs_down.png" scale=0.2 show_if=always x=0 y=0 z_index=0
+
+define sequence prac_sequence_run_if
+	set flush_keyboard yes
+	set description "A sequence containing a single block of trials followed by feedback to the participant"
+	run increment_loopcount "[practice] != \"yes\""
+	run LD_loop_prac "[procedure] = \"LD_loop\""
+	run Target_loop_prac "[procedure] = \"Target_loop\""
+	run Flanker_loop_prac "[procedure] = \"Flanker_loop\""
+	run logger always
+
+define inline_javascript process_code_number_input
+	set description "Executes JavaScript code"
+	___run__
+	
+	console.log(vars.response)
+	if (vars.response in [0,1,2,3,4,5,6,7,8,9]) {
+	    vars.code_number += vars.response.toString()
+	} 
+	else if (vars.response === 'backspace') {
+	    vars.code_number = vars.code_number.toString().slice(0, vars.code_number.toString().length - 1)
+	}
+	__end__
+	set _prepare ""
+
+define sketchpad show_code_number
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Hva er ditt deltagernummer? <br/>Bruk tastaturet, skriv bare inn tall og ingen bokstaver.<br/><br /><br />Ditt nummer: [code_number]<br />Trykk ENTER for å bekrefte.<br />" x=0 y=0 z_index=0
+
+define feedback verify_code_number
+	set reset_variables yes
+	set duration keypress
+	set description "Provides feedback to the participant"
+	draw textline center=1 color=black font_bold=no font_family=sans font_italic=no font_size=18 html=yes show_if=always text="Du skrev [code_number]<br /><br />Om det stemmer, trykk på en tast for å fortsette.<br /><br />Om det ikke stemmer, vennligst avbryt eksperimentet (Esc) og start på nytt." x=0 y=0 z_index=0
