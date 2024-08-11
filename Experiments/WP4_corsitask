@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- character encoding -->
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <!-- Title of the window -->
+        <title>Corsi Blocks task: Gibeau (2021) adapted for MultiLit.</title>
+        <!-- Gibeau, R.-M. (submitted)                                      -->
+        <!--     The Corsi Blocks task: Variations and coding with jsPsych. -->
+        <!--     The Quantitative Methods for Psychology.                   -->
+
+        <!-- declaring the jsPsych functions needed -->
+        <!-- note that jspsych-html-keyboard-response-noerase.js IS NOT part of the standard bundle -->
+        <script src="jspsych-6.1.0/jspsych.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response-noerase.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-audio-button-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-audio-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-audio-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-call-function.js"></script>
+        <script src="/assets/javascripts/jatos.js"></script>
+
+        <!-- uploading the jsPsych style sheet -->
+        <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+
+    <body>
+        <script>
+            // ****************************** 
+            // *   Defining general stuff   * 
+            // ****************************** 
+            console.log('Begining of the parameter definitions')
+            
+            // Experiment parameters 
+            var nItems              = 8       // total number of squares on the display
+            // the sequence lengths to test the participant with, with the variable "OneSequenceLength"
+            var sequenceLengths     = [{OneSequenceLength: 2},{OneSequenceLength: 3},{OneSequenceLength: 4},{OneSequenceLength: 5},{OneSequenceLength: 6},{OneSequenceLength: 7},{OneSequenceLength: 8}];
+            var sequenceRandomOrder = false   // true for "random" or false for "sequential"
+            var sequenceRepetition  = 2       // how many times each length is tested
+
+            // Trial parameters 
+            var InterTrialDuration   = 1000  // e.g., REF
+            var FixationDuration     = 1000  // e.g., REF
+            var MouseToBeHidden      = true 
+            var PreBlinkDuration     = 1000  // e.g., REF
+            var BlinkDuration        = 1000  // e.g., REF
+            var PostBlinkDuration    = 500  // e.g., REF
+            var InterBlinkDuration   = 500  // e.g., REF
+            var RecallSignal         = 'https://raw.githubusercontent.com/RMG2424/Dr.-Mid-Nite/master/CorsiBlockjsPsych/500hz-400ms.wav'
+            var RecallSignalDuration = 400
+            var AcknowledgeDuration  = 300  // e.g., REF
+
+            // Item parameters; assembled using makeItem
+            var BackgroundColor   = "white"        // accept the HTML-defined colors
+            var TextColor         = "black"        	   // 
+            var OneItemShape      = "rect"             // one of the svg primitive
+            var OneItemShownColor = "rgb(148,0,211)"   // purple
+            var OneItemBlinkColor = "rgb(255,255,0)"   // yellow
+            var OneItemClickColor = "rgb(0,0,255)"     // blue
+            var OneItemSize       = 1/8               // proportion of the item relative to minscreen 
+            var OneItemMargin     = 1/25               // margin to leave empty around the item, relative to minscreen 
+
+            console.log('End of the parameter definitions')
+
+            // ************************************************* 
+            // *   THIS IS IT! Everything beyond this point    * 
+            // *   will run nicely from the above definitions  * 
+            // ************************************************* 
+
+            // set the background color
+            document.body.style.backgroundColor = BackgroundColor; 
+            document.body.style.color = TextColor; 
+
+            // these two lines convert the relative sizes into pixel sizes LEAVE UNCHANGED
+            var OneItemSizePX     = Math.floor(OneItemSize * Math.min(screen.width, screen.height))
+            var OneItemMarginPX   = Math.floor(OneItemMargin * Math.min(screen.width, screen.height))
+            console.log(`Item dimensions in pixels are: (size) ${OneItemSizePX}, (margins) ${OneItemMarginPX}`);
+
+            // Function that builts an HTML svg (scalable vector graphic) image
+            // may need to be adapted if a different shape is chosen
+            var makeItem = function(color) {
+                return(`<svg width="${OneItemSizePX}" height="${OneItemSizePX}"><${OneItemShape} width="${OneItemSizePX}" height="${OneItemSizePX}" style="fill:${color};stroke-width:0;"></svg>`);
+            }
+
+            // Empty lists of items; are to be populated by PositionFunction 
+            var ListOfItems         = new Array(nItems); // the array is full length bcse jsPsych updates it too slow 
+            var ListOfBlinkingItems = new Array(nItems); // idem                                                      
+            var ListOfButtons       = new Array(nItems);
+            var nBlinkingItems      = null;
+
+            // Function that generates non-contiguous positions randomly.   
+            // This function can place the items anywhere on screen    
+            // while leaving an empty margin around the items.         
+            var PositionFunction = function() {
+                // console.log("begin of PositionFunction");    
+                // console.log("nBlinkingItems: ", nBlinkingItems); 
+                var i, j;
+                var x, y;
+                var tooclose = true;
+                ListOfButtons.length = 0;
+
+                for (i = 0; i < nItems; i++){
+                    tooclose = true;
+                    while(tooclose) {
+                        tooclose = false;
+                        y = Math.floor(OneItemMarginPX + Math.random() * (screen.width-OneItemSizePX-2*OneItemMarginPX) ); 
+                        x = Math.floor(OneItemMarginPX + Math.random() * (screen.height-OneItemSizePX-2*OneItemMarginPX) ); 
+                        for (j= 0; j <i; j++) {
+                            if ((x > ListOfItems[j].x - OneItemSizePX - OneItemMarginPX)&&
+                                (x < ListOfItems[j].x + OneItemSizePX + OneItemMarginPX)&&
+                                (y > ListOfItems[j].y - OneItemSizePX - OneItemMarginPX)&&
+                                (y < ListOfItems[j].y + OneItemSizePX + OneItemMarginPX)){
+                                tooclose = true;
+                            };
+                        };
+                    };
+                    ListOfItems[i] = [];
+                    ListOfItems[i].x = x;
+                    ListOfItems[i].y = y;
+                    ListOfItems[i].ItemHTML  = `<p style = "position:absolute; margin-top: 0em; left: ${x}px; top: ${y}px">`+
+                                                    `${makeItem(OneItemShownColor)} </p>`;
+                    ListOfItems[i].ItemBLANK = `<p style = "position:absolute; margin-top: 0em; left: ${x}px; top: ${y}px">`+
+                                                    `${makeItem(OneItemBlinkColor)}</p>`;
+                    ListOfItems[i].ItemACKNW = `<p style = "position:absolute; margin-top: 0em; left: ${x}px; top: ${y}px">`+
+                                                    `${makeItem(OneItemClickColor)}</p>`;
+                    // they are also concatenated in a list of buttons 
+                    ListOfButtons.push(`<button type=button style = "position:absolute; `+
+                            `margin-top: 0px; padding: 0px; background: none; `+
+                            `border: none; left: ${x}px; top: ${y}px">`+
+                            `${makeItem(OneItemShownColor)}</button>` );
+                    if (i< nBlinkingItems) {
+                        //  the first nBlinkingItems are also kept in a shorter list 
+                        ListOfBlinkingItems[i] = [];
+                        ListOfBlinkingItems[i].x = x;
+                        ListOfBlinkingItems[i].y = y;
+                        ListOfBlinkingItems[i].ItemHTML  = `<p style = "position:absolute; margin-top: 0em; left: ${x}px; top: ${y}px">${makeItem(OneItemShownColor)}</p>`;
+                        ListOfBlinkingItems[i].ItemBLANK = `<p style = "position:absolute; margin-top: 0em; left: ${x}px; top: ${y}px">${makeItem(OneItemBlinkColor)}</p>`;
+                    }
+                }
+                // console.log("ending of PositionFunction");  
+            }
+            console.log('End of the definitions')
+
+            // ************************************************* 
+            // *   THIS IS IT! Everything beyond this point    * 
+            // *   will run nicely from the above definitions  * 
+            // ************************************************* 
+
+            // mouse pointer functions 
+            var HideMouse = function() { if (MouseToBeHidden) {
+                    document.querySelector('head').insertAdjacentHTML('beforeend', '<style id="cursor-toggle"> html { cursor: none; } </style>');
+                }
+            }
+            var ShowMouse = function() { if (MouseToBeHidden) {
+                    document.querySelector('#cursor-toggle').remove();
+                }
+            }
+
+            // *************************************** 
+            // *   Defining experiment-level events  * 
+            // *************************************** 
+
+            // Toggle full screen on or off 
+            var FullScreenOn = {
+                type: 'fullscreen',
+                message: "<p>Dette er andre delen av undersøkelsen. Denne oppgaven vil ta ca. 5 minutter å gjøre.<br> Trykk på {start} for å begynne.</p>",
+                button_label: 'Start',
+                fullscreen_mode: true
+            }
+            var FullScreenOff = {
+                type: 'fullscreen',
+                fullscreen_mode: false
+            }
+            // the Welcome and Bye object descriptions 
+            var SayWelcome = {
+                type: 'html-button-response',
+                stimulus: '<p>I denne oppgaven trenger du høretelefoner.</p><p> Du vil se 8 lilla firkanter. Noen av disse vil lyse opp (bli gule) <br>i en bestemt rekkefølge. Når du hører et pip, <br>skal du <strong>trykke på de samme firkantene i samme rekkefølge</strong>. <br> Oppgaven starter lett og blir gradvis vanskeligere.',
+                choices: ['Begynn'],
+            }
+            var SayBye = {
+                type: 'html-button-response',
+                stimulus: 'Takk for at du var med i undersøkelsen!',
+                choices: ['Avslutt'],
+            }
+
+            // *************************************** 
+            // *     Defining trial-level events     * 
+            // *************************************** 
+
+            var SetnBlinkingItems = {
+                type: 'call-function',
+                func: function() {
+                        nBlinkingItems =  jsPsych.timelineVariable("OneSequenceLength", true); 
+                        currentBlinkingItem = 0;  // counter that will count the number of blinks    
+                        currentResponse = 0;      // counter that will count the number of responses  
+                    },
+            }
+            var GeneratePositions = {
+                type: 'call-function',
+                func: PositionFunction
+             } 
+            var WaitInterTrialDuration = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: '',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: InterTrialDuration
+            }
+            var WaitPreBlinkDuration = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: '',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: PreBlinkDuration
+            }
+            var WaitBlinkDuration = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: '',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: BlinkDuration
+            }
+            var WaitInterBlinkDuration = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: '',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: InterBlinkDuration
+            }
+            var WaitPostBlinkDuration = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: '',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: PostBlinkDuration,
+            }
+            var ShowFixation = {
+                type: 'html-keyboard-response',
+                stimulus: '+',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: FixationDuration,
+                on_start: HideMouse
+            }
+            var ShowOneItem = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: jsPsych.timelineVariable('ItemHTML'),
+                choices: jsPsych.NO_KEYS,
+                trial_duration: 0
+            }
+            var ShowAllItems = {
+                timeline: [ ShowOneItem ],
+                timeline_variables: ListOfItems
+            }
+            var BlinkOneItem = {
+                type: 'html-keyboard-response-noerase',
+                stimulus: jsPsych.timelineVariable('ItemBLANK'),
+                choices: jsPsych.NO_KEYS,
+                trial_duration: 0,
+            }
+            var BlinkAllItems = {
+                timeline: [ BlinkOneItem, WaitBlinkDuration, ShowOneItem, WaitInterBlinkDuration ],
+                timeline_variables: ListOfBlinkingItems,
+                conditional_function: function() {if(currentBlinkingItem++ < nBlinkingItems) {return true;} else {return false;}}
+            }
+           var StartResponding = {
+               type: 'audio-keyboard-response',
+               stimulus: RecallSignal,
+               choices: jsPsych.NO_KEYS,
+               trial_duration: 150,
+               on_start: ShowMouse
+           }
+            var BlinkThatResponse = {
+                type: 'html-button-response',
+                stimulus: '',
+                button_html: function() {
+                                var choice = jsPsych.data.get().last(1).values()[0].button_pressed; 
+                                if (choice !== null) {return ListOfButtons.concat(ListOfItems[choice].ItemACKNW);} 
+                                else {return "";}
+                            },
+                trial_duration: AcknowledgeDuration,
+                choices: function() {return [...Array(ListOfButtons.length+1).keys()]}
+            }
+            var ReadOneResponse = {
+                type: 'html-button-response',
+                stimulus: '',
+                button_html: ListOfButtons,
+                choices: function() {return [...Array(ListOfButtons.length).keys()] },
+                trial_duration: 5000
+            }
+            var ReadAllResponses = {
+                timeline: [ ReadOneResponse, BlinkThatResponse ], 
+                timeline_variables: ListOfBlinkingItems,
+                conditional_function: function() {if(currentResponse++ < nBlinkingItems) {return true;} else {return false;}}
+            }
+            var GatherResponses = {
+                // jsPsych.data collects everything, so needs to filter
+                // the odd button presses on the last 2*nBlinkingItems events
+                type: 'call-function',
+                func: function() {
+                    var stem = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(2*nBlinkingItems);
+                    var responses = stem.select('button_pressed').values.filter((a,i)=>i%2===0);
+                    responses = responses.map(Number);
+			console.log("test-a: ", responses )
+                    var correct   = [...Array(nBlinkingItems).keys()];
+			console.log("test-b: ", correct)
+                    var acc       = responses.every(function(value, index) { return value === correct[index]});
+                    var rts = stem.select('rt').values.filter((a,i)=>i%2===0)
+                    console.log(nBlinkingItems, responses, acc, rts);
+                    return[nBlinkingItems, responses, acc];
+                }
+            }
+
+            var RunOneTrial = {
+                timeline: [ SetnBlinkingItems,
+                            GeneratePositions, 
+                            WaitInterTrialDuration,
+                            ShowFixation, 
+                            ShowAllItems, 
+                            WaitPreBlinkDuration, 
+                            BlinkAllItems, 
+                            WaitPostBlinkDuration,
+                            StartResponding,
+                            ReadAllResponses,
+                            GatherResponses // don't forget to save...
+                        ],
+                randomize_order:    false,
+                repetitions:        sequenceRepetition
+            }
+
+            var RunAllTrials = {
+                timeline:           [ RunOneTrial ],
+                timeline_variables: sequenceLengths,
+                randomize_order:    sequenceRandomOrder
+            }
+
+            jsPsych.init({
+                timeline: [ FullScreenOn, SayWelcome, RunAllTrials, FullScreenOff, SayBye ],
+                on_finish: function() {
+                var resultJson = jsPsych.data.get().json();
+                jatos.submitResultData(resultJson, jatos.startNextComponent);
+                }
+            })
+
+        </script>
+    </body>
+</html>
