@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="utf-8" />
+    <title>WP1 perception iPad-version Porsgrunn LIST1 BMNN</title> 
+        <!-- Maud Westendorp                                                     -->
+        <!--     Audio-written sentence matching paradigm with keyboard response -->
+   		<script src="jspsych-6.3.1/jspsych.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-button-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-call-function.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-image-keyboard-response.js"></script>       
+        <script src="/assets/javascripts/jatos.js"></script>
+        <link href="jspsych-6.3.1/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+
+
+<body>
+
+  </body>
+  
+  
+  <script>
+
+    /* define welcome and goodbye message trials */
+var welcome = {
+    type: "html-button-response",
+    stimulus: "<p>Velkommen til eksperimentet!</p><p>Trykk på Start for å begynne.<br></p>",
+    choices: ['Start']
+    };
+    
+var SayBye = {
+    type: 'html-button-response',
+    stimulus: "<p>Takk for at du var med i undersøkelsen!<br></p>",
+    choices: ['Avslutt'],
+    };
+    
+
+	/* get participant code */
+var deltagernr = {
+  	type: "survey-html-form",
+  	preamble: "<p style='text-align:left'> <b>Deltager nummer</b></p>",
+  	html: "<p style='text-align:left'>Hva er ditt deltagernummer? <br> \
+              <input required name='code_number' type='number'></p>",
+};
+
+    /* define instructions message trials */
+var instructions = {
+    type: "html-keyboard-response",
+    stimulus: `
+        <p>In dette eksperimentet vil du først høre en setning og så leser du en setning:</p>
+        <p>Du vil høre to forskjellige stemmer, og teksten er skrevet enten på bokmål eller på nynorsk.</p>
+        <p><strong>Du skal angi om setningen du leser er den samme som setningen du hørte.</strong></p>
+        <p>Svar så raskt som mulig.</p>
+        <br>
+        <br>
+        <br>
+        <p><strong>Trykk ENTER for å gå videre.</strong></p>
+        <div style='width: 700px;'>
+    `,
+    post_trial_gap: 0
+    };
+
+var instructions2 = {
+    type: "html-keyboard-response",
+    stimulus: `
+        <p>Først hører du en setning.</p>
+        <br>
+        <br>
+        <br>
+        <p><strong>Trykk ENTER for å gå videre.</strong></p>
+        <div style='width: 700px;'>
+    `,
+    post_trial_gap: 0
+    };
+    
+var instructions3 = {
+    type: "html-keyboard-response",
+    stimulus: `
+        <p>Så leser du en setning.</p>
+        <br>
+        <p><i style='font-size: 30px;'>Bøkene er dessverre utlånt fra biblioteket.</i></p>
+        <br>
+        <br>
+        <br>
+        <p><strong>Trykk ENTER for å gå videre.</strong></p>
+        <div style='width: 700px;'>
+    `,
+    post_trial_gap: 0
+    };
+    
+var instructions4 = {
+    type: "html-keyboard-response",
+    stimulus: `
+        <p>Vi starter med en øvelsesrunde.</p>
+        <br>
+        <br>
+        <br>
+        <p><strong>Trykk ENTER for å gå videre.</strong></p>
+        <div style='width: 700px;'>
+    `,
+    post_trial_gap: 0
+    };
+
+    /* define instruction stimuli array for timeline variables */
+var instruction_stimulus = [
+			{ sound: "sounds/EN_test3.mp3", sentence: 'Bøkene er dessverre utlånt fra biblioteket.', correct_response: 'm', item: "0"}
+	];
+
+    /* define practice stimuli array for timeline variables */
+var practice_stimuli = [
+			{ sound: "sounds/WN_test1.mp3", sentence: 'Vêret var fantastisk i helga.', correct_response: 'x', item: "1"},
+			{ sound: "sounds/EN_test1.mp3", sentence: 'Foreldrene til Knut er ofte bortreist.', correct_response: 'm', item: "2"},
+			{ sound: "sounds/WN_test2.mp3", sentence: 'Faren til Per dro til Spania forrige uke.', correct_response: 'm', item: "3"},
+			{ sound: "sounds/EN_test5.mp3", sentence: 'Eg var innom kontoret for å henta ei bok.', correct_response: 'x', item: "4"},
+			{ sound: "sounds/WN_test3.mp3", sentence: 'Naboane bestemte seg for å kjøpa ny bil.', correct_response: 'm', item: "5"}
+	];
+
+	/* define timeline variables for practice and test procedure */
+var fixation = {
+            type: "audio-image-keyboard-response",
+            audio_stimulus: "sounds/download.mp3",
+            image_stimulus: "img/Snakk_black.png", 
+            choices: "NO_KEYS",
+            stimulus_height: 500,
+            trial_duration: 400
+        };
+
+var sound = {
+            type: "audio-image-keyboard-response",
+            audio_stimulus: jsPsych.timelineVariable('sound'),
+            image_stimulus: "img/Snakk_black.png", 
+            choices: "NO_KEYS",
+            stimulus_height: 500,
+            trial_ends_after_audio: true
+        };
+        
+var sentence_only = {
+      type: "html-keyboard-response",
+      prompt: jsPsych.timelineVariable('sentence'),
+      choices: "NO_KEYS",
+    stimulus: `
+        <div style='height: 50px;'></div>
+        <div style='width: 700px; margin: 0 auto; text-align: center;'>
+            <div style='display: inline-block; margin-right: 20px;'>
+                <img src='img/IkkeSamme_blank.png'></img>
+                <p class='small' style='color: white;'><strong>Er teksten ikke samme som du hørte? <br>Trykk på X tasten</strong></p>
+            </div>
+            <div style='display: inline-block; margin-left: 20px;'>
+                <img src='img/Samme_blank.png'></img>
+                <p class='small' style='color: white;'><strong>Er teksten samme som du hørte? <br>Trykk på M tasten</strong></p>
+            </div>
+        </div>
+    `,
+      trial_duration: 600
+      };
+
+var instructions_response = {
+      type: "html-keyboard-response",
+	  stimulus: `
+        <p>Etter du har lest setningen, skal du velge om setningene var:</p>
+        <div style='width: 700px;'>
+            <div style='float: left;'><img src='img/IkkeSamme.png'></img>
+                <p class='small'> IKKE det SAMME som du hørte, <br>trykk da <strong>X</strong> på tastaturet</p>
+            </div>
+            <div style='float: right;'><img src='img/Samme.png'></img>
+                <p class='small'> det SAMME som du hørte, <br>trykk da <strong>M</strong> på tastaturet</p>
+            </div>
+            <br style='clear: both;'>
+        </div>
+        <p style='clear: both;'><strong>Trykk ENTER for å gå videre.</strong></p>
+      `,
+  	  on_finish: function(data){	
+  	  				var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+
+var prac_response = {
+      type: "html-keyboard-response",
+      prompt: jsPsych.timelineVariable('sentence'),
+      choices: ['x', 'm'],
+    stimulus: `
+        <div style='height: 50px;'></div>
+        <div style='width: 700px; margin: 0 auto; text-align: center;'>
+            <div style='display: inline-block; margin-right: 20px;'>
+                <img src='img/IkkeSamme.png'></img>
+                <p class='small'><strong>Er teksten ikke samme som du hørte? <br>Trykk på X tasten</strong></p>
+            </div>
+            <div style='display: inline-block; margin-left: 20px;'>
+                <img src='img/Samme.png'></img>
+                <p class='small'><strong>Er teksten samme som du hørte? <br>Trykk på M tasten</strong></p>
+            </div>
+        </div>
+    `,
+      data: {
+    				task: 'response',
+    				correct_response: jsPsych.timelineVariable('correct_response')
+  					},
+  	  on_finish: function(data){
+    				data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+  					var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+    
+  var response = {
+      type: "html-keyboard-response",
+      prompt: jsPsych.timelineVariable('sentence'),
+      choices: ['x', 'm'],
+    stimulus: `
+        <div style='height: 50px;'></div>
+        <div style='width: 700px; margin: 0 auto; text-align: center;'>
+            <div style='display: inline-block; margin-right: 20px;'>
+                <img src='img/IkkeSamme.png'></img>
+                <p class='small' style='color: white;'><strong>Er teksten ikke samme som du hørte? <br>Trykk på X tasten</strong></p>
+            </div>
+            <div style='display: inline-block; margin-left: 20px;'>
+                <img src='img/Samme.png'></img>
+                <p class='small' style='color: white;'><strong>Er teksten samme som du hørte? <br>Trykk på M tasten</strong></p>
+            </div>
+        </div>
+    `,
+      trial_duration: 10000,
+      data: {
+    				task: 'target_response',
+    				item: jsPsych.timelineVariable('item'),
+    				condition: jsPsych.timelineVariable('condition'),
+    				sound: jsPsych.timelineVariable('sound'),
+    				sentence: jsPsych.timelineVariable('sentence'),
+    				correct_response: jsPsych.timelineVariable('correct_response'),
+    				list: jsPsych.timelineVariable('list')
+  					},
+  	  on_finish: function(data){
+    				data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+  					var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+
+var feedback = {
+  	type: "html-keyboard-response",
+  	trial_duration: 500,
+  	choices: "NO_KEYS",
+  	stimulus: function(){
+    	// The feedback stimulus is a dynamic parameter because we can't know in advance whether
+    	// the stimulus should be 'correct' or 'incorrect'.
+    	// Instead, this function will check the accuracy of the last response and use that information to set
+    	// the stimulus value on each trial.
+    	var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    	if(last_trial_correct){
+      	return "<img src='img/thumbs_up.png' width='100' height='100'></img>"
+   	 } else {
+    	  return "<img src='img/thumbs_down.png' width='100' height='100'></img>"
+   	 }
+  }
+}
+
+var progress = {
+    type: "html-keyboard-response",
+    stimulus: `
+        <p>Trykk ENTER for å gå videre.</p>
+        <div style='width: 700px;'>
+    `,
+    post_trial_gap: 0,
+    on_finish: function(){
+      		var soundEffect = new Audio();
+			soundEffect.src = "sounds/download2.mp3";
+			soundEffect.play();
+		    }
+    };
+
+	/* define instructions procedure */
+var instructions_procedure = {
+    	timeline: [ instructions, instructions2, fixation, sound, instructions3,
+    				instructions_response, instructions4 ],
+    	timeline_variables: instruction_stimulus,
+    	repetitions: 1,
+    	randomize_order: false
+    };
+    
+	/* define practice procedure */
+var practice_procedure = {
+    	timeline: [ fixation, sound, sentence_only, prac_response, feedback, progress ],
+    	timeline_variables: practice_stimuli,
+    	repetitions: 1,
+    	randomize_order: false
+    };
+    
+    /* add end-of-practice screen with continue button */ 
+var screen_after_practice = {
+  	type: "html-button-response",
+  	stimulus: `<p>Øvelsesrunden er nå ferdig.</p>
+  	<p>Eksperimentet tar ca. 8 minutter.</p>
+  	<br>
+  	<p>Trykk på Start for å begynne.</p>
+  	<div style='width: 700px;'>
+  	`,
+  	choices: ["Start"],
+	};
+    
+    /* define target trial stimuli array for test procedure */
+var test_stimuli = [
+ 		{ item: "101", condition: "BM+East", sound: "sounds/EN_101.mp3", sentence: "Arild skyndte seg hjem fra jobb i går.", correct_response: "m", list: "1bmnn"},
+ 		{ item: "102", condition: "NN+West", sound: "sounds/WN_102.mp3", sentence: "Dei store vindauga stel mykje varme.", correct_response: "m", list: "1bmnn"},
+	 	{ item: "103", condition: "NN+East", sound: "sounds/EN_103.mp3", sentence: "Desse plantane treng mykje vatn.", correct_response: "m", list: "1bmnn"},
+		{ item: "104", condition: "BM+West", sound: "sounds/WN_104.mp3", sentence: "Er bilen deres blå eller grønn?", correct_response: "m", list: "1bmnn"},
+		{ item: "105", condition: "BM+East", sound: "sounds/EN_105.mp3", sentence: "Filmen har spilt inn store summer.", correct_response: "m", list: "1bmnn"},
+		{ item: "106", condition: "NN+West", sound: "sounds/WN_106.mp3", sentence: "Ho reiser aldri heim i juleferien.", correct_response: "m", list: "1bmnn"},
+		{ item: "107", condition: "NN+East", sound: "sounds/EN_107.mp3", sentence: "Eg skal helse deg så mykje frå Sofie.", correct_response: "m", list: "1bmnn"},
+		{ item: "108", condition: "BM+West", sound: "sounds/WN_108.mp3", sentence: "Jeg vet hvorfor de gikk til topps.", correct_response: "m", list: "1bmnn"},
+		{ item: "109", condition: "BM+East", sound: "sounds/EN_109.mp3", sentence: "Hvilken tid starter treningen på tirsdag?", correct_response: "m", list: "1bmnn"},
+		{ item: "110", condition: "NN+West", sound: "sounds/WN_110.mp3", sentence: "Anne tok ikkje bussen til skulen i dag.", correct_response: "m", list: "1bmnn"},
+		{ item: "111", condition: "NN+East", sound: "sounds/EN_111.mp3", sentence: "Kvar er inngangen til kyrkja?", correct_response: "m", list: "1bmnn"},
+		{ item: "112", condition: "BM+West", sound: "sounds/WN_112.mp3", sentence: "Hun har bodd i Finland i mange år.", correct_response: "m", list: "1bmnn"},
+		{ item: "113", condition: "BM+East", sound: "sounds/EN_113.mp3", sentence: "Inngangsdøren har nettopp blitt malt.", correct_response: "m", list: "1bmnn"},
+		{ item: "114", condition: "NN+West", sound: "sounds/WN_114.mp3", sentence: "Me likar å spela brettspel saman.", correct_response: "m", list: "1bmnn"},
+		{ item: "115", condition: "NN+East", sound: "sounds/EN_115.mp3", sentence: "Eg såg mange gode filmar i jula.", correct_response: "m", list: "1bmnn"},
+		{ item: "116", condition: "BM+West", sound: "sounds/WN_116.mp3", sentence: "Vi lar oppvasken stå til i morgen.", correct_response: "m", list: "1bmnn"},
+		{ item: "117", condition: "BM+East", sound: "sounds/EN_117.mp3", sentence: "Flere biler kjørte av veien i natt.", correct_response: "m", list: "1bmnn"},
+		{ item: "118", condition: "NN+West", sound: "sounds/WN_118.mp3", sentence: "Temperaturen har auka med ei grad sidan 1990.", correct_response: "m", list: "1bmnn"},
+		{ item: "119", condition: "NN+East", sound: "sounds/EN_119.mp3", sentence: "Ho drøymer om hus, bil og barn.", correct_response: "m", list: "1bmnn"},
+		{ item: "120", condition: "BM+West", sound: "sounds/WN_120.mp3", sentence: "De valgte Arne til kaptein på laget.", correct_response: "m", list: "1bmnn"},
+		{ item: "121", condition: "BM+East", sound: "sounds/EN_121.mp3", sentence: "Simon sover alltid som en stein.", correct_response: "m", list: "1bmnn"},
+		{ item: "122", condition: "NN+West", sound: "sounds/WN_122.mp3", sentence: "Månen skin på det blanke vatnet.", correct_response: "m", list: "1bmnn"},
+		{ item: "123", condition: "NN+East", sound: "sounds/EN_123.mp3", sentence: "Arbeidet voks over hovudet på han.", correct_response: "m", list: "1bmnn"},
+		{ item: "124", condition: "BM+West", sound: "sounds/WN_124.mp3", sentence: "Det er noe som gnager på samvittigheten.", correct_response: "m", list: "1bmnn"},
+		{ item: "125", condition: "BM+East", sound: "sounds/EN_125.mp3", sentence: "Familien min spiser alltid grøt på lørdager.", correct_response: "m", list: "1bmnn"},
+		{ item: "126", condition: "NN+West", sound: "sounds/WN_126.mp3", sentence: "Kafeen er berre open på føremiddagen.", correct_response: "m", list: "1bmnn"},
+		{ item: "127", condition: "NN+East", sound: "sounds/EN_127.mp3", sentence: "Hunden seier ifrå når han vil ha mat.", correct_response: "m", list: "1bmnn"},
+		{ item: "128", condition: "BM+West", sound: "sounds/WN_128.mp3", sentence: "De skal springe 20 kilometer i uken.", correct_response: "m", list: "1bmnn"},
+		{ item: "129", condition: "BM+East", sound: "sounds/EN_129.mp3", sentence: "De fleste studenter bor på hybel.", correct_response: "m", list: "1bmnn"},
+		{ item: "130", condition: "NN+West", sound: "sounds/WN_130.mp3", sentence: "Ine tel allereie dagane til jul.", correct_response: "m", list: "1bmnn"},
+		{ item: "131", condition: "NN+East", sound: "sounds/EN_131.mp3", sentence: "Skadeomfanget etter ulykka er ikkje kjend.", correct_response: "m", list: "1bmnn"},
+		{ item: "132", condition: "BM+West", sound: "sounds/WN_132.mp3", sentence: "Et høytrykk gir godt vær i hele landsdelen.", correct_response: "m", list: "1bmnn"},
+  		{ item: "201", condition: "BM+East", sound: "sounds/EN_201.mp3", sentence: "Det er ofte isfiskere på vannet.", correct_response: "x", list: "1bmnn"},
+		{ item: "202", condition: "NN+West", sound: "sounds/WN_202.mp3", sentence: "Det er alltid nokon heime hjå dei.", correct_response: "x", list: "1bmnn"},
+		{ item: "203", condition: "NN+East", sound: "sounds/EN_203.mp3", sentence: "Det er ikkje mogleg å arrangere skirenn her.", correct_response: "x", list: "1bmnn"},
+		{ item: "204", condition: "BM+West", sound: "sounds/WN_204.mp3", sentence: "Stormer på høsten gir sjeldent strømbrudd. ", correct_response: "x", list: "1bmnn"},
+		{ item: "211", condition: "BM+East", sound: "sounds/EN_211.mp3", sentence: "Det har kommet masse regn denne uken.", correct_response: "x", list: "1bmnn"},
+		{ item: "212", condition: "NN+West", sound: "sounds/WN_212.mp3", sentence: "Eirik køyrde bussen i grøfta.", correct_response: "x", list: "1bmnn"},
+		{ item: "213", condition: "NN+East", sound: "sounds/EN_213.mp3", sentence: "På laurdag skal eg på tur, og så på kino.", correct_response: "x", list: "1bmnn"},
+		{ item: "214", condition: "BM+West", sound: "sounds/WN_214.mp3", sentence: "Hun blir styreleder fra 1. juni.", correct_response: "x", list: "1bmnn"},
+		{ item: "221", condition: "BM+East", sound: "sounds/EN_221.mp3", sentence: "I fjor satt onkelen min opp et nytt skur.", correct_response: "x", list: "1bmnn"},
+		{ item: "222", condition: "NN+West", sound: "sounds/WN_222.mp3", sentence: "Til hausten begynner systera mi på skulen.", correct_response: "x", list: "1bmnn"},
+		{ item: "223", condition: "NN+East", sound: "sounds/EN_223.mp3", sentence: "Framleis står skøyteklubben utan bane.", correct_response: "x", list: "1bmnn"},
+		{ item: "224", condition: "BM+West", sound: "sounds/WN_224.mp3", sentence: "Nå forbereder forskeren seg på et møte.", correct_response: "x", list: "1bmnn"},
+		{ item: "231", condition: "BM+East", sound: "sounds/EN_231.mp3", sentence: "På sommeren springer Johannes mye.", correct_response: "x", list: "1bmnn"},
+		{ item: "232", condition: "NN+West", sound: "sounds/WN_232.mp3", sentence: "Utvalet skal diskutere saka i dag.", correct_response: "x", list: "1bmnn"},
+		{ item: "233", condition: "NN+East", sound: "sounds/EN_233.mp3", sentence: "No vert det dyrare å selje straum.", correct_response: "x", list: "1bmnn"},
+		{ item: "234", condition: "BM+West", sound: "sounds/WN_234.mp3", sentence: "Meteorologen håper på en fin vinter.", correct_response: "x", list: "1bmnn"}
+    ];
+     
+    
+	/* define test procedure */
+var test_procedure = {
+    	timeline: [ fixation, sound, sentence_only, response, feedback],
+    	timeline_variables: test_stimuli,
+    	repetitions: 1,
+    	randomize_order: true
+    };
+    
+    /* define debrief */
+var debrief_block = {
+      type: "html-keyboard-response",
+      stimulus: function() {
+
+        var trials = jsPsych.data.get().filter({task: 'target_response'});
+        var correct_trials = trials.filter({correct: true});
+        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+        var rt = Math.round(correct_trials.select('rt').mean());
+
+        return `<p>You responded correctly on ${accuracy}% of the trials.</p>
+          <p>Your average response time was ${rt}ms.</p>
+          <p>Press any key to complete the experiment. Thank you!</p>`;
+
+      }
+    };
+
+/******************************************************************************/
+/*** Preload stimuli **********************************************************/
+/******************************************************************************/
+
+// Create an array containing all the unique URLs for our required audio.
+        var audio_files = new Set();
+        for (var i = 0; i < test_stimuli.length; i++) {
+            		audio_files.add(test_stimuli[i].sound)}
+        for (var i = 0; i < practice_stimuli.length; i++) {
+        	   		audio_files.add(practice_stimuli[i].sound)}
+
+/******************************************************************************/
+/*** Build the timeline *******************************************************/
+/******************************************************************************/
+
+/*
+I am using concat here to make sure the timeline is a flat list.
+*/
+var full_timeline = [].concat(
+//  preload,
+//  welcome,
+  deltagernr,
+  instructions_procedure,
+  practice_procedure,
+  screen_after_practice,
+  test_procedure,
+  SayBye
+  //  debrief_block
+);
+
+    /* start the experiment */
+jsPsych.init({
+  timeline: full_timeline,
+  override_safe_mode: true,
+//  preload_images: images,
+  preload_audio: audio_files,
+  show_preload_progress_bar: true,
+  on_finish: function() {
+      var resultJson = jsPsych.data.get().json();
+      jatos.submitResultData(resultJson, jatos.endStudy);
+  },
+});
+
+</script>
+</html>
