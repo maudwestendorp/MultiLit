@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="utf-8" />
+    <title>WP1 perception iPad-version Porsgrunn LIST1 BM-English</title> 
+        <!-- Maud Westendorp                                                   -->
+        <!--     Audio-written sentence matching paradigm with button response -->
+   		<script src="jspsych-6.3.1/jspsych.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-button-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-call-function.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-audio-image-keyboard-response.js"></script>       
+        <script src="/assets/javascripts/jatos.js"></script>
+        <link href="jspsych-6.3.1/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+
+
+<body>
+
+  </body>
+  
+  
+  <script>
+
+    /* define welcome and goodbye message trials */
+var welcome = {
+    type: "html-button-response",
+    stimulus: "<p>Velkommen til eksperimentet!</p><p>Trykk på Start for å begynne.<br></p>",
+    choices: ['Start']
+    };
+    
+var SayBye = {
+    type: 'html-button-response',
+    stimulus: "<p>Takk for at du var med i undersøkelsen!<br></p>",
+    choices: ['Avslutt'],
+    };
+    
+
+	/* get participant code */
+var deltagernr = {
+  	type: "survey-html-form",
+  	preamble: "<p style='text-align:left'> <b>Deltager nummer</b></p>",
+  	html: "<p style='text-align:left'>Hva er ditt deltagernummer? <br> \
+              <input required name='code_number' type='number'></p>",
+};
+
+    /* define instructions message trials */
+var instructions = {
+    type: "html-button-response",
+    stimulus: `
+        <p>In dette eksperimentet vil du først høre en setning og så leser du en setning:</p>
+        <p>Du vil høre setninger på norsk eller engelsk, og teksten er skrevet enten på bokmål eller på engelsk.</p>
+        <p><strong>Du skal angi om setningen du leser er den samme som setningen du hørte.</strong></p>
+        <p>Svar så raskt som mulig.</p>
+        <br>
+        <br>
+        <br>
+        <div style='width: 700px;'>
+    `,
+    choices: ['Fortsett'],
+    post_trial_gap: 0
+    };
+
+var instructions2 = {
+    type: "html-button-response",
+    stimulus: `
+        <p>Først hører du en setning.</p>
+        <br>
+        <br>
+        <br>
+        <div style='width: 700px;'>
+    `,
+    choices: ['Fortsett'],
+    on_finish: function(data){	
+  	  				var soundEffect = new Audio();
+					soundEffect.src = "sounds/download.mp3";
+					soundEffect.play();
+  					},
+    post_trial_gap: 100
+    };
+    
+var instructions3 = {
+    type: "html-button-response",
+    stimulus: `
+        <p>Så leser du en setning.</p>
+        <br>
+        <p><i style='font-size: 30px;'>My daughter misses doing ceramics.</i></p>
+        <br>
+        <br>
+        <br>
+        <div style='width: 700px;'>
+    `,
+    choices: ['Fortsett'],
+    post_trial_gap: 0
+    };
+    
+var instructions4 = {
+    type: "html-button-response",
+    stimulus: `
+        <p>Vi starter med en øvelsesrunde.</p>
+        <br>
+        <br>
+        <br>
+        <div style='width: 700px;'>
+    `,
+    choices: ['Fortsett'],
+    post_trial_gap: 0
+    };
+
+    /* define practice stimuli array for timeline variables */
+var instruction_stimulus = [
+			{ sound: "sounds/ENG_test6.mp3", sentence: 'My daughter misses doing ceramics.', correct_response: 1, item: "0"}
+	];
+
+    /* define practice stimuli array for timeline variables */
+var practice_stimuli = [
+		{ sound: "sounds/ENG_test4.mp3", sentence: 'Katrine works as a cleaner at a large hotel.', correct_response: 0, item: "1"},
+        { sound: "sounds/EN_test6.mp3", sentence: 'Kan du overføre pengene til meg?', correct_response: 1, item: "2"},
+        { sound: "sounds/ENG_test3.mp3", sentence: 'Peter er alltid snill og hjelpsom mot meg.', correct_response: 1, item: "3"},
+        { sound: "sounds/EN_test4.mp3", sentence: 'Anne is going to do three exams.', correct_response: 0, item: "4"},
+        { sound: "sounds/ENG_test1.mp3", sentence: 'An old tree fell on our car last night.', correct_response: 1, item: "5"}
+    ];
+
+	/* define timeline variables for practice and test procedure */
+var fixation = {
+            type: "audio-image-keyboard-response",
+            audio_stimulus: "sounds/download.mp3",
+            image_stimulus: "img/Snakk_black.png", 
+            choices: "NO_KEYS",
+            stimulus_height: 500,
+            trial_duration: 400
+        };
+
+var sound = {
+            type: "audio-image-keyboard-response",
+            audio_stimulus: jsPsych.timelineVariable('sound'),
+            image_stimulus: "img/Snakk_black.png", 
+            choices: "NO_KEYS",
+            stimulus_height: 500,
+            trial_ends_after_audio: true
+        };
+        
+var sentence_only = {
+      type: "html-keyboard-response",
+      choices: "NO_KEYS",
+		stimulus: function() {
+    		var verticalOffset = Math.floor(window.innerHeight / 5); // Adjust the fraction as needed
+    		var stim = '<div style="font-size: 30px; position: absolute; top: ' + verticalOffset + 'px; left: 50%; transform: translateX(-50%);">' + jsPsych.timelineVariable('sentence') + '</div>';
+    		return stim;
+			},
+      trial_duration: 600
+      };
+    
+var instructions_response = {
+      type: "html-button-response",
+	  stimulus: `
+        <p>Etter du har lest setningen, skal du velge om setningene var:</p>
+        <div style='width: 700px;'>
+            <div style='float: left;'><img src='img/IkkeSamme.png'></img>
+                <p class='small'> IKKE det SAMME som du hørte, <br>trykker du på den røde sirkelen.</p>
+            </div>
+            <div style='float: right;'><img src='img/Samme.png'></img>
+                <p class='small'> det SAMME som du hørte, <br>trykker du på den grønne sirkelen.</p>
+            </div>
+            <br style='clear: both;'>
+        </div>
+      `,
+      choices: ['Fortsett'],
+  	  on_finish: function(data){	
+  	  				var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+
+var prac_response = {
+      type: "html-button-response",
+      stimulus: function() {
+    		var verticalOffset = Math.floor(window.innerHeight / 5); // Adjust the fraction as needed
+    		var stim = '<div style="font-size: 30px; position: absolute; top: ' + verticalOffset + 'px; left: 50%; transform: translateX(-50%);">' + jsPsych.timelineVariable('sentence') + '</div>';
+    		return stim;
+    		},
+      choices: ["<img src=img/IkkeSamme.png width=250px>",
+               "<img src=img/Samme.png width=250px>"],
+      data: {
+    				task: 'response',
+    				correct_response: jsPsych.timelineVariable('correct_response')
+  					},
+  	  on_finish: function(data){
+    				data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+  					var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+    
+  var response = {
+      type: "html-button-response",
+      stimulus: function() {
+    		var verticalOffset = Math.floor(window.innerHeight / 5); // Adjust the fraction as needed
+    		var stim = '<div style="font-size: 30px; position: absolute; top: ' + verticalOffset + 'px; left: 50%; transform: translateX(-50%);">' + jsPsych.timelineVariable('sentence') + '</div>';
+    		return stim;
+    		},
+      choices:["<img src=img/IkkeSamme.png width=250px>",
+               "<img src=img/Samme.png width=250px>"],
+      trial_duration: 10000,
+      data: {
+    				task: 'button_response',
+    				item: jsPsych.timelineVariable('item'),
+    				condition: jsPsych.timelineVariable('condition'),
+    				sound: jsPsych.timelineVariable('sound'),
+    				sentence: jsPsych.timelineVariable('sentence'),
+    				correct_response: jsPsych.timelineVariable('correct_response'),
+    				list: jsPsych.timelineVariable('list')
+  					},
+  	  on_finish: function(data){
+    				data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+  					var soundEffect = new Audio();
+					soundEffect.src = "sounds/download2.mp3";
+					soundEffect.play();
+  					}
+    };
+
+var feedback = {
+  	type: "html-keyboard-response",
+  	trial_duration: 500,
+  	choices: "NO_KEYS",
+  	stimulus: function(){
+    	// The feedback stimulus is a dynamic parameter because we can't know in advance whether
+    	// the stimulus should be 'correct' or 'incorrect'.
+    	// Instead, this function will check the accuracy of the last response and use that information to set
+    	// the stimulus value on each trial.
+    	var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    	if(last_trial_correct){
+      	return "<img src='img/thumbs_up.png' width='100' height='100'></img>"
+   	 } else {
+    	  return "<img src='img/thumbs_down.png' width='100' height='100'></img>"
+   	 }
+  }
+}
+
+var progress = {
+    type: "html-button-response",
+    stimulus: `
+        <div style='width: 700px;'>
+    `,
+    choices: ['Fortsett'],
+    post_trial_gap: 0,
+    on_finish: function(){
+      		var soundEffect = new Audio();
+			soundEffect.src = "sounds/download2.mp3";
+			soundEffect.play();
+		    }
+    };
+
+	/* define instructions procedure */
+var instructions_procedure = {
+    	timeline: [ instructions, instructions2, fixation, sound, instructions3,
+    				instructions_response, instructions4 ],
+    	timeline_variables: instruction_stimulus,
+    	repetitions: 1,
+    	randomize_order: false
+    };
+    
+	/* define practice procedure */
+var practice_procedure = {
+    	timeline: [ fixation, sound, sentence_only, prac_response, feedback, progress ],
+    	timeline_variables: practice_stimuli,
+    	repetitions: 1,
+    	randomize_order: false
+    };
+    
+    /* add end-of-practice screen with continue button */ 
+var screen_after_practice = {
+  	type: "html-button-response",
+  	stimulus: `<p>Øvelsesrunden er nå ferdig.</p>
+  	<p>Eksperimentet tar ca. 8 minutter.</p>
+  	<br>
+  	<p>Trykk på Start for å begynne.</p>
+  	<div style='width: 700px;'>
+  	`,
+  	choices: ["Start"],
+	};
+    
+    /* define target trial stimuli array for test procedure */
+var test_stimuli = [
+{ item: "101", condition: "BM+East", sound: "sounds/EN_101.mp3", sentence: "Utestående faktura kan man finne ved å logge inn på denne nettsiden.", correct_response: 1, list: "1bmeng"},
+{ item: "102", condition: "BM+Eng", sound: "sounds/ENG_102.mp3", sentence: "Jeg skal sjekke om vi har noe mer å spise i kjøleskapet.", correct_response: 1, list: "1bmeng"},
+{ item: "103", condition: "ENG+Eng", sound: "sounds/ENG_103.mp3", sentence: "It irritates me endlessly that they always talk about politics.", correct_response: 1, list: "1bmeng"},
+{ item: "104", condition: "ENG+East", sound: "sounds/EN_104.mp3", sentence: "Madeleine is so beautiful that everyone falls in love with her instantly.", correct_response: 1, list: "1bmeng"},
+{ item: "105", condition: "BM+East", sound: "sounds/EN_105.mp3", sentence: "Bjørn Eirik fant en uåpnet boks med makrell i tomat.", correct_response: 1, list: "1bmeng"},
+{ item: "106", condition: "BM+Eng", sound: "sounds/ENG_106.mp3", sentence: "Dere kan bruke spiselig glitter i drinker.", correct_response: 1, list: "1bmeng"},
+{ item: "107", condition: "ENG+Eng", sound: "sounds/ENG_107.mp3", sentence: "Kristine does not believe that the situation can get any worse.", correct_response: 1, list: "1bmeng"},
+{ item: "108", condition: "ENG+East", sound: "sounds/EN_108.mp3", sentence: "The children are glueing together the homemade gingerbread houses.", correct_response: 1, list: "1bmeng"},
+{ item: "109", condition: "BM+East", sound: "sounds/EN_109.mp3", sentence: "Reparatøren spurte hvor lenge vinduene har vært ødelagt.", correct_response: 1, list: "1bmeng"},
+{ item: "110", condition: "BM+Eng", sound: "sounds/ENG_110.mp3", sentence: "Innboforsikringen vår dekte alle skadene på bilen.", correct_response: 1, list: "1bmeng"},
+{ item: "111", condition: "ENG+Eng", sound: "sounds/ENG_111.mp3", sentence: "This chat platform is the best for people who play video games together.", correct_response: 1, list: "1bmeng"},
+{ item: "112", condition: "ENG+East", sound: "sounds/EN_112.mp3", sentence: "It turned out that all the guests who came to the party were drunk.", correct_response: 1, list: "1bmeng"},
+{ item: "113", condition: "BM+East", sound: "sounds/EN_113.mp3", sentence: "Elevene i disse dager liker ikke å lese klassisk litteratur.", correct_response: 1, list: "1bmeng"},
+{ item: "114", condition: "BM+Eng", sound: "sounds/ENG_114.mp3", sentence: "Imorgen kommer søsteren min tilbake fra sydenferien.", correct_response: 1, list: "1bmeng"},
+{ item: "115", condition: "ENG+Eng", sound: "sounds/ENG_115.mp3", sentence: "It is not certain that you will be able to get home with the ferry.", correct_response: 1, list: "1bmeng"},
+{ item: "116", condition: "ENG+East", sound: "sounds/EN_116.mp3", sentence: "Some tourists spend the night in the mountains to see the sun rise.", correct_response: 1, list: "1bmeng"},
+{ item: "117", condition: "BM+East", sound: "sounds/EN_117.mp3", sentence: "En del papirer må til i denne søknadsprosessen.", correct_response: 1, list: "1bmeng"},
+{ item: "118", condition: "BM+Eng", sound: "sounds/ENG_118.mp3", sentence: "De kan ikke servere oss noe annet enn grillet fisk.", correct_response: 1, list: "1bmeng"},
+{ item: "119", condition: "ENG+Eng", sound: "sounds/ENG_119.mp3", sentence: "It isn't long ago that her husband promised to build a new cabin.", correct_response: 1, list: "1bmeng"},
+{ item: "120", condition: "ENG+East", sound: "sounds/EN_120.mp3", sentence: "A new Via Ferrata route opened in Bodø a couple of months ago.", correct_response: 1, list: "1bmeng"},
+{ item: "121", condition: "BM+East", sound: "sounds/EN_121.mp3", sentence: "Frivillige på festivalen jobber for at du skal bli god og mett.", correct_response: 1, list: "1bmeng"},
+{ item: "122", condition: "BM+Eng", sound: "sounds/ENG_122.mp3", sentence: "Ingen vet hvor man får kjøpt tørrfisk i Frankrike.", correct_response: 1, list: "1bmeng"},
+{ item: "123", condition: "ENG+Eng", sound: "sounds/ENG_123.mp3", sentence: "Silje asks which dog breed is best for people with allergies.", correct_response: 1, list: "1bmeng"},
+{ item: "124", condition: "ENG+East", sound: "sounds/EN_124.mp3", sentence: "For three months there was an abundance of cloudberries on Ringvassøya.", correct_response: 1, list: "1bmeng"},
+{ item: "125", condition: "BM+East", sound: "sounds/EN_125.mp3", sentence: "På det fjellet finner man god parkering og lettgående terreng.", correct_response: 1, list: "1bmeng"},
+{ item: "126", condition: "BM+Eng", sound: "sounds/ENG_126.mp3", sentence: "Idéen høres veldig lovende ut, men jeg har ikke finansiering til det.", correct_response: 1, list: "1bmeng"},
+{ item: "127", condition: "ENG+Eng", sound: "sounds/ENG_127.mp3", sentence: "Ivar wonders when the concert starts today.", correct_response: 1, list: "1bmeng"},
+{ item: "128", condition: "ENG+East", sound: "sounds/EN_128.mp3", sentence: "My friends did not catch a single fish on the entire trip.", correct_response: 1, list: "1bmeng"},
+{ item: "129", condition: "BM+East", sound: "sounds/EN_129.mp3", sentence: "Denne elgkuen angriper alle som finner seg mellom henne og kalven.", correct_response: 1, list: "1bmeng"},
+{ item: "130", condition: "BM+Eng", sound: "sounds/ENG_130.mp3", sentence: "Du kan kjøpe en lignende jakke på denne facebook-gruppen.", correct_response: 1, list: "1bmeng"},
+{ item: "131", condition: "ENG+Eng", sound: "sounds/ENG_131.mp3", sentence: "Most stores accept gift cards even if they have expired.", correct_response: 1, list: "1bmeng"},
+{ item: "132", condition: "ENG+East", sound: "sounds/EN_132.mp3", sentence: "It took several hours before my girlfriend stopped being angry with me.", correct_response: 1, list: "1bmeng"},
+{ item: "201", condition: "BM+East", sound: "sounds/EN_201.mp3", sentence: "Reisen til månen tar fryktelig lang tid.", correct_response: 0, list: "1bmeng"},
+{ item: "202", condition: "BM+Eng", sound: "sounds/ENG_202.mp3", sentence: "Man trenger ikke sertifikat for å padle i Mallorca.", correct_response: 0, list: "1bmeng"},
+{ item: "203", condition: "ENG+Eng", sound: "sounds/ENG_203.mp3", sentence: "We are going to make t-shirts with a logo for our team.", correct_response: 0, list: "1bmeng"},
+{ item: "204", condition: "ENG+East", sound: "sounds/EN_204.mp3", sentence: "You should go to the emergency room if your schoulder still hurts.", correct_response: 0, list: "1bmeng"},
+{ item: "211", condition: "BM+East", sound: "sounds/EN_211.mp3", sentence: "Det er vanskelig å bli enige om hvilken sirup som smaker best i boblete.", correct_response: 0, list: "1bmeng"},
+{ item: "212", condition: "BM+Eng", sound: "sounds/ENG_212.mp3", sentence: "Penger til russebussen vår skal samles inn imorgen.", correct_response: 0, list: "1bmeng"},
+{ item: "213", condition: "ENG+Eng", sound: "sounds/ENG_213.mp3", sentence: "My parents are going on the trip together.", correct_response: 0, list: "1bmeng"},
+{ item: "214", condition: "ENG+East", sound: "sounds/EN_214.mp3", sentence: "I got a surprisingly bad gift from my boyfriend.", correct_response: 0, list: "1bmeng"},
+{ item: "221", condition: "BM+East", sound: "sounds/EN_221.mp3", sentence: "Marianne bor utenfor byen og bruker mye penger på bomringer.", correct_response: 0, list: "1bmeng"},
+{ item: "222", condition: "BM+Eng", sound: "sounds/ENG_222.mp3", sentence: "Mange ungdommer har flyttet til byen i år for å gå på skole.", correct_response: 0, list: "1bmeng"},
+{ item: "223", condition: "ENG+Eng", sound: "sounds/ENG_223.mp3", sentence: "People from Northern Norway are used to varying weather and dark winters.", correct_response: 0, list: "1bmeng"},
+{ item: "224", condition: "ENG+East", sound: "sounds/EN_224.mp3", sentence: "That journalist writes several articles every day.", correct_response: 0, list: "1bmeng"},
+{ item: "231", condition: "BM+East", sound: "sounds/EN_231.mp3", sentence: "Venninnen min fortalte meg hvor de selger brannslukningsapparat.", correct_response: 0, list: "1bmeng"},
+{ item: "232", condition: "BM+Eng", sound: "sounds/ENG_232.mp3", sentence: "Jeg vet hvilke salonger i Tromsø er flinke med forming av bryn.", correct_response: 0, list: "1bmeng"},
+{ item: "233", condition: "ENG+Eng", sound: "sounds/ENG_233.mp3", sentence: "One of these days, we'll surely get rain here in the city.", correct_response: 0, list: "1bmeng"},
+{ item: "234", condition: "ENG+East", sound: "sounds/EN_234.mp3", sentence: "There are many people who steal expensive cars in this area.", correct_response: 0, list: "1bmeng"}
+    ];
+     
+    
+	/* define test procedure */
+var test_procedure = {
+    	timeline: [ fixation, sound, sentence_only, response, feedback],
+    	timeline_variables: test_stimuli,
+    	repetitions: 1,
+    	randomize_order: true
+    };
+    
+    /* define debrief */
+var debrief_block = {
+      type: "html-keyboard-response",
+      stimulus: function() {
+
+        var trials = jsPsych.data.get().filter({task: 'target_response'});
+        var correct_trials = trials.filter({correct: true});
+        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+        var rt = Math.round(correct_trials.select('rt').mean());
+
+        return `<p>You responded correctly on ${accuracy}% of the trials.</p>
+          <p>Your average response time was ${rt}ms.</p>
+          <p>Press any key to complete the experiment. Thank you!</p>`;
+
+      }
+    };
+
+/******************************************************************************/
+/*** Preload stimuli **********************************************************/
+/******************************************************************************/
+
+//Create an array containing all the unique URLs for our required audio.
+        var audio_files = new Set();
+        for (var i = 0; i < test_stimuli.length; i++) {
+            audio_files.add(test_stimuli[i].sound)
+        }
+
+/******************************************************************************/
+/*** Build the timeline *******************************************************/
+/******************************************************************************/
+
+/*
+I am using concat here to make sure the timeline is a flat list.
+*/
+var full_timeline = [].concat(
+//  preload,
+//  welcome,
+  deltagernr,
+  instructions_procedure,
+  practice_procedure,
+  screen_after_practice,
+  test_procedure,
+  SayBye
+  //  debrief_block
+);
+
+    /* start the experiment */
+jsPsych.init({
+  timeline: full_timeline,
+  override_safe_mode: true,
+//  preload_images: images,
+  preload_audio: audio_files,
+  show_preload_progress_bar: true,
+  on_finish: function() {
+      var resultJson = jsPsych.data.get().json();
+      jatos.submitResultData(resultJson, jatos.endStudy);
+  },
+});
+
+</script>
+</html>
