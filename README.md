@@ -1,7 +1,7 @@
 # MultiLit
 *August 2024, Maud Westendorp*
 
-This repository is an archive for files related to the project MultiLectal Literacy in Education (2020-2026). The repo includes test material, experiment scripts, and analysis scripts. 
+This repository is an archive for files related to the project MultiLectal Literacy in Education (2020-2026). The repo includes test material, experiment scripts, and analysis scripts. The project is still ongoing, and this repo will be updated during the project period.
 
 ## About the Nordic Word order Database
 More information on MultiLectal Literacy in Education ("MultiLit") can be found on the [project website](https://www.hvl.no/en/multilit/).
@@ -29,8 +29,13 @@ The MultiLit-project is funded by the Recearch Council of Norway (project number
 
 ### Folders with experimental materials
 + Preregistrations
+    - WP1 audio-sentence mapping experiment
+    - WP4 Flanker/Language Decision combination experiment
 + OpenSesame experimental files
+    - WP4 Flanker/Language Decision combination experiment
 + jsPsych experiments
+    - Corsi block tapping task (WP4)
+    - Audio-sentence mapping paradigm (WP1)
   
 
 
