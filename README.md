@@ -3,7 +3,7 @@
 
 This repository is an archive for files related to the project MultiLectal Literacy in Education (2020-2026). The repo includes test material, experiment scripts, and analysis scripts. The project is still ongoing, and this repo will be updated during the project period.
 
-## About the Nordic Word order Database
+## About the project
 More information on MultiLectal Literacy in Education ("MultiLit") can be found on the [project website](https://www.hvl.no/en/multilit/).
 
 ### In a nutshell
